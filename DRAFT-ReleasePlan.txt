@@ -1,0 +1,12 @@
+Team Name: #NOLife
+
+Team Members:
+Alice Yu (aljyu@ucsc.edu)
+Brighton Keslin (bkeslin@ucsc.edu)
+Carol Figueroa (cfiguer3@ucsc.edu)
+Christopher Peck (ccpeck@ucsc.edu)
+Timothy Ma (ttma@ucsc.edu)
+Alix Feinsod (afeinsod@ucsc.edu)
+
+Project Name: Ride Share Application
+Project Description: This application will facilitate an easy way for people to share rides to common locations. We hope that this application will help reduce greenhouse gas emissions by incentivizing ride-share.
