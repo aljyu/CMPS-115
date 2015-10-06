@@ -1,26 +1,21 @@
-<html>
+<!DOCTYPE html>
+<html style = "background-color:lightblue">
+<link rel="stylesheet" type="text/css" href="stylesheet.css" />
 <meta charset="utf-8" />
-<font size = "12" >
 <p> This is the page for submitting rides </p>
-<form>
-  First name:<br>
-  <input type="text" name="firstname">
-  <br>
-  Last name:<br>
-  <input type="text" name="lastname">
-  <br>
-  Departure point:<br>
-  <input type="text" name="depart">
-  <br>
-  Destination:<br>
-  <input type="text" name="dest">
-  <br>
-  Departure time:<br>
-  <input type="text" name="depart">
-  <br>
-  Arrival time:<br>
-  <input type="text" name="atime">
-<br><br>
-    <input type="submit" value="Submit"method="link" action="RideShare.html">	
-  </fieldset>
+
+<form action="submit.php" method="post"> 
+<label for="name">Full Name: </label>
+<input id="name" type="text" name="name"><br>
+<label for="email"> Email: </label>
+<input id = "email" type="text" name="email"><br>
+<label for="origin"> Origin: </label> 
+<input id =" origin" type="text" name = "origin"><br>
+<label for="dest"> Destination: </label>
+<input id= "dest" type ="text" name = "dest"><br>
+<label for="depart"> Departure Time: </label>
+<input id="depart" type ="text" name= "depart"><br>
+<label for "arrival"> Arrival Time: </label>
+<input id = "arrival" type ="text" name "arrival"><br>
+<input type="submit">
 </form>
