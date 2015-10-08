@@ -1,6 +1,9 @@
 <!DOCTYPE>
 <html ng-app = "myApp">
 	<head>
+		<link type = "text/css" rel = "stylesheet" href = "Index_stylesheet.css"/>
+		<!-- Google Fonts -->
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine|Great Vibes">
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<!-- Optional theme -->
@@ -9,28 +12,42 @@
 	</head>
 	<body>
 		<div class = "container" ng-controller = "AppCtrl">
-			<h1>Contact List App</h1>
-			<table class = "table">
+			<h1 class = "Title">Contact List App</h1>
+			<table class = "table"> <img src = "https://lh6.googleusercontent.com/-KStnh-1hoko/U3uDO7mJ-8I/AAAAAAAADBA/V-SUKE51uEo/w863-h647-n-o/20130815_110456.jpg" id = "background" alt = ""></img>
 				<thead>
 					<tr>
-						<th>Name</th>
-						<th>Email</th>
-						<th>Phone Number</th>
-						<th>Action</th>
+						<td class = "FieldNames">Full Name</td>
+						<td class = "FieldNames">Email</td>
+						<td class = "FieldNames">Origin</td>
+						<td class = "FieldNames">Destination</td>
+						<td class = "FieldNames">Driver/Rider</td>
+						<td class = "FieldNames">Departure Time</td>
+						<td class = "FieldNames">Arrival Time</td>
+						<td  class = "FieldNames" colspan = "2">Action</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td><input class = "form-control" ng-model ="contact.name"></td>
 						<td><input class = "form-control" ng-model ="contact.email"></td>
-						<td><input class = "form-control" ng-model ="contact.number"></td>
+						<td><input class = "form-control" ng-model ="contact.origin"></td>
+						<td><input class = "form-control" ng-model ="contact.dest"></td>
+						<td><input class = "form-control" ng-model ="contact.drive"></td>
+						<td><input class = "form-control" ng-model ="contact.depart"></td>
+						<td><input class = "form-control" ng-model ="contact.arrive"></td>
 						<td><button class = "btn btn-primary" ng-click = "addContact()">Add Contact</button></td>
+						<td><button class = "btn btn-info" ng-click = "update()">Update</button></td>
 					</tr>
 					<tr ng-repeat = "contact in contactlist">
 						<td>{{contact.name}}</td>
 						<td>{{contact.email}}</td>
-						<td>{{contact.number}}</td>
+						<td>{{contact.origin}}</td>
+						<td>{{contact.dest}}</td>
+						<td>{{contact.drive}}</td>
+						<td>{{contact.depart}}</td>
+						<td>{{contact.arrive}}</td>
 						<td><button class="btn btn-danger" ng-click="remove(contact._id)">Remove</button></td>
+						<td><button class = "btn btn-warning" ng-click = "edit()">Edit</button></td>
 					</tr>
 				</tbody>
 			</table>

@@ -1,0 +1,33 @@
+table {
+	border-collapse: collapse;
+	text-align: center;
+	width: 20px;
+	white-space: nowrap;
+}
+.Title {
+	text-align: center;
+	font-family: "Great Vibes";
+	text-shadow: 7px 7px 7px red;
+	font-size: 48px;
+	color: #99FF00;
+	font-weight: bold;
+}
+.FieldNames {
+	color: transparent;
+	text-shadow: 0px 0px 6px #99FF00;
+	font-family: "Tangerine";
+	font-weight: bold;
+	font-size: 40px;
+	color: red;
+}
+#background {
+	min-height: 100%;
+	min-width: 863px;
+	width: 100%;
+	height: auto;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: -100;
+	opacity: 0.7;
+}
