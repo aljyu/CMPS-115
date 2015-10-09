@@ -1,20 +1,41 @@
 
 <html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/boostrap/3.3.1/css/bootstrap.min.css">
+</head>
+<script src ="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
 <meta charset="utf-8" />
 <font size = "12" >
+<body>
+<div ng-app="myApp" ng-controller="namesCtrl">
 <p> This is the page for searching for rides </p>
 <form>
   Search by:<br>
    <select name="searchby">
-  <option value="origin">Origin</option>
+  <option value="depart">Departure Point</option>
   <option value="dest">Destination</option>
   <option value="depart">Departure time</option>
-  <option value="arrive">Arrival Time</option>
-  <option value="drive">Driver or Rider - type true if you need a driver and false if you're looking for a rider</option>
-
+  <option value="ddate">Departure date</option> <!-- Need to figure this out. get a name for it in the database-->
+  <option value="arrive">Arrival time</option>
+  <option value="adate">Arrival date</option> <!-- This too needs to be added to database.-->
+  
 </select>
-	<input type="text" name="searchterm">
+	<input type="text" ng-model="searchterm">
 <br><br>
     <input type="submit" value="Search"method="link" action="SearchResults.html">
   </fieldset>
+
+  
 </form>
+
+<ul>
+  <li ng-repeat="x in names | filter:searchterm | orderBy:'origin'"> <!-- may need to change this later to be more effienent-->
+    {{ (x.name | uppercase) + ', ' + x.origin }}
+  </li>
+</ul>
+
+</div>
+<script scr ="controllers/controller.js"></script>
+<script src="testdata.js"></script> <!-- replace with the controller later-->
+</body>
+</html>
