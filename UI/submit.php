@@ -1,8 +1,23 @@
-<html>
-<body>
+<?php
 
-Welcome <?php echo $_GET["name"]; ?><br>
-Your email address is: <?php echo $_GET["email"]; ?>
+$m = new MongoClient();
 
-</body>
-</html>
+// select database
+$db = $m->comedy;
+
+// select a collection
+$collection = $db->cartoons;
+
+// fix this to include all elements
+// adds a record
+$document = array ( "name" => "($POST));
+$collection->insert($document);
+
+// prints the database for debugging
+$cursor = $collection->find();
+foreach ($cursor as $document) {
+   echo $document["title"] . "\n";
+}
+
+?>
+
