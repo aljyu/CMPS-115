@@ -12,7 +12,7 @@
 <form>
   Search by:<br>
    <select name="searchby">
-  <option value="depart">Departure Point</option>
+  <option value="origin">Departure Point</option>
   <option value="dest">Destination</option>
   <option value="depart">Departure time</option>
   <option value="ddate">Departure date</option> <!-- Need to figure this out. get a name for it in the database-->
@@ -20,7 +20,8 @@
   <option value="adate">Arrival date</option> <!-- This too needs to be added to database.-->
   
 </select>
-	<input type="text" ng-model="searchterm">
+	<input id="origin" type="text" ng-model="searchterm.dest">
+	<input id="dest" type="text" ng-model="searchterm.origin">
 <br><br>
     <input type="submit" value="Search"method="link" action="SearchResults.html">
   </fieldset>
@@ -29,8 +30,8 @@
 </form>
 
 <ul>
-  <li ng-repeat="x in names | filter:searchterm | orderBy:'origin'"> <!-- may need to change this later to be more effienent-->
-    {{ (x.name | uppercase) + ', ' + x.origin }}
+  <li ng-repeat="x in names | filter:searchterm | orderBy:'time'"> <!-- may need to change this later to be more effienent-->
+    {{ (x.name | uppercase) + ', ' + x.origin + ', ' + x.dest}}
   </li>
 </ul>
 
