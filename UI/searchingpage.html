@@ -30,14 +30,8 @@
 </form>
 
 <ul>
-<<<<<<< HEAD
-
-  <li ng-repeat="x in names | filter:searchterm | orderBy:'origin'"> <!-- may need to change this later to be more effienent-->
-    {{ (x.name | uppercase) + ', ' + x.origin }}
-=======
   <li ng-repeat="x in names | filter:searchterm | orderBy:'time'"> <!-- may need to change this later to be more effienent-->
     {{ (x.name | uppercase) + ', ' + x.origin + ', ' + x.dest}}
->>>>>>> origin/master
   </li>
 </ul>
 
