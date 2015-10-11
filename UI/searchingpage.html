@@ -31,13 +31,7 @@
 
 <ul>
 <<<<<<< HEAD
-<if searchby.equals('origin') {
-			db.rideshare.find(origin:searchterm);
-		}
-		else if searchby.equals('dest') {
-			db.rideshare.find(dest:searchterm);
-		}
-	>
+
   <li ng-repeat="x in names | filter:searchterm | orderBy:'origin'"> <!-- may need to change this later to be more effienent-->
     {{ (x.name | uppercase) + ', ' + x.origin }}
 =======
