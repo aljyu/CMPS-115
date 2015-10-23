@@ -27,9 +27,41 @@ public class Ridelist{
 	//consisting of an int and a ride, and sort the rides in ascending 
 	//order by their associated ints, and return just the list of rides 
 	//in the correct order. 
-	private List<ride> sort(List<IntRide> l) {
-		List<ride> rl = new List<ride>[inputlist.length()];
-		return rl;
+	private List<Ride> sort(List<IntRide> iRide) {
+		List<ride> rList = new List<ride>[inputlist.length()];
+		List<IntRide> sorted = logsort(iRide);
+		for(int i = 0; i < sorted.length(); i++){
+			rList.add(sorted[i].ride);
+		}
+		return rList;
+	}
+	
+	private List<IntRide> logsort(List<IntRide> rides){
+		List<IntRide> ret = new List<ride>[rides.length()];
+		if(rides.length() <= 1){
+			return rides;
+		} else {
+			List<IntRide> left = logsort(rides.sublist(0,rides.length()/2-1));
+			List<IntRide> right = logsort(rides.sublist(rides.length()/2,rides.length()-1));
+			int l = 0;
+			int r = 0;
+			while(l < left.length() && r < right.length()){
+				if(left[l].value < right[r].value){
+					ret.add(left[l]);
+					l++;
+				}else{
+					ret.add(right[r]);
+					r++;
+				}
+			}
+			for(;l < left.length();l++){
+				ret.add(left[l]);
+			}
+			for(;r < right.length();r++){
+				ret.add(right[r]);
+			}
+			return ret;
+		}
 	}
 
 	//sortDepart: this function uses sort to sort a list by the departure

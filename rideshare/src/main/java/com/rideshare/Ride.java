@@ -19,6 +19,7 @@ public class Ride {
    @Index public int depart;
    @Index public int arrive;
    @Index public boolean drive;
+   @Index public int date;
     
    // add more fields later
    // default needed for Objectify 
