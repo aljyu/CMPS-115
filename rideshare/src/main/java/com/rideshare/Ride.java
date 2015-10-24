@@ -12,25 +12,28 @@ import java.util.List;
 
 @Entity
 public class Ride {
-   @Id public String email;
-   @Index public String name;
+   @Id public String name;
+   @Index public String email;
    @Index public String origin;
    @Index public String destination;
-   @Index public int depart;
-   @Index public int arrive;
+   @Index public String depart;
+   @Index public String arrive;
+//   @Index public int depart;
+//   @Index public int arrive;
    @Index public boolean drive;
     
    // add more fields later
    // default needed for Objectify 
    public Ride(){
    }
-   public Ride(String name, String email, String origin, String dest, int depart, int arrive, boolean drive){
-	name = name;
-	email = email;
-	origin = origin;
-	dest = dest;
-	depart = depart;
-	arrive = arrive;
-	drive = drive;
+   public Ride(String fullname, String riderEmail, 
+               String orig, String dest, String departure, String arrival, boolean driver){
+	name = fullname;
+	email = riderEmail;
+	origin = orig;
+	destination = dest;
+	depart = departure;
+	arrive = arrival;
+	drive = driver;
    }	
 }

@@ -30,21 +30,21 @@ public class RideShareServlet extends HttpServlet {
       String email = req.getParameter("email"); 
       String origin = req.getParameter("origin");
       String dest = req.getParameter("dest");
-      String departs = req.getParameter("depart");
-	int depart = Integer.parseInt(departs);
-      String arrives = req.getParameter("arrive");
-	int arrive = Integer.parseInt(arrives);
+      String depart = req.getParameter("depart");
+     // int depart = Integer.parseInt(departs);
+      String arrive = req.getParameter("arrive");
+     // int arrive = Integer.parseInt(arrives);
       String driving = req.getParameter("drive");
-	boolean drive;
-	if (driving.equals("true")) {
-		drive = true;
-		}
-	else {
-		drive = false;
-	}
+      boolean drive;
+      if (driving.equals("true")) {
+         drive = true;
+      }
+      else {
+         drive = false;
+      }
       ride = new Ride(name, email, origin, dest, depart, arrive, drive);
-
       ObjectifyService.ofy().save().entity(ride).now();
+      System.out.println (name);
       resp.sendRedirect("/rideshare.jsp");
    }
 }

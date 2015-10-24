@@ -86,31 +86,51 @@ public class Ridelist{
 
 	//sortDepart: this function uses sort to sort a list by the departure
 	//time closest to the input time
-	public List<Ride> sortDepart(double length, double time){
-		List<DoubleRide> irlist = new ArrayList<DoubleRide>();//[this.inputlist.size()]
-		//first, go through the list and compute values
-		for (int i=0; i< this.inputlist.size(); i++) {
-			double val = Math.abs(this.inputlist.get(i).depart - time);
-			DoubleRide ir = new DoubleRide(val, this.inputlist.get(i));
-			irlist.add(ir);
-		}
-		//then, sort the list and return it
-		return sort(irlist);
-	}
+    public List<Ride> sortDepart(double length, double time){
+       int hour = 0;
+       int minutes = 0;
+       List<DoubleRide> irlist = new ArrayList<DoubleRide>();//[this.inputlist.size()]
+       //first, go through the list and compute values
+       for (int i=0; i< this.inputlist.size(); i++) {
+            String depart = this.inputlist.get(i).depart;
+            int index = depart.indexOf(':');
+            if(index == -1) hour = Integer.parseInt(depart);
+            else{
+                hour = Integer.parseInt(depart.substring(0, index));
+                if(index == depart.length() - 1) 
+                    minutes = Integer.parseInt(depart.substring(index + 1));
+            }
+            double hours = hour + minutes/60;
+            double val = Math.abs(hours - time);
+            DoubleRide ir = new DoubleRide(val, this.inputlist.get(i));
+            irlist.add(ir);
+        }
+        //then, sort the list and return it
+        return sort(irlist);
+    }
 
-	//sortArrive: this function uses sort to sort a list by the arrival
-	//time closest to the input time
-	public List<Ride> sortArrive(double length, double time){
-		List<DoubleRide> irlist = new ArrayList<DoubleRide>();//[this.inputlist.size()]
-		//first, go through the list and compute values
-		for (int i=0; i< this.inputlist.size(); i++) {
-			double val = Math.abs(this.inputlist.get(i).arrive - time);
-			DoubleRide ir = new DoubleRide(val, this.inputlist.get(i));
-			irlist.add(ir);
-		}
-		//then, sort the list and retur it
-		return sort(irlist);
-	}
-
-
+    //sortArrive: this function uses sort to sort a list by the arrival
+    //time closest to the input time
+    public List<Ride> sortArrive(double length, double time){
+       int hour = 0;
+       int minutes = 0;
+       List<DoubleRide> irlist = new ArrayList<DoubleRide>();//[this.inputlist.size()]
+       //first, go through the list and compute values
+       for (int i=0; i< this.inputlist.size(); i++) {
+            String depart = this.inputlist.get(i).depart;
+            int index = depart.indexOf(':');
+            if(index == -1) hour = Integer.parseInt(depart);
+            else{
+                hour = Integer.parseInt(depart.substring(0, index));
+                if(index == depart.length() - 1)
+                    minutes = Integer.parseInt(depart.substring(index + 1));
+            }
+            double hours = hour + minutes/60;
+            double val = Math.abs(hours - time);
+            DoubleRide ir = new DoubleRide(val, this.inputlist.get(i));
+            irlist.add(ir);
+        }
+        //then, sort the list and return it	
+        return sort(irlist);
+    }
 }
