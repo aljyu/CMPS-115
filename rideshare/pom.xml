@@ -23,6 +23,11 @@
 
     <dependencies>
         <dependency>
+	    <groupId>com.google.maps</groupId>
+	    <artifactId>google-maps-services</artifactId>
+	    <version>0.1.8</version>
+        </dependency>        
+        <dependency>
             <groupId>com.googlecode.objectify</groupId>
             <artifactId>objectify</artifactId>
             <version>4.0.1</version>
