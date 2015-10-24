@@ -10,14 +10,22 @@ import java.lang.String;
 import java.util.Date;
 import java.util.List;
 
-import Ride;
-
 @Entity
-public class IntRide{
-	int value;
+public class DoubleRide{
+	double value;
 	Ride ride;
 
-	IntRide(int val, Ride r) {
+	DoubleRide(double val, Ride r) {
 		value=val;
 		ride = r;
 	}
+	
+	Ride getRide(){
+		return ride;
+	}
+	
+	double getValue(){
+		return value;
+	}
+	
+}
