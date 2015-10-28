@@ -4,6 +4,7 @@
 <%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
 
 <%@ page import="com.rideshare.Ride" %>
+<%@ page import="com.rideshare.Ridelist"%>
 <%@ page import="com.googlecode.objectify.Key" %>
 <%@ page import="com.googlecode.objectify.ObjectifyService" %>
 
@@ -24,6 +25,10 @@
       .limit(5)
       .list();
   %>
+
+	<% Ridelist rl = new Ridelist(rides); %>
+	<% pageContext.setAttribute("geo", rl.testFindDist()); %>
+	<b>${fn:escapeXml(geo)}</b>
   <form action="/sign" method="post"> 
       <label for="email"> Email: </label>
       <input id = "email" type="text" name="email"><br>
@@ -38,12 +43,9 @@
    <% if (!rides.isEmpty()) { %>
 	  <p> The Current Rides </p>
       <% for (Ride ride : rides) { %>
-		 
-	  <%}%>
-	  <% for (Ride ride : ordRides) { %>
          <% pageContext.setAttribute("ride_email", ride.email); %>
          <% pageContext.setAttribute("ride_origin", ride.origin); %>
-         <% pageContext.setAttribute("ride_dest", ride.dest); %>
+         <% pageContext.setAttribute("ride_dest", ride.destination); %>
          <% pageContext.setAttribute("ride_depart", ride.depart); %>
          <b>${fn:escapeXml(ride_email)}</b>
          <b>${fn:escapeXml(ride_origin)}</b>

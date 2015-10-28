@@ -31,7 +31,7 @@
 <form method="link" action="/submissionpage.jsp" >
 <input type="submit" value="Add a Ride?">
 </form>
-<form method="link" action="/searchingpage.jsp">
+<form method="link" action="/searchpage.jsp">
 <input type="submit" value="Or Search for a Ride?">
 </font>
 

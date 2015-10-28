@@ -20,19 +20,41 @@ public class Ridelist{
 
 	
 	//constructor 
-	Ridelist(List<Ride> list){
+	public Ridelist(List<Ride> list){
 		inputlist = list;
+	}
+	
+	public double testFindDist(){
+		//List<double> l = new ArrayList<double>();
+		double l = 0.0;
+		//l = findDist(createGP(50,03,59,-05,-42,-53),createGP(58,38,38,-03,-04,-12));
+		//l = findDist(createGP(50,03,59,-05,-42,-53),createGP(50,03,59,-05,-42,-54));
+		l = findDist(createGP(50,03,59,-05,-42,-53),createGP(40,44,55,-73,-59,-11));
+		return l;
+	}
+	
+	private GeoPoint createGP(double d1, double m1, double s1, double d2, double m2, double s2){
+		double lat = createRad(d1,m1,s1);
+		double lon = createRad(d2,m2,s2);
+		GeoPoint g = new GeoPoint(lat,lon);
+		return g;
+	}
+	
+	private double createRad(double d, double m, double s){
+		double mn = m/60;
+		double sn = s/3600;
+		return d + mn + sn;
 	}
 	
 	private double findDist(GeoPoint orig, GeoPoint dest){
 		double dist;
-		int R = 6371000; //Radius of the earth in meters
+		int R = 6371; //Radius of the earth in meters
 		double latO = Math.toRadians(orig.getLatitude());
 		double latD = Math.toRadians(dest.getLatitude());
 		double lonO = Math.toRadians(orig.getLongitude());
 		double lonD = Math.toRadians(dest.getLongitude());
 		double latDiff = latD - latO;
-		double lonDiff = lonD - latO;
+		double lonDiff = lonD - lonO;
 		double a = Math.sin(latDiff/2) * Math.sin(latDiff/2) + 
 		           Math.cos(latO) * Math.cos(latD) * Math.sin(lonDiff/2) * Math.sin(lonDiff/2);
 		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
