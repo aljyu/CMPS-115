@@ -106,24 +106,31 @@ public class Ridelist{
 		}
 	}
 
+	public double convertTime(String time) {
+            int index = int.indexOf(':');
+            if(index == -1) hour = Integer.parseInt(time);
+            else{
+                hour = Integer.parseInt(time.substring(0, index));
+                if(index == int.length() - 1) {
+                    minutes = Integer.parseInt(time.substring(index + 1));
+                }
+            }
+            double hours = hour + minutes/60;
+            return hours;
+	}
+
 	//sortDepart: this function uses sort to sort a list by the departure
 	//time closest to the input time
-    public List<Ride> sortDepart(double length, double time){
+    public List<Ride> sortDepart(double length, String time){
+    	double inputtime = this.convertTime(time);
        int hour = 0;
        int minutes = 0;
        List<DoubleRide> irlist = new ArrayList<DoubleRide>();//[this.inputlist.size()]
        //first, go through the list and compute values
        for (int i=0; i< this.inputlist.size(); i++) {
             String depart = this.inputlist.get(i).depart;
-            int index = depart.indexOf(':');
-            if(index == -1) hour = Integer.parseInt(depart);
-            else{
-                hour = Integer.parseInt(depart.substring(0, index));
-                if(index == depart.length() - 1) 
-                    minutes = Integer.parseInt(depart.substring(index + 1));
-            }
-            double hours = hour + minutes/60;
-            double val = Math.abs(hours - time);
+            double hours = this.convertTime(depart);
+            double val = Math.abs(hours - inputtime);
             DoubleRide ir = new DoubleRide(val, this.inputlist.get(i));
             irlist.add(ir);
         }
@@ -134,21 +141,15 @@ public class Ridelist{
     //sortArrive: this function uses sort to sort a list by the arrival
     //time closest to the input time
     public List<Ride> sortArrive(double length, double time){
+    	double inputtime = this.convertTime(time);
        int hour = 0;
        int minutes = 0;
        List<DoubleRide> irlist = new ArrayList<DoubleRide>();//[this.inputlist.size()]
        //first, go through the list and compute values
        for (int i=0; i< this.inputlist.size(); i++) {
-            String depart = this.inputlist.get(i).depart;
-            int index = depart.indexOf(':');
-            if(index == -1) hour = Integer.parseInt(depart);
-            else{
-                hour = Integer.parseInt(depart.substring(0, index));
-                if(index == depart.length() - 1)
-                    minutes = Integer.parseInt(depart.substring(index + 1));
-            }
-            double hours = hour + minutes/60;
-            double val = Math.abs(hours - time);
+            String arrive = this.inputlist.get(i).arrive;
+            double hours = this.convertTime(arrive);
+            double val = Math.abs(hours - inputtime);
             DoubleRide ir = new DoubleRide(val, this.inputlist.get(i));
             irlist.add(ir);
         }
