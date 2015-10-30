@@ -25,6 +25,7 @@ public class RideShareServlet extends HttpServlet {
       Ride ride;
       UserService userService = UserServiceFactory.getUserService();
       User user = userService.getCurrentUser();
+      String returner = req.getRequestURL().toString(); 
       
       String name = req.getParameter("name");
       String email = req.getParameter("email"); 
@@ -41,6 +42,11 @@ public class RideShareServlet extends HttpServlet {
       }
       else {
          drive = false;
+      }
+      if (name == null || name.isEmpty() || email == null || email.isEmpty() || origin == null || 
+          origin.isEmpty() || dest == null || dest.isEmpty() || depart == null || 
+          depart.isEmpty() || arrive == null || arrive.isEmpty() ){
+         resp.sendRedirect(returner);
       }
       ride = new Ride(name, email, origin, dest, depart, arrive, drive);
       ObjectifyService.ofy().save().entity(ride).now();
