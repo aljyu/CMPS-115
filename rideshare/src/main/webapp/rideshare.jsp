@@ -23,6 +23,8 @@
    <font size ="12">
 <p> Team #NoLife !!!!</p>
  </font>
+
+ <div class = "temp"><a href = "Register.jsp">Link to Register.jsp</a></div>
 <p>
 <div class = "menu">
 <center>
