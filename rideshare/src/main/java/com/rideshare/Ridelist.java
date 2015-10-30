@@ -107,15 +107,6 @@ public class Ridelist{
 	}
 
 	public double convertTime(String time) {
-            int hour = 0;
-            int minutes = 0;
-            int index = time.indexOf(':');
-            if(index == -1) hour = Integer.parseInt(time);
-            else{
-                hour = Integer.parseInt(time.substring(0, index));
-                if(index < time.length() - 1) {
-                    minutes = Integer.parseInt(time.substring(index + 1));
-                }
 		double hour = 0;
 		double minutes = 0;
         int index = time.indexOf(':');
@@ -150,12 +141,6 @@ public class Ridelist{
     //sortArrive: this function uses sort to sort a list by the arrival
     //time closest to the input time
     public List<Ride> sortArrive(double length, String time){
-    	double inputtime = this.convertTime(time);
-       int hour = 0;
-       int minutes = 0;
-       List<DoubleRide> irlist = new ArrayList<DoubleRide>();//[this.inputlist.size()]
-       //first, go through the list and compute values
-       for (int i=0; i< this.inputlist.size(); i++) {
 		double inputtime = this.convertTime(time);
         int hour = 0;
         int minutes = 0;
