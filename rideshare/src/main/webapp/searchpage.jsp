@@ -22,14 +22,13 @@
       .load()
       .type(Ride.class)
       .order("-depart")
-      .limit(5)
       .list();
   %>
 
 	<% Ridelist rl = new Ridelist(rides); %>
-	<% pageContext.setAttribute("geo", rl.testFindDist()); %>
-	<b>${fn:escapeXml(geo)}</b>
-  <form action="/sign" method="post"> 
+	<!--% pageContext.setAttribute("geo", rl.testFindDist().toString()); %-->
+	<!--b>${fn:escapeXml(geo)}</b-->
+  <form action="/search" method="post"> 
       <label for="email"> Email: </label>
       <input id = "email" type="text" name="email"><br>
       <label for="origin"> Origin: </label> 
@@ -40,6 +39,9 @@
       <input id="depart" type = "text" name = "depart">
       <input type="submit" name="Submit" value=Submit/>
    </form>
+   <!--% String departs = pageContext.getAttribute("depart");%-->
+   <!--% System.out.println(departs);%-->
+   <!--% rides = rl.sortDepart(5,pageContext.getAttribute("depart"));%-->
    <% if (!rides.isEmpty()) { %>
 	  <p> The Current Rides </p>
       <% for (Ride ride : rides) { %>
@@ -47,11 +49,12 @@
          <% pageContext.setAttribute("ride_origin", ride.origin); %>
          <% pageContext.setAttribute("ride_dest", ride.destination); %>
          <% pageContext.setAttribute("ride_depart", ride.depart); %>
-         <b>${fn:escapeXml(ride_email)}</b>
+         <p>
+		 <b>${fn:escapeXml(ride_email)}</b>
          <b>${fn:escapeXml(ride_origin)}</b>
          <b>${fn:escapeXml(ride_dest)}</b>
          <b>${fn:escapeXml(ride_depart)}</b>
-		 
+		 </p>
       <% } %>
   <% } else { %>
       <p> There are no current rides. </p>

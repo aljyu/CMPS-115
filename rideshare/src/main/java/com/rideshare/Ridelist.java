@@ -83,8 +83,8 @@ public class Ridelist{
 			return rides;
 		} else {
 			int size = rides.size();
-			List<DoubleRide> left = logsort(rides.subList(0,size/2-1));
-			List<DoubleRide> right = logsort(rides.subList(size/2,size-1));
+			List<DoubleRide> left = logsort(rides.subList(0,size/2));
+			List<DoubleRide> right = logsort(rides.subList(size/2,size));
 			int l = 0;
 			int r = 0;
 			while(l < left.size() && r < right.size()){
@@ -107,6 +107,7 @@ public class Ridelist{
 	}
 
 	public double convertTime(String time) {
+<<<<<<< HEAD
             int hour = 0;
             int minutes = 0;
             int index = time.indexOf(':');
@@ -116,20 +117,29 @@ public class Ridelist{
                 if(index < time.length() - 1) {
                     minutes = Integer.parseInt(time.substring(index + 1));
                 }
+=======
+		double hour = 0;
+		double minutes = 0;
+        int index = time.indexOf(':');
+        if(index == -1) hour = Integer.parseInt(time);
+        else{
+            hour = Integer.parseInt(time.substring(0, index));
+            if(index == time.length() - 1) {
+                minutes = Integer.parseInt(time.substring(index + 1));
+>>>>>>> ed71747b7c0d86c0704750ffd64a26a883e060c5
             }
-            double hours = hour + minutes/60;
-            return hours;
+        }
+        double hours = hour + minutes/60;
+        return hours;
 	}
-
+	
 	//sortDepart: this function uses sort to sort a list by the departure
 	//time closest to the input time
     public List<Ride> sortDepart(double length, String time){
-    	double inputtime = this.convertTime(time);
-       int hour = 0;
-       int minutes = 0;
-       List<DoubleRide> irlist = new ArrayList<DoubleRide>();//[this.inputlist.size()]
-       //first, go through the list and compute values
-       for (int i=0; i< this.inputlist.size(); i++) {
+		double inputtime = convertTime(time);
+        List<DoubleRide> irlist = new ArrayList<DoubleRide>();//[this.inputlist.size()]
+        //first, go through the list and compute values
+        for (int i=0; i< this.inputlist.size(); i++) {
             String depart = this.inputlist.get(i).depart;
             double hours = this.convertTime(depart);
             double val = Math.abs(hours - inputtime);
@@ -143,12 +153,21 @@ public class Ridelist{
     //sortArrive: this function uses sort to sort a list by the arrival
     //time closest to the input time
     public List<Ride> sortArrive(double length, String time){
+<<<<<<< HEAD
     	double inputtime = this.convertTime(time);
        int hour = 0;
        int minutes = 0;
        List<DoubleRide> irlist = new ArrayList<DoubleRide>();//[this.inputlist.size()]
        //first, go through the list and compute values
        for (int i=0; i< this.inputlist.size(); i++) {
+=======
+		double inputtime = this.convertTime(time);
+        int hour = 0;
+        int minutes = 0;
+        List<DoubleRide> irlist = new ArrayList<DoubleRide>();//[this.inputlist.size()]
+        //first, go through the list and compute values
+        for (int i=0; i< this.inputlist.size(); i++) {
+>>>>>>> ed71747b7c0d86c0704750ffd64a26a883e060c5
             String arrive = this.inputlist.get(i).arrive;
             double hours = this.convertTime(arrive);
             double val = Math.abs(hours - inputtime);
@@ -158,4 +177,9 @@ public class Ridelist{
         //then, sort the list and return it	
         return sort(irlist);
     }
+	
+	/*public List<Ride> sortDistance(){
+		
+	}*/
+	
 }
