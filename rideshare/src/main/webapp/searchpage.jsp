@@ -37,28 +37,49 @@
       <input id= "dest" type ="text" name = "dest">
       <label for="depart"> Time: </label>
       <input id="depart" type = "text" name = "depart">
+	  <label for "drive"> Are you driving or riding? </label><br>
+      <label for "drive"> Driving </label>
+      <input type="radio" name="drive" value="true" checked>
+      <label for "drive"> Riding </label>
+      <input type="radio" name="drive" value="false"> <br>
+	  <label for "weekday"> Days of the week </label><br>
+	  <label for="weekday"> Sunday </label>
+	  <input type="checkbox"  name="weekday" value="su">
+	  <label for="weekday"> Monday </label>
+	  <input type="checkbox"  name="weekday" value="mo">
+	  <label for="weekday"> Tuesday </label>
+	  <input type="checkbox"  name="weekday" value="tu">
+	  <label for="weekday"> Wednesday </label>
+	  <input type="checkbox"  name="weekday" value="we">
+	  <label for="weekday"> Thursday </label>
+	  <input type="checkbox"  name="weekday" value="th">
+	  <label for="weekday"> Friday </label>
+	  <input type="checkbox"  name="weekday" value="fr">
+	  <label for="weekday"> Saturday </label>
+	  <input type="checkbox"  name="weekday" value="sa"><br>
+	  
       <input type="submit" name="Submit" value=Submit/>
    </form>
    <!--% String departs = pageContext.getAttribute("depart");%-->
    <!--% System.out.println(departs);%-->
    <!--% rides = rl.sortDepart(5,pageContext.getAttribute("depart"));%-->
-   <% if (!rides.isEmpty()) { %>
+   <!--% if (!rides.isEmpty()) { %>
 	  <p> The Current Rides </p>
-      <% for (Ride ride : rides) { %>
-         <% pageContext.setAttribute("ride_email", ride.email); %>
-         <% pageContext.setAttribute("ride_origin", ride.origin); %>
-         <% pageContext.setAttribute("ride_dest", ride.destination); %>
-         <% pageContext.setAttribute("ride_depart", ride.depart); %>
+      <!--% for (Ride ride : rides) { %>
+         <!--% pageContext.setAttribute("ride_email", ride.email); %>
+         <!--% pageContext.setAttribute("ride_origin", ride.origin); %>
+         <!--% pageContext.setAttribute("ride_dest", ride.destination); %>
+         <!--% pageContext.setAttribute("ride_depart", ride.depart); %>
          <p>
 		 <b>${fn:escapeXml(ride_email)}</b>
          <b>${fn:escapeXml(ride_origin)}</b>
          <b>${fn:escapeXml(ride_dest)}</b>
          <b>${fn:escapeXml(ride_depart)}</b>
 		 </p>
-      <% } %>
-  <% } else { %>
+      <!--% } %>
+  <!--% } else { %>
       <p> There are no current rides. </p>
-   <% } %>
+   <!--% } %-->
    
 </body>
 </html>
