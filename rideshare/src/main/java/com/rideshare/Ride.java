@@ -21,13 +21,20 @@ public class Ride {
 //   @Index public int depart;
 //   @Index public int arrive;
    @Index public boolean drive;
+   @Index public boolean mo;
+   @Index public boolean tu;
+   @Index public boolean we;
+   @Index public boolean th;
+   @Index public boolean fr;
+   @Index public boolean sa;
+   @Index public boolean su;
     
    // add more fields later
    // default needed for Objectify 
    public Ride(){
    }
    public Ride(String fullname, String riderEmail, 
-               String orig, String dest, String departure, String arrival, boolean driver){
+               String orig, String dest, String departure, String arrival, boolean driver, boolean sun, boolean mon, boolean tue, boolean wed, boolean thu, boolean fri, boolean sat){
 	name = fullname;
 	email = riderEmail;
 	origin = orig;
@@ -35,5 +42,12 @@ public class Ride {
 	depart = departure;
 	arrive = arrival;
 	drive = driver;
+	su = sun;
+	mo = mon;
+	tu = tue;
+	we = wed;
+	th = thu;
+	fr = fri;
+	sa = sat;
    }	
 }

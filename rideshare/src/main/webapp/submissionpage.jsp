@@ -24,7 +24,7 @@
       .limit(5)
       .list();
   %>
-  <form action="/submissionpage.jsp" method="post"> 
+  <form action="/sign" method="post"> 
       <p> Please submit your ride here: </p>
 
       <label for="name"> Full Name: </label>
@@ -44,8 +44,16 @@
       <input type="radio" name="drive" value="true" checked>
       <label for "drive"> Riding </label>
       <input type="radio" name="drive" value="false"> <br>
+      <br>
+      <p> Offering a weekly ride? Check the day(s) that apply: </p>
+      <p><input type="checkbox" name="weekday" value="mo"/>Monday</p>
+      <p><input type="checkbox" name="weekday" value="tu"/>Tuesday</p>
+      <p><input type="checkbox" name="weekday" value="we"/>Wednesday</p>
+      <p><input type="checkbox" name="weekday" value="th"/>Thursday</p>
+      <p><input type="checkbox" name="weekday" value="fr"/>Friday</p>
+      <p><input type="checkbox" name="weekday" value="sa"/>Saturday</p>
+      <p><input type="checkbox" name="weekday" value="su"/>Sunday</p>
       <input type="submit" name="Submit" value=Submit>
-   
    </form>
 
 </body>
