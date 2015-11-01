@@ -156,7 +156,32 @@ public class Ridelist{
         //then, sort the list and return it	
         return sort(irlist);
     }
+
+    //filterByDrive: takes in a list of rides and returns a list of rides 
+    //that match the boolean
+    public List<Ride> filterByDrive(List<Ride> l, boolean b) {
+    	List<Ride> rl = new List<Ride>[];
+    	for (int i = 0; i < l.length; i++) {
+    		if (l[i].drive = b) {
+    			rl.add(l[i]);
+    		}
+    	}
+    	return rl;
+    }
 	
+	//filterByEmail: takes in a list of rides and returns a list of rides 
+    //that match the email
+    public List<Ride> filterByEmail(List<Ride> l, String e) {
+    	List<Ride> rl = new List<Ride>[];
+    	for (int i = 0; i < l.length; i++) {
+    		if (l[i].email.equals(e)) {
+    			rl.add(l[i]);
+    		}
+    	}
+    	return rl;
+    }
+
+
 	/*public List<Ride> sortDistance(){
 		
 	}*/
