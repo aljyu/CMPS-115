@@ -30,7 +30,9 @@
 				<br></br>
 				<input placeholder = "Confirm your password" name = "pass2" type = "password">
 				<br></br>
-				<input type = "submit">
+				<form method = "link" action = "/LoginPage.jsp" >
+				<input type = "submit" value = "Register">
+			</form>
 			</form>
 		</p>
 	</center></body>

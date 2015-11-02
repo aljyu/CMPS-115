@@ -11,25 +11,33 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html style = "background-color:lightblue">
-	<head>
+	<head><center>
 		<link type = "text/css" rel = "stylesheet" href = "LoginPage.css"/>
-		<title>Create a New Account</title>
-	</head>
+		
+		<h1>Returning User? Sign-In Here!</h1>
+		<meta name="google-signin-scope" content="profile email">
+		<meta name="google-signin-client_id" content="504928432041-6ivaiei584ib5vueh5hjult3o2v9o49v.apps.googleusercontent.com">
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+		
+		<title>Log-In Page</title>
+	</center></head>
 	<body><center>
-		<h1>Create a New Account</h1>
-		<p>
-			<form action = "rideshare.jsp" method = "post">
-				</br></br>
-				<input placeholder = "Full Name" name = "name" type = "text">
-				</br></br>
-				<input placeholder = "Email" name = "email" type = "text">
-				</br></br>
-				<input placeholder = "Username" name = "user" type = "text">
-				</br></br>
-				<input placeholder = "Password" name = "pass" type = "password">
-				</br></br>
-				<input type = "submit">
-			</form>
-		</p>
+		<h1>New User? Register Here!</h1>
+		<div class = "temp"><a href = "Register.jsp">Link to Register.jsp</a></div>
+		
+		<script>
+		  function onSignIn(googleUser) {
+			// Useful data for your client-side scripts:
+			var profile = googleUser.getBasicProfile();
+			console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+			console.log("Name: " + profile.getName());
+			console.log("Image URL: " + profile.getImageUrl());
+			console.log("Email: " + profile.getEmail());
+
+			// The ID token you need to pass to your backend:
+			var id_token = googleUser.getAuthResponse().id_token;
+			console.log("ID Token: " + id_token);
+		  };
+		</script>
 	</center></body>
 </html>
