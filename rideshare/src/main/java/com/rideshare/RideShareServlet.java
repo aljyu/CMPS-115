@@ -16,7 +16,13 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.Date;
+<<<<<<< Updated upstream
 import com.google.appengine.api.datastore.GeoPt;
+=======
+import java.io.PrintWriter;
+import java.util.List;
+
+>>>>>>> Stashed changes
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,10 +43,11 @@ public class RideShareServlet extends HttpServlet {
       String depart = req.getParameter("depart");
       String arrive = req.getParameter("arrive");
       String driving = req.getParameter("drive");
-      boolean drive;
+      boolean drive = false;
       if (driving.equals("true")) {
          drive = true;
       }
+<<<<<<< Updated upstream
       else {
          drive = false;
       }
@@ -97,6 +104,8 @@ public class RideShareServlet extends HttpServlet {
       float sln = Float.parseFloat(slg);
       GeoPt end = new GeoPt(slt, sln);
 
+=======
+>>>>>>> Stashed changes
       String weekdays[]= req.getParameterValues("weekday");
       boolean su = false;
       boolean mo = false;
@@ -105,6 +114,7 @@ public class RideShareServlet extends HttpServlet {
       boolean th = false;
       boolean fr = false;
       boolean sa = false;
+<<<<<<< Updated upstream
 
      /* for (int i = 0; i< weekdays.length; i++) {
         if (weekdays[i].equals("su")) {
@@ -127,6 +137,31 @@ public class RideShareServlet extends HttpServlet {
         }
         if (weekdays[i].equals("sa")) {
           sa = true;
+=======
+      if ((weekdays != null) && (weekdays.length > 0)) {
+        for (int i = 0; i< weekdays.length; i++) {
+          if (weekdays[i].equals("su")) {
+            su = true;
+          }
+          if (weekdays[i].equals("mo")) {
+            mo = true;
+          }
+          if (weekdays[i].equals("tu")) {
+            tu = true;
+          }
+          if (weekdays[i].equals("we")) {
+            we = true;
+          }
+          if (weekdays[i].equals("th")) {
+            th = true;
+          }
+          if (weekdays[i].equals("fr")) {
+            fr = true;
+          }
+          if (weekdays[i].equals("sa")) {
+            sa = true;
+          }
+>>>>>>> Stashed changes
         }
       }*/
 
@@ -137,6 +172,30 @@ public class RideShareServlet extends HttpServlet {
      // }
       ride = new Ride(name, email, origin, dest, depart, arrive, start, end, drive, su, mo, tu, we, th, fr, sa);
       ObjectifyService.ofy().save().entity(ride).now();
+<<<<<<< Updated upstream
       resp.sendRedirect("/rideshare.jsp");
+=======
+      
+    PrintWriter writer = resp.getWriter();
+    
+    String htmlResp = "<html><b>Start</b>";
+    
+      htmlResp += "<p>";
+      //htmlResp += "<b>";
+      htmlResp += "Contact Email: " + ride.email + ", ";
+      htmlResp += "Departure Time: " + ride.depart + ", ";
+      htmlResp += "Arrival Time: " + ride.arrive + ", ";
+      //htmlResp += "Days of the week offered: " + ride.su + ", " + ride.mo + ", " + ride.tu + ", " + ride.we + ", " + ride.th + ", " + ride.fr + ", " + ride.sa;
+      htmlResp += "Driver? " + ride.drive;
+      //htmlResp += "</b>";"
+      htmlResp += "</p>";
+    
+    htmlResp += "</html>";
+    
+    writer.println(htmlResp);
+
+
+      //resp.sendRedirect("/rideshare.jsp");
+>>>>>>> Stashed changes
    }
 }

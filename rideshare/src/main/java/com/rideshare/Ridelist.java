@@ -109,6 +109,9 @@ public class Ridelist{
 	public double convertTime(String time) {
 		double hour = 0;
 		double minutes = 0;
+		if (time == null) {
+			return 0;
+		}
         int index = time.indexOf(':');
         if(index == -1) hour = Integer.parseInt(time);
         else{
@@ -160,10 +163,10 @@ public class Ridelist{
     //filterByDrive: takes in a list of rides and returns a list of rides 
     //that match the boolean
     public List<Ride> filterByDrive(List<Ride> l, boolean b) {
-    	List<Ride> rl = new List<Ride>[];
-    	for (int i = 0; i < l.length; i++) {
-    		if (l[i].drive = b) {
-    			rl.add(l[i]);
+    	List<Ride> rl = new ArrayList<Ride>();
+    	for (int i = 0; i < l.size(); i++) {
+    		if (l.get(i).drive == b) {
+    			rl.add(l.get(i));
     		}
     	}
     	return rl;
@@ -172,18 +175,81 @@ public class Ridelist{
 	//filterByEmail: takes in a list of rides and returns a list of rides 
     //that match the email
     public List<Ride> filterByEmail(List<Ride> l, String e) {
-    	List<Ride> rl = new List<Ride>[];
-    	for (int i = 0; i < l.length; i++) {
-    		if (l[i].email.equals(e)) {
-    			rl.add(l[i]);
+    	List<Ride> rl = new ArrayList<Ride>();
+    	for (int i = 0; i < l.size(); i++) {
+    		if (l.get(i).email.equals(e)) {
+    			rl.add(l.get(i));
     		}
     	}
     	return rl;
     }
 
+    //filterByDays: takes in a list of rides and returns a list of rides 
+    //that match the days listed in boolean form
+    public List<Ride> filterByDays(List<Ride> l, boolean su, boolean mo, boolean tu, boolean we, boolean th, boolean fr, boolean sa) {
+    	List<Ride> rl = new ArrayList<Ride>();
+    	for (int i = 0; i < l.size(); i++) {
+    		if (su) {
+	    		if (l.get(i).su) {
+	    			rl.add(l.get(i));
+	    		}
+    		}
+    		if (mo) {
+	    		if (l.get(i).mo) {
+	    			rl.add(l.get(i));
+	    		}
+    		}
+    		if (tu) {
+	    		if (l.get(i).tu) {
+	    			rl.add(l.get(i));
+	    		}
+    		}
+    		if (we) {
+	    		if (l.get(i).we) {
+	    			rl.add(l.get(i));
+	    		}
+    		}
+    		if (th) {
+	    		if (l.get(i).th) {
+	    			rl.add(l.get(i));
+	    		}
+    		}
+    		if (fr) {
+	    		if (l.get(i).fr) {
+	    			rl.add(l.get(i));
+	    		}
+    		}
+    		if (sa) {
+	    		if (l.get(i).sa) {
+	    			rl.add(l.get(i));
+	    		}
+    		}
+    	}
+    	return rl;
+    }
 
-	/*public List<Ride> sortDistance(){
-		
-	}*/
+    //filterByDepart: takes in a list of rides and returns a list of rides 
+    //that leave after the departure time
+    public List<Ride> filterByDepart(List<Ride> l, String inputtime) {
+    	List<Ride> rl = new ArrayList<Ride>();
+    	for (int i = 0; i < l.size(); i++) {
+    		if (this.convertTime(l.get(i).depart) >= this.convertTime(inputtime)) {
+    			rl.add(l.get(i));
+    		}
+    	}
+    	return rl;
+    }
+
+    //filterByArrive: takes in a list of rides and returns a list of rides 
+    //that arrive before the arrival time
+    public List<Ride> filterByArrive(List<Ride> l, String inputtime) {
+    	List<Ride> rl = new ArrayList<Ride>();
+    	for (int i = 0; i < l.size(); i++) {
+    		if (this.convertTime(l.get(i).arrive) <= this.convertTime(inputtime)) {
+    			rl.add(l.get(i));
+    		}
+    	}
+    	return rl;
+    }
 	
 }

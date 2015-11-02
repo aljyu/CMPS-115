@@ -35,30 +35,29 @@
       <input id =" origin" type="text" name = "origin"><br>
       <label for="dest"> Destination: </label>
       <input id= "dest" type ="text" name = "dest">
-      <label for="depart"> Time: </label>
+      <label for="depart"> Departure Time: </label>
       <input id="depart" type = "text" name = "depart">
-	  <label for "drive"> Are you driving or riding? </label><br>
-      <label for "drive"> Driving </label>
+      <label for="arrive"> Arrival Time: </label>
+      <input id="arrive" type = "text" name = "arrive">
+	  <label for "drive"> Are you looking for a driver or a rider?</label><br>
+      <label for "drive"> Driver </label>
       <input type="radio" name="drive" value="true" checked>
-      <label for "drive"> Riding </label>
+      <label for "drive"> Rider </label>
       <input type="radio" name="drive" value="false"> <br>
-	  <label for "weekday"> Days of the week </label><br>
-	  <label for="weekday"> Sunday </label>
-	  <input type="checkbox"  name="weekday" value="su">
-	  <label for="weekday"> Monday </label>
-	  <input type="checkbox"  name="weekday" value="mo">
-	  <label for="weekday"> Tuesday </label>
-	  <input type="checkbox"  name="weekday" value="tu">
-	  <label for="weekday"> Wednesday </label>
-	  <input type="checkbox"  name="weekday" value="we">
-	  <label for="weekday"> Thursday </label>
-	  <input type="checkbox"  name="weekday" value="th">
-	  <label for="weekday"> Friday </label>
-	  <input type="checkbox"  name="weekday" value="fr">
-	  <label for="weekday"> Saturday </label>
-	  <input type="checkbox"  name="weekday" value="sa"><br>
+      <br>
+      <br>
+	  Searching for a weekly ride? Check the day(s) that apply: <br>
+    <br>
+      <br>
+	  <input type="checkbox" name="weekday" value="su"/>Sunday<br>
+      <input type="checkbox" name="weekday" value="mo"/>Monday<br>
+      <input type="checkbox" name="weekday" value="tu"/>Tuesday<br>
+     <input type="checkbox" name="weekday" value="we"/>Wednesday<br>
+      <input type="checkbox" name="weekday" value="th"/>Thursday<br>
+      <input type="checkbox" name="weekday" value="fr"/>Friday<br>
+      <input type="checkbox" name="weekday" value="sa"/>Saturday<br>
 	  
-      <input type="submit" name="Submit" value=Submit/>
+      <input type="submit" name="Submit" value=Submit>
    </form>
    <!--% String departs = pageContext.getAttribute("depart");%-->
    <!--% System.out.println(departs);%-->

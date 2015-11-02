@@ -37,22 +37,22 @@
       <input id= "dest" type ="text" name = "dest"><br>
       <label for="depart"> Departure Time: </label>
       <input id="depart" type ="text" name= "depart"><br>
-      <label for "arrival"> Arrival Time: </label>
-      <input id = "arrival" type ="text" name "arrival"><br>
+      <label for "arrive"> Arrival Time: </label>
+      <input id = "arrive" type ="text" name = "arrive"><br>
       <label for "drive"> Are you driving or riding? </label><br>
       <label for "drive"> Driving </label>
       <input type="radio" name="drive" value="true" checked>
       <label for "drive"> Riding </label>
       <input type="radio" name="drive" value="false"> <br>
       <br>
-      <p> Offering a weekly ride? Check the day(s) that apply: </p>
+      <p> Offering or looking for a weekly ride? Check the day(s) that apply: </p>
+      <p><input type="checkbox" name="weekday" value="su"/>Sunday</p>
       <p><input type="checkbox" name="weekday" value="mo"/>Monday</p>
       <p><input type="checkbox" name="weekday" value="tu"/>Tuesday</p>
       <p><input type="checkbox" name="weekday" value="we"/>Wednesday</p>
       <p><input type="checkbox" name="weekday" value="th"/>Thursday</p>
       <p><input type="checkbox" name="weekday" value="fr"/>Friday</p>
       <p><input type="checkbox" name="weekday" value="sa"/>Saturday</p>
-      <p><input type="checkbox" name="weekday" value="su"/>Sunday</p>
       <input type="submit" name="Submit" value=Submit>
    </form>
 
