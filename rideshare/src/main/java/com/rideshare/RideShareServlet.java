@@ -52,7 +52,7 @@ public class RideShareServlet extends HttpServlet {
       String lat = null, lng = null;
       origin = origin.replaceAll(" ", "%20");
       try {
-         String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + origin + "key=AIzaSyCbsHfkMCdFmWfVz8E3Wu61iNsor9IKQnQ"; 
+         String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + origin + "key="; 
          URL geocodeOri = new URL(url);
          BufferedReader reader = new BufferedReader(new InputStreamReader(geocodeOri.openStream()));
          String line;
