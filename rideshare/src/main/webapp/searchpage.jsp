@@ -31,32 +31,41 @@
   <form action="/search" method="post"> 
       <label for="email"> Email: </label>
       <input id = "email" type="text" name="email"><br>
+
       <label for="origin"> Origin: </label> 
-      <input id =" origin" type="text" name = "origin"><br>
+      <input id ="origin" type="text" name = "origin"><br>
+      <label for="originrad"> Origin Radius: </label>
+      <input id ="originrad" type="text" name = "originrad"><br>
+
       <label for="dest"> Destination: </label>
-      <input id= "dest" type ="text" name = "dest">
+      <input id= "dest" type ="text" name = "dest"><br>
+      <label for="destrad"> Destination Radius: </label>
+      <input if= "destrad" type="text" name = "destrad"><br>
+
       <label for="depart"> Departure Time: </label>
-      <input id="depart" type = "text" name = "depart">
+      <input id="depart" type = "text" name = "depart"> <br>
+      
       <label for="arrive"> Arrival Time: </label>
-      <input id="arrive" type = "text" name = "arrive">
-	  <label for "drive"> Are you looking for a driver or a rider?</label><br>
+      <input id="arrive" type = "text" name = "arrive"> <br><br>
+	  Are you looking for a driver or a rider? <br>
       <label for "drive"> Driver </label>
       <input type="radio" name="drive" value="true" checked>
       <label for "drive"> Rider </label>
       <input type="radio" name="drive" value="false"> <br>
       <br>
       <br>
-	  Searching for a weekly ride? Check the day(s) that apply: <br>
-    <br>
-      <br>
-	  <input type="checkbox" name="weekday" value="su"/>Sunday<br>
+	Searching for a weekly ride? Check the day(s) that apply: <br>
+	    <input type="checkbox" name="weekday" value="su"/>Sunday<br>
       <input type="checkbox" name="weekday" value="mo"/>Monday<br>
       <input type="checkbox" name="weekday" value="tu"/>Tuesday<br>
-     <input type="checkbox" name="weekday" value="we"/>Wednesday<br>
+      <input type="checkbox" name="weekday" value="we"/>Wednesday<br>
       <input type="checkbox" name="weekday" value="th"/>Thursday<br>
       <input type="checkbox" name="weekday" value="fr"/>Friday<br>
       <input type="checkbox" name="weekday" value="sa"/>Saturday<br>
-	  
+	Prioritize: <br>
+      <input type="radio" name="prio" value="both" checked/>Origin and Destination<br>
+      <input type="radio" name="prio" value="origin"/>Origin<br>
+      <input type="radio" name="prio" value="dest"/>Destination<br>
       <input type="submit" name="Submit" value=Submit>
    </form>
    <!--% String departs = pageContext.getAttribute("depart");%-->
