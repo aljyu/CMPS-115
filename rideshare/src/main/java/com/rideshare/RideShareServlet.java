@@ -48,8 +48,7 @@ public class RideShareServlet extends HttpServlet {
          drive = false;
       }
      
-      String finalOrigin;
-      String lat = null, lng = null;
+      String lat = "0", lng = "0";
       origin = origin.replaceAll(" ", "%20");
       try {
          String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + origin + "key="; 
@@ -60,14 +59,16 @@ public class RideShareServlet extends HttpServlet {
             int colon = 0;
             colon = line.indexOf(":");
             if(line.contains("formatted_address")){
-               finalOrigin = line.substring(colon + 2);
+               origin = line.substring(colon + 2);
             }
             if(line.contains("lat")) lat = line.substring(colon + 2, line.lastIndexOf(",") - 1);
             if(line.contains("lng")) lng = line.substring(colon + 2);
          }   
       } catch (MalformedURLException e) {
+        System.exit(127);
       // ...
       } catch (IOException e) {
+        System.exit(127);
       // ...
       } 
       float lt = Float.parseFloat(lat);
@@ -78,7 +79,7 @@ public class RideShareServlet extends HttpServlet {
       String slg = null;
       dest = dest.replaceAll(" ", "%20");
       try {
-         String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + dest + "key=AIzaSyCbsHfkMCdFmWfVz8E3Wu61iNsor9IKQnQ";
+         String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + dest + "key=AIzaSyCp5fkGT7jJUzBRbexUadI1EmU1nq8pVO8";
          URL geocodeOri = new URL(url);
          BufferedReader reader = new BufferedReader(new InputStreamReader(geocodeOri.openStream()));
          String line;
@@ -86,7 +87,7 @@ public class RideShareServlet extends HttpServlet {
             int colon = 0;
             colon = line.indexOf(":");
             if(line.contains("formatted_address")){
-               finalOrigin = line.substring(colon + 2);
+               dest = line.substring(colon + 2);
             }
             if(line.contains("lat")) sla = line.substring(colon + 2, line.lastIndexOf(",") - 1);
             if(line.contains("lng")) slg = line.substring(colon + 2);

@@ -9,10 +9,12 @@ import com.google.appengine.api.datastore.GeoPt;
 import java.lang.String;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Entity
 public class Ride {
-   @Id public String name;
+   @Id public Long id;
+   @Index public String name;
    @Index public String email;
    @Index public String origin;
    @Index public String destination;
@@ -39,6 +41,8 @@ public class Ride {
                String orig, String dest, String departure, String arrival, 
                GeoPt st, GeoPt en, boolean driver, 
                boolean sun, boolean mon, boolean tue, boolean wed, boolean thu, boolean fri, boolean sat){
+        Random r = new Random();
+        id = r.nextLong();
 	name = fullname;
 	email = riderEmail;
 	origin = orig;

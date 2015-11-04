@@ -11,11 +11,11 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class DoubleRide{
-	double value;
+public class floatRide{
+	float value;
 	Ride ride;
 
-	DoubleRide(double val, Ride r) {
+	floatRide(float val, Ride r) {
 		value=val;
 		ride = r;
 	}
@@ -24,7 +24,7 @@ public class DoubleRide{
 		return ride;
 	}
 	
-	double getValue(){
+	float getValue(){
 		return value;
 	}
 	
