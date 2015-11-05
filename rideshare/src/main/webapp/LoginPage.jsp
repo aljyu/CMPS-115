@@ -24,6 +24,8 @@
 	<body><center>
 		<h1>New User? Register Here!</h1>
 		<div class = "temp"><a href = "Register.jsp">Link to Register.jsp</a></div>
+		<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+
 		
 		<script>
 		  function onSignIn(googleUser) {
