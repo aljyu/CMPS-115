@@ -39,6 +39,6 @@
 		<title>Log-In Page</title>
 	</center></head>
 	<body><center>
-		<h1>New User? Register <div class = "temp"><a href = "Register.jsp">Here</a></div>!</h1>
+		<h1>New User? Register <a href = "Register.jsp">Here</a>!</h1>
 	</center></body>
 </html>
