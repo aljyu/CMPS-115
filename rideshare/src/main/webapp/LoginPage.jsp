@@ -20,7 +20,6 @@
 		<meta name="google-signin-client_id" content="504928432041-6ivaiei584ib5vueh5hjult3o2v9o49v.apps.googleusercontent.com">
 		<script src="https://apis.google.com/js/platform.js" async defer></script>
 		
-		<form action = "rideshare.jsp">
 			<!-- Google Sign-In Button -->
 			<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 			<script>
@@ -31,10 +30,16 @@
 				
 			  };
 			</script>
-		 </form>
+			<script>
+				function Redirect() {
+					window.location.assign("rideshare.jsp")
+				}
+			</script>
 		
 	</center></head>
 	<body><center>
+		<input type = "button" value = "Click here to continue" onclick = "Rediret()">
+		</br></br>
 		<h1>New User? Register <a href = "Register.jsp">Here</a>!</h1>
 	</center></body>
 </html>
