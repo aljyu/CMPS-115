@@ -38,7 +38,7 @@
 		
 	</center></head>
 	<body><center>
-		<input type = "button" value = "Click here to continue" onclick = "Rediret()">
+		<input type = "button" value = "Click here to continue" onclick = "Redirect()">
 		</br></br>
 		<h1>New User? Register <a href = "Register.jsp">Here</a>!</h1>
 	</center></body>
