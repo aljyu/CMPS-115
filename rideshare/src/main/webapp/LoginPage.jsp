@@ -19,14 +19,7 @@
 		<meta name="google-signin-client_id" content="504928432041-6ivaiei584ib5vueh5hjult3o2v9o49v.apps.googleusercontent.com">
 		<script src="https://apis.google.com/js/platform.js" async defer></script>
 		
-		<title>Log-In Page</title>
-	</center></head>
-	<body><center>
-		<h1>New User? Register Here!</h1>
-		<div class = "temp"><a href = "Register.jsp">Link to Register.jsp</a></div>
 		<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-
-		
 		<script>
 		  function onSignIn(googleUser) {
 			// Useful data for your client-side scripts:
@@ -41,5 +34,12 @@
 			console.log("ID Token: " + id_token);
 		  };
 		</script>
+		
+		<title>Log-In Page</title>
+	</center></head>
+	<body><center>
+		<h1>New User? Register </h1>
+		<div class = "temp"><a href = "Register.jsp">Here</a></div>
+		<h1>!</h1>
 	</center></body>
 </html>
