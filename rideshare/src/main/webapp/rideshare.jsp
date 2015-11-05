@@ -23,6 +23,8 @@
 			<form method="link" action="/searchpage.jsp">
 				<input type="submit" value="Or Search for a Ride?">
 			</form>
+			</br></br></br>
+				<h1><a href = "Register.jsp">My Profile Page</a><form action = "rideshare.jsp"></form></h1>
 			</font>
 		</p>
 	</center></body>
