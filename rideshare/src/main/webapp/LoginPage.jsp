@@ -20,17 +20,18 @@
 		<meta name="google-signin-client_id" content="504928432041-6ivaiei584ib5vueh5hjult3o2v9o49v.apps.googleusercontent.com">
 		<script src="https://apis.google.com/js/platform.js" async defer></script>
 		
-		<!-- Google Sign-In Button -->
-		<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-		<script>
-		  function onSignIn(googleUser) {
-			//Gets all of the basic information from Google
-			var profile = googleUser.getBasicProfile();
-			
-			
-			<a href = "rideshare.jsp">Redirecting</a><form action = "rideshare.jsp"></a>
-		  };
-		</script>
+		<form action = "rideshare.jsp">
+			<!-- Google Sign-In Button -->
+			<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+			<script>
+			  function onSignIn(googleUser) {
+				//Gets all of the basic information from Google
+				var profile = googleUser.getBasicProfile();
+				
+				
+			  };
+			</script>
+		 </form>
 		
 	</center></head>
 	<body><center>
