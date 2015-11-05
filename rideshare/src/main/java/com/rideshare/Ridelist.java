@@ -5,13 +5,27 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Parent;
 import com.googlecode.objectify.Key;
-import com.google.appengine.api.search.GeoPoint;
+import com.google.appengine.api.datastore.GeoPt;
 
 import java.lang.String;
-import java.util.Date;
-import java.util.List;
 import java.util.*;
 import java.lang.Math;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.Date;
+import com.google.appengine.api.datastore.GeoPt;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.googlecode.objectify.ObjectifyService;
 
 @Entity
 public class Ridelist{
@@ -24,67 +38,67 @@ public class Ridelist{
 		inputlist = list;
 	}
 	
-	public double testFindDist(){
-		//List<double> l = new ArrayList<double>();
-		double l = 0.0;
+	public float testFindDist(){
+		//List<float> l = new ArrayList<float>();
+		float l = 0;
 		//l = findDist(createGP(50,03,59,-05,-42,-53),createGP(58,38,38,-03,-04,-12));
 		//l = findDist(createGP(50,03,59,-05,-42,-53),createGP(50,03,59,-05,-42,-54));
 		l = findDist(createGP(50,03,59,-05,-42,-53),createGP(40,44,55,-73,-59,-11));
 		return l;
 	}
 	
-	private GeoPoint createGP(double d1, double m1, double s1, double d2, double m2, double s2){
-		double lat = createRad(d1,m1,s1);
-		double lon = createRad(d2,m2,s2);
-		GeoPoint g = new GeoPoint(lat,lon);
+	private GeoPt createGP(float d1, float m1, float s1, float d2, float m2, float s2){
+		float lat = createRad(d1,m1,s1);
+		float lon = createRad(d2,m2,s2);
+		GeoPt g = new GeoPt(lat,lon);
 		return g;
 	}
 	
-	private double createRad(double d, double m, double s){
-		double mn = m/60;
-		double sn = s/3600;
+	private float createRad(float d, float m, float s){
+		float mn = m/60;
+		float sn = s/3600;
 		return d + mn + sn;
 	}
 	
-	private double findDist(GeoPoint orig, GeoPoint dest){
-		double dist;
+	private float findDist(GeoPt orig, GeoPt dest){
+		float dist;
 		int R = 6371; //Radius of the earth in meters
-		double latO = Math.toRadians(orig.getLatitude());
-		double latD = Math.toRadians(dest.getLatitude());
-		double lonO = Math.toRadians(orig.getLongitude());
-		double lonD = Math.toRadians(dest.getLongitude());
-		double latDiff = latD - latO;
-		double lonDiff = lonD - lonO;
-		double a = Math.sin(latDiff/2) * Math.sin(latDiff/2) + 
-		           Math.cos(latO) * Math.cos(latD) * Math.sin(lonDiff/2) * Math.sin(lonDiff/2);
-		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+		float latO = (float) Math.toRadians(orig.getLatitude());
+		float latD = (float) Math.toRadians(dest.getLatitude());
+		float lonO = (float) Math.toRadians(orig.getLongitude());
+		float lonD = (float) Math.toRadians(dest.getLongitude());
+		float latDiff = latD - latO;
+		float lonDiff = lonD - lonO;
+		float a = (float) (Math.sin(latDiff/2) * Math.sin(latDiff/2) + 
+		           Math.cos(latO) * Math.cos(latD) * Math.sin(lonDiff/2) * Math.sin(lonDiff/2));
+		float c = (float) (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
 		
 		dist = R * c;
 		
 		return dist;
 	}
 	
-	//Sort: This function should take in a list of DoubleRides (simple class 
-	//consisting of an double and a ride, and sort the rides in ascending 
-	//order by their associated doubles, and return just the list of rides 
+	//Sort: This function should take in a list of FloatRides (simple class 
+	//consisting of an float and a ride, and sort the rides in ascending 
+	//order by their associated floats, and return just the list of rides 
 	//in the correct order. 
-	private List<Ride> sort(List<DoubleRide> iRide) {
+	public List<Ride> sort(List<floatRide> iRide) {
 		List<Ride> rList = new ArrayList<Ride>(); //[this.inputlist.size()]
-		List<DoubleRide> sorted = logsort(iRide);
+		List<floatRide> sorted = logsort(iRide);
 		for(int i = 0; i < sorted.size(); i++){
 			rList.add(sorted.get(i).ride);
 		}
 		return rList;
 	}
 	
-	private List<DoubleRide> logsort(List<DoubleRide> rides){
-		List<DoubleRide> ret = new ArrayList<DoubleRide>();//[rides.size()]
+	private List<floatRide> logsort(List<floatRide> rides){
+		List<floatRide> ret = new ArrayList<floatRide>();//[rides.size()]
 		if(rides.size() <= 1){
 			return rides;
 		} else {
 			int size = rides.size();
-			List<DoubleRide> left = logsort(rides.subList(0,size/2));
-			List<DoubleRide> right = logsort(rides.subList(size/2,size));
+			List<floatRide> left = logsort(rides.subList(0,size/2));
+			List<floatRide> right = logsort(rides.subList(size/2,size));
 			int l = 0;
 			int r = 0;
 			while(l < left.size() && r < right.size()){
@@ -106,9 +120,90 @@ public class Ridelist{
 		}
 	}
 
-	public double convertTime(String time) {
-		double hour = 0;
-		double minutes = 0;
+	public GeoPt convertString(String location) {
+		String finalLoc;
+	      String lat = null, lng = null;
+	      location = location.replaceAll(" ", "%20");
+	      try {
+	         String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "key=AIzaSyCp5fkGT7jJUzBRbexUadI1EmU1nq8pVO8"; 
+	         URL geocodeOri = new URL(url);
+	         BufferedReader reader = new BufferedReader(new InputStreamReader(geocodeOri.openStream()));
+	         String line;
+	         while ((line = reader.readLine()) != null){
+	            int colon = 0;
+	            colon = line.indexOf(":");
+	            if(line.contains("formatted_address")){
+	               finalLoc = line.substring(colon + 2);
+	            }
+	            if(line.contains("lat")) lat = line.substring(colon + 2, line.lastIndexOf(",") - 1);
+	            if(line.contains("lng")) lng = line.substring(colon + 2);
+	         }   
+	      } catch (MalformedURLException e) {
+	      // ...
+	      } catch (IOException e) {
+	      // ...
+	      } 
+	      float lt = Float.parseFloat(lat);
+	      float ln = Float.parseFloat(lng);
+	      GeoPt loc = new GeoPt(lt, ln); 
+	      return loc;
+	}
+
+	public List<Ride> sortOrigin(List<Ride> ilist, String location) {
+	      GeoPt loc = convertString(location); 
+	      List<floatRide> irlist = new ArrayList<floatRide>();
+        //first, go through the list and compute values
+        for (int i=0; i< ilist.size(); i++) {
+            GeoPt istart = ilist.get(i).start;
+            float val = this.findDist(istart, loc);
+            floatRide ir = new floatRide(val, ilist.get(i));
+            irlist.add(ir);
+        }
+        //then, sort the list and return it
+        return sort(irlist);
+	}
+
+	public List<Ride> originRadius(List<Ride> l, String origin, String radius){
+		int b = Integer.parseInt(radius);
+		GeoPt loc = convertString(origin); 
+		List<Ride> rl = new ArrayList<Ride>();
+    	for (int i = 0; i < l.size(); i++) {
+    		if (this.findDist(l.get(i).start, loc) < b) {
+    			rl.add(l.get(i));
+    		}
+    	}
+    	return rl;
+	}
+
+	public List<Ride> sortDest(List<Ride> ilist, String location) {
+	      GeoPt loc = convertString(location); 
+	      List<floatRide> irlist = new ArrayList<floatRide>();
+        //first, go through the list and compute values
+        for (int i=0; i< ilist.size(); i++) {
+            GeoPt istart = ilist.get(i).end;
+            float val = this.findDist(istart, loc);
+            floatRide ir = new floatRide(val, ilist.get(i));
+            irlist.add(ir);
+        }
+        //then, sort the list and return it
+        return sort(irlist);
+	}
+
+	public List<Ride> destRadius(List<Ride> l, String dest, String radius){
+		int b = Integer.parseInt(radius);
+		GeoPt loc = convertString(dest); 
+		List<Ride> rl = new ArrayList<Ride>();
+    	for (int i = 0; i < l.size(); i++) {
+    		if (this.findDist(l.get(i).end, loc) < b) {
+    			rl.add(l.get(i));
+    		}
+    	}
+    	return rl;
+	}
+
+	public float convertTime(String time) {
+		float hour = 0;
+		float minutes = 0;
 		if (time == null) {
 			return 0;
 		}
@@ -120,21 +215,21 @@ public class Ridelist{
                 minutes = Integer.parseInt(time.substring(index + 1));
             }
         }
-        double hours = hour + minutes/60;
+        float hours = hour + minutes/60;
         return hours;
 	}
 	
 	//sortDepart: this function uses sort to sort a list by the departure
 	//time closest to the input time
-    public List<Ride> sortDepart(double length, String time){
-		double inputtime = convertTime(time);
-        List<DoubleRide> irlist = new ArrayList<DoubleRide>();//[this.inputlist.size()]
+    public List<Ride> sortDepart(float length, String time){
+		float inputtime = convertTime(time);
+        List<floatRide> irlist = new ArrayList<floatRide>();//[this.inputlist.size()]
         //first, go through the list and compute values
         for (int i=0; i< this.inputlist.size(); i++) {
             String depart = this.inputlist.get(i).depart;
-            double hours = this.convertTime(depart);
-            double val = Math.abs(hours - inputtime);
-            DoubleRide ir = new DoubleRide(val, this.inputlist.get(i));
+            float hours = this.convertTime(depart);
+            float val = Math.abs(hours - inputtime);
+            floatRide ir = new floatRide(val, this.inputlist.get(i));
             irlist.add(ir);
         }
         //then, sort the list and return it
@@ -143,17 +238,17 @@ public class Ridelist{
 
     //sortArrive: this function uses sort to sort a list by the arrival
     //time closest to the input time
-    public List<Ride> sortArrive(double length, String time){
-		double inputtime = this.convertTime(time);
+    public List<Ride> sortArrive(float length, String time){
+		float inputtime = this.convertTime(time);
         int hour = 0;
         int minutes = 0;
-        List<DoubleRide> irlist = new ArrayList<DoubleRide>();//[this.inputlist.size()]
+        List<floatRide> irlist = new ArrayList<floatRide>();//[this.inputlist.size()]
         //first, go through the list and compute values
         for (int i=0; i< this.inputlist.size(); i++) {
             String arrive = this.inputlist.get(i).arrive;
-            double hours = this.convertTime(arrive);
-            double val = Math.abs(hours - inputtime);
-            DoubleRide ir = new DoubleRide(val, this.inputlist.get(i));
+            float hours = this.convertTime(arrive);
+            float val = Math.abs(hours - inputtime);
+            floatRide ir = new floatRide(val, this.inputlist.get(i));
             irlist.add(ir);
         }
         //then, sort the list and return it	
