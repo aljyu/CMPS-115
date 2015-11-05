@@ -30,6 +30,7 @@
 			
 		  };
 		</script>
+		<a href = "rideshare.jsp">Redirecting</a><form action = "rideshare.jsp"></a>
 		
 	</center></head>
 	<body><center>
