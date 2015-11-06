@@ -31,12 +31,22 @@
 			  };
 			</script>
 			
-			<script>
-				function Redirect() {
-					window.location.assign("rideshare.jsp")
-				}
-			</script>
+			
+			
+			
+			
+			
+			
+			<!-- 
+			if () {
+				<script>
+					function Redirect() {
+						window.location.assign("rideshare.jsp")
+					}
+				</script>
+			}
 			</br></br>
+			-->
 	</center></head>
 	<body><center>
 		<input type = "button" value = "Click here to continue" onclick = "Redirect()">
