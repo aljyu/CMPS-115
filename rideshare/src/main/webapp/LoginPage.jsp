@@ -30,16 +30,15 @@
 				
 			  };
 			</script>
+			
 			<script>
 				function Redirect() {
 					window.location.assign("rideshare.jsp")
 				}
 			</script>
-		
+			</br></br>
 	</center></head>
 	<body><center>
 		<input type = "button" value = "Click here to continue" onclick = "Redirect()">
-		</br></br>
-		<h1>New User? Register <a href = "Register.jsp">Here</a>!</h1>
 	</center></body>
 </html>

@@ -10,23 +10,24 @@
 <%@ page import="java.util.List" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<html>
-	<head></head>
+<html style = "background-color:lightblue">
+	<head>
+		<link type = "text/css" rel = "stylesheet" href = "Register.css"/>
+		<title>Profile Page</title>
+	</head>
 	<body><center>
+		<h1>My Profile Page</h1>
 		<p>
-			<div class = "menu">
-			<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-			<font size ="0">
-			<form method="link" action="/submissionpage.jsp" >
-				<input type="submit" value="Add a Ride?">
-			</form>
-			<form method="link" action="/searchpage.jsp">
-				<input type="submit" value="Or Search for a Ride?">
-			</form>
-			</br></br></br>
-				<h1><a href = "Register.jsp">My Profile Page</a><form action = "ProfilePage.jsp"></form></h1>
-			</font>
+			Full Name: <!-- Output specific name -->
+			</br>
+			Username: <!-- Output specific username -->
+			</br>
+			Email: <!-- Output specific email -->
+		</p>
+		</br></br>
+		<h3>My Rides</h3>
+		<p>
+			<!-- Output rides -->
 		</p>
 	</center></body>
 </html>
-
