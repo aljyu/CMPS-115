@@ -33,9 +33,9 @@
 			
 			<script>
 				function Redirect() {
-					if (login_success === "true") {
+					//if (login_success === "true") {
 						window.location.assign("rideshare.jsp");
-					}
+					//}
 				};
 			</script>
 			
