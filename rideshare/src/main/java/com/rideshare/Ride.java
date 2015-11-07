@@ -32,6 +32,7 @@ public class Ride {
    @Index public boolean fr;
    @Index public boolean sa;
    @Index public boolean su;
+   @Index public int seats;
     
    // add more fields later
    // default needed for Objectify 
@@ -40,7 +41,7 @@ public class Ride {
    public Ride(String fullname, String riderEmail, 
                String orig, String dest, String departure, String arrival, 
                GeoPt st, GeoPt en, boolean driver, 
-               boolean sun, boolean mon, boolean tue, boolean wed, boolean thu, boolean fri, boolean sat){
+               boolean sun, boolean mon, boolean tue, boolean wed, boolean thu, boolean fri, boolean sat, int seat){
         Random r = new Random();
         id = r.nextLong();
 	name = fullname;
@@ -59,5 +60,6 @@ public class Ride {
 	th = thu;
 	fr = fri;
 	sa = sat;
+	seats = seat;
    }	
 }

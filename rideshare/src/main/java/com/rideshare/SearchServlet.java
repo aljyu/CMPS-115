@@ -54,6 +54,7 @@ public class SearchServlet extends HttpServlet {
       boolean fr = false;
       boolean sa = false;
       String prio = req.getParameter("prio");
+	  String seats = req.getParameter("seats");
 
       if ((weekdays != null) && (weekdays.length > 0)) {
         for (int i = 0; i< weekdays.length; i++) {
@@ -105,13 +106,18 @@ public class SearchServlet extends HttpServlet {
 			List<Ride> filter2 = allrides.filterByArrive(filtered, arrive);
 			filtered=filter2;
 		}
-    //sixth, if user entered a origin radius
+		//sixth, if user entered number of seats, filter by seats avaliable
+		if(seats.length() > 0){
+			List<Ride> filter2 = allrides.filterBySeats(filtered, seats);
+			filtered=filter2;
+		}
+    //seventh, if user entered a origin radius
     if ((origin.length() > 0) && (originrad.length()>0)) {
       List<Ride> filter2 = allrides.originRadius(filtered, origin, originrad);
       filtered=filter2;
     }
 
-    //seventh, if user entered a origin radius
+    //eigthth, if user entered a origin radius
     if ((dest.length() > 0) && (destrad.length()>0)) {
       List<Ride> filter2 = allrides.destRadius(filtered, dest, destrad);
       filtered=filter2;
@@ -154,13 +160,14 @@ public class SearchServlet extends HttpServlet {
 			htmlResp += "<p>";
 			//htmlResp += "<b>";
 			htmlResp += "Contact Email: " + ride.email + ", ";
-      htmlResp += "Origin: " + ride.origin.replaceAll("%20", " ") + ", ";
-      htmlResp += "Destination: " + ride.destination.replaceAll("%20", " ") + ", ";
+			htmlResp += "Origin: " + ride.origin.replaceAll("%20", " ") + ", ";
+			htmlResp += "Destination: " + ride.destination.replaceAll("%20", " ") + ", ";
 			htmlResp += "Departure Time: " + ride.depart + ", ";
 			htmlResp += "Arrival Time: " + ride.arrive + ", ";
 			//htmlResp += "Days of the week offered: " + ride.su + ", " + ride.mo + ", " + ride.tu + ", " + ride.we + ", " + ride.th + ", " + ride.fr + ", " + ride.sa;
+			htmlResp += "Seats Avaliable: " + ride.seats;
 			htmlResp += "Driver? " + ride.drive;
-      //htmlResp += "</b>";"
+			//htmlResp += "</b>";"
 			htmlResp += "</p>";
 		}
 		htmlResp += "</html>";

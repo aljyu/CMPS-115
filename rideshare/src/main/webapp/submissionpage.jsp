@@ -39,6 +39,8 @@
       <input id="depart" type ="text" name= "depart"><br>
       <label for "arrive"> Arrival Time: </label>
       <input id = "arrive" type ="text" name = "arrive"><br>
+	  <label for = "seats"> Seats Avaliable: </label>
+	  <input id = "seats" type = "text" name = "seats"><br>
       <label for "drive"> Are you driving or riding? </label><br>
       <label for "drive"> Driving </label>
       <input type="radio" name="drive" value="true" checked>

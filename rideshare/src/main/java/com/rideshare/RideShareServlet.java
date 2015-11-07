@@ -56,6 +56,9 @@ public class RideShareServlet extends HttpServlet {
       else {
          drive = false;
       }
+	  String seatstring = req.getParameter("seats");
+	  int seats = Integer.parseInt(seatstring);
+	  
       String lat = "0", lng = "0";
       origin = origin.replaceAll(" ", "%20");
       List<Keys> listkey = ObjectifyService.ofy().load().type(Keys.class).list();
@@ -154,7 +157,7 @@ public class RideShareServlet extends HttpServlet {
       //    depart.isEmpty() || arrive.isEmpty()){
      //    resp.sendRedirect(returner);
      // }
-    ride = new Ride(name, email, origin, dest, depart, arrive, start, end, drive, su, mo, tu, we, th, fr, sa);
+    ride = new Ride(name, email, origin, dest, depart, arrive, start, end, drive, su, mo, tu, we, th, fr, sa, seats);
     ObjectifyService.ofy().save().entity(ride).now();
     resp.sendRedirect("/rideshare.jsp");
       

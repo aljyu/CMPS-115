@@ -46,7 +46,11 @@
       <input id="depart" type = "text" name = "depart"> <br>
       
       <label for="arrive"> Arrival Time: </label>
-      <input id="arrive" type = "text" name = "arrive"> <br><br>
+      <input id="arrive" type = "text" name = "arrive"> <br>
+	  
+	  <label for="seats"> Number of Seats Avaliable: </label>
+	  <input id="seats" type = "text" name = "seats"> <br><br>
+	  
 	  Are you looking for a driver or a rider? <br>
       <label for "drive"> Driver </label>
       <input type="radio" name="drive" value="true" checked>
@@ -54,6 +58,7 @@
       <input type="radio" name="drive" value="false"> <br>
       <br>
       <br>
+	  
 	Searching for a weekly ride? Check the day(s) that apply: <br>
 	    <input type="checkbox" name="weekday" value="su"/>Sunday<br>
       <input type="checkbox" name="weekday" value="mo"/>Monday<br>
@@ -62,6 +67,7 @@
       <input type="checkbox" name="weekday" value="th"/>Thursday<br>
       <input type="checkbox" name="weekday" value="fr"/>Friday<br>
       <input type="checkbox" name="weekday" value="sa"/>Saturday<br>
+	  
 	Prioritize: <br>
       <input type="radio" name="prio" value="both" checked/>Origin and Destination<br>
       <input type="radio" name="prio" value="origin"/>Origin<br>
