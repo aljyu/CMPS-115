@@ -23,15 +23,15 @@
 			<!-- Google Sign-In Button -->
 			<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 			<script>
-			  function onSignIn(googleUser) {
-				//Gets all of the basic information from Google
-				var profile = googleUser.getBasicProfile();
-				
-				
-			  };
+				function onSignIn(googleUser) {
+					//Gets all of the basic information from Google
+					var profile = googleUser.getBasicProfile();
+					window.location.assign("rideshare.jsp");
+				};
 			</script>
 			</br></br>
-			<!-- 
+			
+			<!--
 			if () {
 				<script>
 					function Redirect() {
