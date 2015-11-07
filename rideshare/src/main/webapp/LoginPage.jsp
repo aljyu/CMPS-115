@@ -33,13 +33,13 @@
 			
 			<script>
 				function Redirect() {
-					if (login_success) {
+					//if (login_success) {
 						window.location.assign("rideshare.jsp");
-					}
+					//}
 				};
 			</script>
 			
-			<button type = "button" onclick = "Redirect()">Click here to continue after signing in</button>>
+			<button type = "button" onclick = "Redirect()">Click here to continue after signing in</button>
 			</script>
 	</center></head>
 	<body><center>
