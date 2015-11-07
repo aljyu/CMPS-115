@@ -15,7 +15,7 @@
 		<link type = "text/css" rel = "stylesheet" href = "LoginPage.css"/>
 		<title>Log-In Page</title>
 		
-		<h1>Returning User? Sign-In Here!</h1>
+		<h1>Sign-In Here!</h1>
 		<meta name="google-signin-scope" content="profile email">
 		<meta name="google-signin-client_id" content="504928432041-6ivaiei584ib5vueh5hjult3o2v9o49v.apps.googleusercontent.com">
 		<script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -30,7 +30,7 @@
 				
 			  };
 			</script>
-			
+			</br>
 			<!-- 
 			if () {
 				<script>
