@@ -26,17 +26,13 @@
 				function onSignIn(googleUser) {
 					//Gets all of the basic information from Google
 					var profile = googleUser.getBasicProfile();
-					//Sets variable to true;
-					var login_success = true;
 				};
 			</script>
 			</br></br>
 			
 			<script>
 				function Redirect() {
-					if (Boolean(login_success)) {
-						window.location.assign("rideshare.jsp");
-					}
+					window.location.assign("rideshare.jsp");
 				};
 			</script>
 			
