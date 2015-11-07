@@ -23,19 +23,20 @@
 		<!-- Google Sign-In Button -->
 			<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 			<script>
+				var login_success = "false";
 				function onSignIn(googleUser) {
 					//Gets all of the basic information from Google
 					var profile = googleUser.getBasicProfile();
-					var login_success = "true";
+					login_success = "true";
 				};
 			</script>
 			</br></br>
 			
 			<script>
 				function Redirect() {
-					//if (login_success === "true") {
+					if (login_success === "true") {
 						window.location.assign("rideshare.jsp");
-					//}
+					}
 				};
 			</script>
 			
