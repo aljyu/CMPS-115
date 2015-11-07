@@ -20,40 +20,32 @@
 		<meta name="google-signin-client_id" content="504928432041-6ivaiei584ib5vueh5hjult3o2v9o49v.apps.googleusercontent.com">
 		<script src="https://apis.google.com/js/platform.js" async defer></script>
 		
-			<script>
-				function Redirect() {
-					window.location.assign("rideshare.jsp")
-				}
-			</script>
-					
+			
 			<!-- Google Sign-In Button -->
 			<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 			<script>
 				function onSignIn(googleUser) {
 					//Gets all of the basic information from Google
 					var profile = googleUser.getBasicProfile();
-					//window.location.assign("rideshare.jsp");
 					var login_success = true;
 				};
 			</script>
 			</br></br>
 			
 			<script>
-				if (login_success) {
-					<input type = "button" value = "Click here to continue after signing in" onclick = "Redirect()">
+				function Redirect() {
+					window.location.assign("rideshare.jsp")
 				}
 			</script>
 			
-			<!--
-			if () {
-				<script>
-					function Redirect() {
-						window.location.assign("rideshare.jsp")
-					}
-				</script>
-			}
-			</br></br>
-			-->
+			<script>
+				if (login_success) {
+					<input type = "button" value = "Click here to continue after signing in" onclick = "Redirect()">
+				}
+				else {
+					console.log("Hi");
+				}
+			</script>
 	</center></head>
 	<body><center>
 	</center></body>
