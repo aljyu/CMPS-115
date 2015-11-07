@@ -14,18 +14,14 @@
 	<head></head>
 	<body><center>
 		<p>
-			<div class = "menu">
-			<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-			<font size ="0">
-			<form method="link" action="/submissionpage.jsp" >
-				<input type="submit" value="Add a Ride?">
-			</form>
-			<form method="link" action="/searchpage.jsp">
-				<input type="submit" value="Or Search for a Ride?">
-			</form>
+			<h1><a href = "Register.jsp">My Profile Page</a><form action = "ProfilePage.jsp"></form></h1>
 			</br></br></br>
-				<h1><a href = "Register.jsp">My Profile Page</a><form action = "ProfilePage.jsp"></form></h1>
-			</font>
+			<form method = "link" action = "submissionpage.jsp" >
+				<input type = "submit" value = "Add a Ride?">
+			</form>
+			<form method = "link" action = "searchpage.jsp">
+				<input type = "submit" value = "Or Search for a Ride?">
+			</form>
 		</p>
 	</center></body>
 </html>
