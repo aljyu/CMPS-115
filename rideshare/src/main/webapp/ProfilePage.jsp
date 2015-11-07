@@ -4,6 +4,7 @@
 <%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
 
 <%@ page import="com.rideshare.Ride" %>
+<%@ page import="com.rideshare.Ridelist" %>
 <%@ page import="com.googlecode.objectify.Key" %>
 <%@ page import="com.googlecode.objectify.ObjectifyService" %>
 
@@ -15,19 +16,40 @@
 		<link type = "text/css" rel = "stylesheet" href = "Register.css"/>
 		<title>Profile Page</title>
 	</head>
-	<body><center>
+	<body>
+		<% 
+			List<Ride> rides = ObjectifyService.ofy()
+				.load()
+				.type(Ride.class)
+				.order("-depart")
+				.list();
+		%>		
+		<!-- profile.getEmail() make this a global variable -->
+		<center>
 		<h1>My Profile Page</h1>
 		<p>
-			Full Name: <!-- Output specific name -->
+			Full Name: 
 			</br>
 			Username: <!-- Output specific username -->
 			</br>
 			Email: <!-- Output specific email -->
 		</p>
 		</br></br>
-		<h3>My Rides</h3>
-		<p>
+		<h1>My Rides</h1>
 			<!-- Output rides -->
-		</p>
+		<% if (!rides.isEmpty()) { %>
+		<%		for(Ride ride : rides) { %>
+		<%			pageContext.setAttribute("ride_email", ride.email); %>
+		<% 			pageContext.setAttribute("ride_origin", ride.origin); %>
+		<%			pageContext.setAttribute("ride_dest", ride.destination); %>
+		<%			pageContext.setAttribute("ride_depart", ride.depart); %>
+					<b>$ {fn:escapeXml(ride_email)}</b>
+					<b>$ {fn:escapeXml(ride_origin)}</b>
+					<b>$ {fn:escapeXml(ride_dest)}</b>
+					<b>$ {fn:escapeXml(ride_depart)}</b>	
+		<% } %>			
+		<% } else { %> 
+			<p>There are no current rides</p>
+		<% } %> 		
 	</center></body>
 </html>
