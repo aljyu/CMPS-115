@@ -91,8 +91,8 @@ public class RideShareServlet extends HttpServlet {
       float ln = Float.parseFloat(lng);
       GeoPt start = new GeoPt(lt, ln); 
     
-      String sla = null;
-      String slg = null;
+      String sla = "0"; 
+      String slg = "0";
       dest = dest.replaceAll(" ", "%20");
       try {
          String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + dest + "key="+geokey;
@@ -110,8 +110,10 @@ public class RideShareServlet extends HttpServlet {
          }         
       } catch (MalformedURLException e) {
       // ...
+         System.exit(125);
       } catch (IOException e) {
       // ...
+         System.exit(125);
       }
       float slt = Float.parseFloat(sla);
       float sln = Float.parseFloat(slg);
