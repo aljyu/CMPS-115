@@ -31,12 +31,6 @@
 			  };
 			</script>
 			
-			
-			
-			
-			
-			
-			
 			<!-- 
 			if () {
 				<script>
@@ -49,6 +43,6 @@
 			-->
 	</center></head>
 	<body><center>
-		<input type = "button" value = "Click here to continue" onclick = "Redirect()">
+		<input type = "button" value = "Click here to continue after signing in" onclick = "Redirect()">
 	</center></body>
 </html>
