@@ -14,7 +14,7 @@
 	<head></head>
 	<body><center>
 		<p>
-			<h1><a href = "Register.jsp">My Profile Page</a><form action = "ProfilePage.jsp"></form></h1>
+			<h1><a href = "ProfilePage.jsp">My Profile Page</a><form action = "ProfilePage.jsp"></form></h1>
 			</br></br></br>
 			<form method = "link" action = "submissionpage.jsp" >
 				<input type = "submit" value = "Add a Ride?">
