@@ -40,7 +40,7 @@
 			
 			<script>
 				if (login_success) {
-					
+					<input type = "button" value = "Click here to continue after signing in" onclick = "Redirect()">
 				}
 			</script>
 			
