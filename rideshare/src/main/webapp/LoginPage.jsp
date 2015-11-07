@@ -26,17 +26,20 @@
 				function onSignIn(googleUser) {
 					//Gets all of the basic information from Google
 					var profile = googleUser.getBasicProfile();
+					var login_success = new Boolean(true);
 				};
 			</script>
 			</br></br>
 			
 			<script>
 				function Redirect() {
-					window.location.assign("rideshare.jsp");
+					if (login_success) {
+						window.location.assign("rideshare.jsp");
+					}
 				};
 			</script>
 			
-			<a class = "btn btn-success" id = "btn_add" Click here to continue after signing in onclick = "Redirect()">
+			<button type = "button" onclick = "Redirect()">Click here to continue after signing in</button>>
 			</script>
 	</center></head>
 	<body><center>
