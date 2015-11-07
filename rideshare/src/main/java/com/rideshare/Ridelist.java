@@ -125,7 +125,7 @@ public class Ridelist{
 	      String lat = null, lng = null;
 	      location = location.replaceAll(" ", "%20");
 	      try {
-	         String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "key=AIzaSyCp5fkGT7jJUzBRbexUadI1EmU1nq8pVO8"; 
+	         String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "key="; 
 	         URL geocodeOri = new URL(url);
 	         BufferedReader reader = new BufferedReader(new InputStreamReader(geocodeOri.openStream()));
 	         String line;

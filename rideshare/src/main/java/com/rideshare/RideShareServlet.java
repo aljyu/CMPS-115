@@ -9,6 +9,13 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.api.datastore.GeoPt;
+import com.googlecode.objectify.annotation.AlsoLoad;
+import com.googlecode.objectify.annotation.Cache;
+import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.IgnoreSave;
+import com.googlecode.objectify.annotation.Load;
+import com.googlecode.objectify.annotation.OnLoad;
+import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -19,6 +26,9 @@ import java.util.Date;
 import com.google.appengine.api.datastore.GeoPt;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Properties;
+import java.lang.Iterable;
+import java.util.Iterator;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,8 +41,7 @@ public class RideShareServlet extends HttpServlet {
    @Override
    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
       Ride ride;
-      UserService userService = UserServiceFactory.getUserService();
-      User user = userService.getCurrentUser();
+      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       String name = req.getParameter("name");
       String email = req.getParameter("email"); 
       String origin = req.getParameter("origin");
@@ -47,11 +56,15 @@ public class RideShareServlet extends HttpServlet {
       else {
          drive = false;
       }
-     
       String lat = "0", lng = "0";
       origin = origin.replaceAll(" ", "%20");
+      List<Keys> listkey = ObjectifyService.ofy().load().type(Keys.class).list();
+      String geokey = null;
+      for(int i = 0; i < listkey.size(); ++i){
+         if(listkey.get(i).type == "Server")geokey = listkey.get(i).value;
+      }
       try {
-         String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + origin + "key="; 
+         String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + origin + "key="+geokey; 
          URL geocodeOri = new URL(url);
          BufferedReader reader = new BufferedReader(new InputStreamReader(geocodeOri.openStream()));
          String line;
@@ -79,7 +92,7 @@ public class RideShareServlet extends HttpServlet {
       String slg = null;
       dest = dest.replaceAll(" ", "%20");
       try {
-         String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + dest + "key=AIzaSyCp5fkGT7jJUzBRbexUadI1EmU1nq8pVO8";
+         String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + dest + "key="+geokey;
          URL geocodeOri = new URL(url);
          BufferedReader reader = new BufferedReader(new InputStreamReader(geocodeOri.openStream()));
          String line;
@@ -111,27 +124,27 @@ public class RideShareServlet extends HttpServlet {
       boolean sa = false;
       
       if ((weekdays != null) && (weekdays.length > 0)) {
-        for (int i = 0; i< weekdays.length; i++) {
+        for (int i = 0; i < weekdays.length; i++) {
           if (weekdays[i].equals("su")) {
-            su = true;
+             su = true;
           }
           if (weekdays[i].equals("mo")) {
-            mo = true;
+             mo = true;
           }
           if (weekdays[i].equals("tu")) {
-            tu = true;
+             tu = true;
           }
           if (weekdays[i].equals("we")) {
-            we = true;
+             we = true;
           }
           if (weekdays[i].equals("th")) {
-            th = true;
+             th = true;
           }
           if (weekdays[i].equals("fr")) {
-            fr = true;
+             fr = true;
           }
           if (weekdays[i].equals("sa")) {
-            sa = true;
+             sa = true;
           }
         }
       }
