@@ -32,10 +32,17 @@
 				function onSignIn(googleUser) {
 					//Gets all of the basic information from Google
 					var profile = googleUser.getBasicProfile();
-					window.location.assign("rideshare.jsp");
+					//window.location.assign("rideshare.jsp");
+					var login_success = true;
 				};
 			</script>
 			</br></br>
+			
+			<script>
+				if (login_success) {
+					
+				}
+			</script>
 			
 			<!--
 			if () {
