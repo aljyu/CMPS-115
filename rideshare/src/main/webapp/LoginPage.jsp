@@ -26,7 +26,13 @@
 				function onSignIn(googleUser) {
 					//Gets all of the basic information from Google
 					var profile = googleUser.getBasicProfile();
-					window.location.assign("rideshare.jsp");
+					
+					<script>
+						function Redirect() {
+							window.location.assign("rideshare.jsp")
+						}
+					</script>
+					<input type = "button" value = "Click here to continue after signing in" onclick = "Redirect()">
 				};
 			</script>
 			</br></br>
@@ -43,6 +49,5 @@
 			-->
 	</center></head>
 	<body><center>
-		<input type = "button" value = "Click here to continue after signing in" onclick = "Redirect()">
 	</center></body>
 </html>
