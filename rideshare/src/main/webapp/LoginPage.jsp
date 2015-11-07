@@ -40,7 +40,7 @@
 				};
 			</script>
 			
-			<input type = "button" value = "Click here to continue after signing in" onclick = "Redirect()">
+			<a class = "btn btn-success" id = "btn_add" Click here to continue after signing in onclick = "Redirect()">
 			</script>
 	</center></head>
 	<body><center>
