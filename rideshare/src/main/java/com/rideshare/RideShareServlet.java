@@ -57,8 +57,17 @@ public class RideShareServlet extends HttpServlet {
          drive = false;
       }
 	  String seatstring = req.getParameter("seats");
-	  int seats = Integer.parseInt(seatstring);
-	  
+    if ((name.length() == 0) || (email.length() == 0) || 
+          (origin.length() == 0) || (dest.length() == 0) ||  
+          (depart.length() == 0) || (arrive.length() == 0)
+          || (seatstring.length() == 0)){
+        resp.sendRedirect("/submissionerror.jsp");
+      }
+
+    else { 
+      
+      int seats = Integer.parseInt(seatstring);
+    
       String lat = "0", lng = "0";
       origin = origin.replaceAll(" ", "%20");
       List<Keys> listkey = ObjectifyService.ofy().load().type(Keys.class).list();
@@ -154,11 +163,7 @@ public class RideShareServlet extends HttpServlet {
         }
       }
 
-     // if (name.isEmpty() || email.isEmpty() || 
-     //     origin.isEmpty() || dest.isEmpty() ||  
-      //    depart.isEmpty() || arrive.isEmpty()){
-     //    resp.sendRedirect(returner);
-     // }
+    
     ride = new Ride(name, email, origin, dest, depart, arrive, start, end, drive, su, mo, tu, we, th, fr, sa, seats);
     ObjectifyService.ofy().save().entity(ride).now();
     resp.sendRedirect("/rideshare.jsp");
@@ -180,5 +185,6 @@ public class RideShareServlet extends HttpServlet {
     htmlResp += "</html>";
     
     writer.println(htmlResp);
+  }
    }
 }
