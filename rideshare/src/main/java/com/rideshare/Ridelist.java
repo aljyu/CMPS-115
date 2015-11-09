@@ -121,11 +121,16 @@ public class Ridelist{
 	}
 
 	public GeoPt convertString(String location) {
-		String finalLoc;
-	      String lat = null, lng = null;
-	      location = location.replaceAll(" ", "%20");
-	      try {
-	         String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "key="; 
+	       String finalLoc;
+	       String lat = null, lng = null;
+	       location = location.replaceAll(" ", "%20");
+	       List<Keys> listkey = ObjectifyService.ofy().load().type(Keys.class).list();
+               String geokey = null;
+               for(int i = 0; i < listkey.size(); ++i){
+                  if(listkey.get(i).type.compareToIgnoreCase("Server") == 0)geokey = listkey.get(i).value;
+              }
+              try {
+	         String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "key="+geokey; 
 	         URL geocodeOri = new URL(url);
 	         BufferedReader reader = new BufferedReader(new InputStreamReader(geocodeOri.openStream()));
 	         String line;

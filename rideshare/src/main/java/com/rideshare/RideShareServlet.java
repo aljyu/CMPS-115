@@ -64,7 +64,7 @@ public class RideShareServlet extends HttpServlet {
       List<Keys> listkey = ObjectifyService.ofy().load().type(Keys.class).list();
       String geokey = null;
       for(int i = 0; i < listkey.size(); ++i){
-         if(listkey.get(i).type == "Server")geokey = listkey.get(i).value;
+         if(listkey.get(i).type.compareToIgnoreCase("Server") == 0)geokey = listkey.get(i).value;
       }
       try {
          String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + origin + "key="+geokey; 
