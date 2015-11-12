@@ -29,6 +29,7 @@
 		<h1>My Profile Page</h1>
 		<p>
 			Full Name: 
+			<script> document.write(hello);</script>
 			</br>
 			Username: <!-- Output specific username -->
 			</br>
@@ -43,10 +44,10 @@
 		<% 			pageContext.setAttribute("ride_origin", ride.origin); %>
 		<%			pageContext.setAttribute("ride_dest", ride.destination); %>
 		<%			pageContext.setAttribute("ride_depart", ride.depart); %>
-					<b>$ {fn:escapeXml(ride_email)}</b>
-					<b>$ {fn:escapeXml(ride_origin)}</b>
-					<b>$ {fn:escapeXml(ride_dest)}</b>
-					<b>$ {fn:escapeXml(ride_depart)}</b>	
+					<b>${fn:escapeXml(ride_email)}</b>
+					<b>${fn:escapeXml(ride_origin)}</b>
+					<b>${fn:escapeXml(ride_dest)}</b>
+					<b>${fn:escapeXml(ride_depart)}</b>	
 		<% } %>			
 		<% } else { %> 
 			<p>There are no current rides</p>
