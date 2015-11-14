@@ -356,7 +356,7 @@ public class Ridelist{
 		List <Ride> rl = new ArrayList<Ride>();
 		int seats = Integer.parseInt(inputseats);
 		for (int i = 0; i < l.size(); i++) {
-    		if (l.get(i).seats <= seats) {
+    		if (l.get(i).seats >= seats) {
     			rl.add(l.get(i));
     		}
     	}
