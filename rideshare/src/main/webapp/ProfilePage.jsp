@@ -31,18 +31,8 @@
 		<center>
 		<h1>My Profile Page</h1>
 		<p>
-			<script>
-				function onSignIn(googleUser) {
-					var profile = googleUser.getBasicProfile();
-					var name_token = googleUser.getAuthResponse().name_token;
-					var email_token = googleUser.getAuthResponse().email_token;
-				};
-			</script>
+			Welcome back, <%= session.getAttribute("user_email") %>
 			</br>
-			<script>
-				console.log("Welcome Back, " + name_token + "!\n");
-				console.log("Your email is " + email_token);
-			</script>
 		</p>
 		</br></br>
 		<h1>My Rides</h1>

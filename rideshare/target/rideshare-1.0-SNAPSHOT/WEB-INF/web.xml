@@ -12,9 +12,29 @@
       <servlet-name>sign</servlet-name>
       <url-pattern>/sign</url-pattern>
     </servlet-mapping>
+	
+    <servlet>
+      <servlet-name>search</servlet-name>
+      <servlet-class>com.rideshare.SearchServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+      <servlet-name>search</servlet-name>
+      <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>keys</servlet-name>
+      <servlet-class>com.rideshare.KeyServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+      <servlet-name>keys</servlet-name>
+      <url-pattern>/key</url-pattern>
+    </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>rideshare.jsp</welcome-file>
+        <welcome-file>LoginPage.jsp</welcome-file>
     </welcome-file-list>
 
     <filter>
