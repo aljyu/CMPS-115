@@ -23,10 +23,12 @@
 		<!-- Google Sign-In Button -->
 			<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 			<script>
+				/* Added var email */
+				var email;
 				var login_success = Boolean(false);
 				function onSignIn(googleUser) {
-					//Gets all of the basic information from Google
-					var profile = googleUser.getBasicProfile();
+					//Gets the email portion of all of the basic information from Google
+					email = GoogleUser.getBasicProfile().getEmail();
 					login_success = Boolean(true);
 				};
 			</script>
