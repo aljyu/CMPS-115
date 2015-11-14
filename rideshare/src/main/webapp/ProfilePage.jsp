@@ -31,7 +31,8 @@
 		<center>
 		<h1>My Profile Page</h1>
 		<p>
-			<script> document.write("Full Name: " + name_token); </script>
+			Welcome back, <%= session.getAttribute("name_token") %>
+			Welcome back, <%= session.getAttribute("email_token") %>
 			</br>
 			<script> document.write("Email: " + email_token); </script>
 		</p>
