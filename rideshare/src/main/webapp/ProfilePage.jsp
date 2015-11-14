@@ -15,6 +15,9 @@
 	<head>
 		<link type = "text/css" rel = "stylesheet" href = "Register.css"/>
 		<title>Profile Page</title>
+		<meta name="google-signin-scope" content="profile email">
+    	<meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+    	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	</head>
 	<body>
 		<% 
@@ -28,12 +31,18 @@
 		<center>
 		<h1>My Profile Page</h1>
 		<p>
-			Full Name: 
-			<script> document.write(hello);</script>
+			<script>
+				function onSignIn(googleUser) {
+					var profile = googleUser.getBasicProfile();
+					var name_token = googleUser.getAuthResponse().name_token;
+					var email_token = googleUser.getAuthResponse().email_token;
+				};
+			</script>
 			</br>
-			Username: <!-- Output specific username -->
-			</br>
-			Email: <!-- Output specific email -->
+			<script>
+				console.log("Welcome Back, " + name_token + "!\n");
+				console.log("Your email is " + email_token);
+			</script>
 		</p>
 		</br></br>
 		<h1>My Rides</h1>
