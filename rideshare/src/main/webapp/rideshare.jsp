@@ -14,6 +14,11 @@
 	<head></head>
 	<body><center>
 		<p>
+			<%
+				String email_login = request.getParameter("login_email");
+				session.setAttribute( "user_email", email_login );
+				System.out.println("Your email is: " + email_login);
+			%>
 			<h1><a href = "ProfilePage.jsp">My Profile Page</a><form action = "ProfilePage.jsp"></form></h1>
 			</br></br></br>
 			<form method = "link" action = "submissionpage.jsp" >
