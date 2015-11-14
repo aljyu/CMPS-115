@@ -24,10 +24,11 @@
 			<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 			<script>
 				/* Added var email */
+				var name_token, email_token;
 				function onSignIn(googleUser) {
 					//Gets the name and email portion of all of the basic information from Google
-					var name_token = googleUser.getAuthResponse().name_token;
-					var email_token = googleUser.getAuthResponse().email_token;
+					name_token = googleUser.getAuthResponse().name_token;
+					email_token = googleUser.getAuthResponse().email_token;
 					login_success = Boolean(true);
 				};
 			</script>
