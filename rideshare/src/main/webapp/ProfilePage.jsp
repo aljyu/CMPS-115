@@ -15,6 +15,9 @@
 	<head>
 		<link type = "text/css" rel = "stylesheet" href = "Register.css"/>
 		<title>Profile Page</title>
+		<meta name="google-signin-scope" content="profile email">
+    	<meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+    	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	</head>
 	<body>
 		<% 
@@ -28,8 +31,18 @@
 		<center>
 		<h1>My Profile Page</h1>
 		<p>
+			<script>
+			function onSignIn(googleUser) {
+        	// Useful data for your client-side scripts:
+        		var profile = googleUser.getBasicProfile();
+        		console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+        		console.log("Name: " + profile.getName());
+        		console.log("Image URL: " + profile.getImageUrl());
+       		    console.log("Email: " + profile.getEmail());
+       		};
+       		</script>
+
 			Full Name: 
-			<script> document.write(hello);</script>
 			</br>
 			Username: <!-- Output specific username -->
 			</br>
