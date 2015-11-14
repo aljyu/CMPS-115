@@ -42,11 +42,10 @@
        		};
        		</script>
 
-			Full Name: 
+			Full Name: <% String full_name = request.getParameter("login_name") %>
 			</br>
-			Username: <!-- Output specific username -->
-			</br>
-			Email: <!-- Output specific email -->
+			Email: <% String full_email = request.getParameter("login_email") %>
+			
 		</p>
 		</br></br>
 		<h1>My Rides</h1>

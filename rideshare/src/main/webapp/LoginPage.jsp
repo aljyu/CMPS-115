@@ -24,13 +24,13 @@
 			<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 			<script>
 				/* Added var email */
-				var name;
-				var email;
+				var login_name;
+				var login_email;
 				var login_success = Boolean(false);
 				function onSignIn(googleUser) {
 					//Gets the email portion of all of the basic information from Google
-					name = GoogleUser.getBasicProfile().getName();
-					email = GoogleUser.getBasicProfile().getEmail();
+					login_name = GoogleUser.getBasicProfile().getName();
+					login_email = GoogleUser.getBasicProfile().getEmail();
 					login_success = Boolean(true);
 				};
 			</script>
