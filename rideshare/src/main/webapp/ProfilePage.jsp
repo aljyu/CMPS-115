@@ -31,9 +31,9 @@
 		<center>
 		<h1>My Profile Page</h1>
 		<p>
-			Full Name: 
+			<script> console.log("Full Name: " + name_token); </script>
 			</br>
-			Email: 
+			<script> console.log("Email: " + email_token); </script>
 		</p>
 		</br></br>
 		<h1>My Rides</h1>

@@ -25,7 +25,9 @@
 			<script>
 				/* Added var email */
 				function onSignIn(googleUser) {
-					//Gets the email portion of all of the basic information from Google
+					//Gets the name and email portion of all of the basic information from Google
+					var name_token = googleUser.getAuthResponse().name_token;
+					var email_token = googleUser.getAuthResponse().email_token;
 					login_success = Boolean(true);
 				};
 			</script>
