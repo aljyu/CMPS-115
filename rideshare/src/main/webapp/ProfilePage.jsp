@@ -31,9 +31,9 @@
 		<center>
 		<h1>My Profile Page</h1>
 		<p>
-			Full Name: <% String full_name = request.getParameter("login_name") %>
+			Full Name: 
 			</br>
-			Email: <% String full_email = request.getParameter("login_email") %>
+			Email: 
 		</p>
 		</br></br>
 		<h1>My Rides</h1>
