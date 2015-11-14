@@ -20,13 +20,14 @@
     	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	</head>
 	<body>
+		<a href = "rideshare.jsp">Click here to go to the main page</a>
 		<% 
 			List<Ride> rides = ObjectifyService.ofy()
 				.load()
 				.type(Ride.class)
 				.order("-depart")
 				.list();
-		%>		
+		%>
 		<!-- profile.getEmail() make this a global variable -->
 		<center>
 		<h1>My Profile Page</h1>
