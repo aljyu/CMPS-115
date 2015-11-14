@@ -20,7 +20,7 @@
     	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	</head>
 	<body>
-		<a href = "rideshare.jsp">Click here to go to the main page</a>
+		<a href = "rideshare.jsp">Click here to go back to the main page</a>
 		<% 
 			List<Ride> rides = ObjectifyService.ofy()
 				.load()
