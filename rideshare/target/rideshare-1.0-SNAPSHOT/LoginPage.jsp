@@ -22,28 +22,25 @@
 	</center></head>
 	<body><center>
 		<!-- Google Sign-In Button -->
-			<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-			<script>
-				var login_success = Boolean(false);
-				var profile;
-				var login_email;
-				function onSignIn(googleUser) {
-					profile = googleUser.getBasicProfile();
-					login_email = profile.getEmail();
-					login_success = Boolean(true);
-				};
-			</script>
-			</br></br>
-			
-			<script>
-				function Redirect() {
-					if (login_success) {
-						window.location.assign("rideshare.jsp");
-					}
-				};
-			</script>
-			
-			<button type = "button" onclick = "Redirect()">Click here to continue after signing in</button>
-			</script>
+		<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+		<script>
+			var login_success = Boolean(false);
+			var profile;
+			function onSignIn(googleUser) {
+				var profile = googleUser.getBasicProfile();
+				login_success = Boolean(true);
+			};
+		</script>
+		</br></br>
+		
+		<script>
+			function Redirect() {
+				if (login_success) {
+					window.location.assign("GetEmail.jsp");
+				}
+			};
+		</script>
+		<button type = "button" onclick = "Redirect()">Click here to continue after signing in</button>
+		</script>
 	</center></body>
 </html>

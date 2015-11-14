@@ -31,7 +31,7 @@
 		<center>
 		<h1>My Profile Page</h1>
 		<p>
-			<input type = "hidden" name = "login_email" value = "${sessionScope.login_email}" />
+			Welcome back, <%= session.getAttribute("user_email") %>
 			</br>
 		</p>
 		</br></br>
