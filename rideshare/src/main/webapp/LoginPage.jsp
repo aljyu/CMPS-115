@@ -19,17 +19,12 @@
 		<meta name="google-signin-scope" content="profile email">
 		<meta name="google-signin-client_id" content="504928432041-6ivaiei584ib5vueh5hjult3o2v9o49v.apps.googleusercontent.com">
 		<script src="https://apis.google.com/js/platform.js" async defer></script>
-		
+	</center></head>
+	<body><center>
 		<!-- Google Sign-In Button -->
 			<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 			<script>
 				function onSignIn(googleUser) {
-					//Gets the name and email portion of all of the basic information from Google
-					var profile = googleUser.getBasicProfile();
-					var name = googleUser.getBasicProfile().getName();
-					var email = googleUser.getBasicProfile().getEmail();
-					<% session.setAttribute("name_token", name); %>
-					<% session.setAttribute("email_token", email); %>
 					login_success = Boolean(true);
 				};
 			</script>
@@ -45,7 +40,5 @@
 			
 			<button type = "button" onclick = "Redirect()">Click here to continue after signing in</button>
 			</script>
-	</center></head>
-	<body><center>
 	</center></body>
 </html>

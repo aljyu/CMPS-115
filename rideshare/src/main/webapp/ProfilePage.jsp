@@ -31,10 +31,18 @@
 		<center>
 		<h1>My Profile Page</h1>
 		<p>
-			Welcome back, <%= session.getAttribute("name_token") %>
-			Welcome back, <%= session.getAttribute("email_token") %>
+			<script>
+				function onSignIn(googleUser) {
+					var profile = googleUser.getBasicProfile();
+					var name_token = googleUser.getAuthResponse().name_token;
+					var email_token = googleUser.getAuthResponse().email_token;
+				};
+			</script>
 			</br>
-			<script> document.write("Email: " + email_token); </script>
+			<script>
+				console.log("Welcome Back, " + name_token + "!\n");
+				console.log("Your email is " + email_token);
+			</script>
 		</p>
 		</br></br>
 		<h1>My Rides</h1>
