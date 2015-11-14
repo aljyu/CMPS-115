@@ -31,21 +31,9 @@
 		<center>
 		<h1>My Profile Page</h1>
 		<p>
-			<script>
-			function onSignIn(googleUser) {
-        	// Useful data for your client-side scripts:
-        		var profile = googleUser.getBasicProfile();
-        		console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-        		console.log("Name: " + profile.getName());
-        		console.log("Image URL: " + profile.getImageUrl());
-       		    console.log("Email: " + profile.getEmail());
-       		};
-       		</script>
-
 			Full Name: <% String full_name = request.getParameter("login_name") %>
 			</br>
 			Email: <% String full_email = request.getParameter("login_email") %>
-			
 		</p>
 		</br></br>
 		<h1>My Rides</h1>
