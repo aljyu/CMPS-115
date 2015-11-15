@@ -41,6 +41,5 @@
 			};
 		</script>
 		<button type = "button" onclick = "Redirect()">Click here to continue after signing in</button>
-		</script>
 	</center></body>
 </html>
