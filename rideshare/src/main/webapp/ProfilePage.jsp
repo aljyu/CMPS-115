@@ -13,14 +13,13 @@
 
 <html style = "background-color:lightblue">
 	<head>
-		<link type = "text/css" rel = "stylesheet" href = "Register.css"/>
 		<title>Profile Page</title>
 		<meta name="google-signin-scope" content="profile email">
     	<meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
     	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	</head>
 	<body>
-		<a href = "rideshare.jsp">Click here to go back to the main page</a>
+		<a href = "rideshare.jsp"><center>Click here to go back to the main page</center></a>
 		<% 
 			List<Ride> rides = ObjectifyService.ofy()
 				.load()
