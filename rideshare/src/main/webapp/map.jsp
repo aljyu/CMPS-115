@@ -5,6 +5,7 @@
 <%@ page import="com.googlecode.objectify.ObjectifyService" %>
 <%@ page import="java.net.URL" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html>
@@ -15,9 +16,16 @@
       .load()
       .type(Ride.class)
       .order("-email")
-      .limit(5)
       .list(); 
 %>
+<% String usersemail = session.getAttribute("user_email").toString(); %>
+<% int top = rides.size(); %>
+<% List <Ride> finalrides = new ArrayList<Ride>(); %>
+<% for (int i = 0; i < top; ++i){ %>
+<%    String rideemail = rides.get(i).email; %>
+<%    if(rideemail.equals(usersemail)) %>
+<%      finalrides.add(rides.get(i)); %>
+<% } %>
 <% 
    List<Keys> keys = ObjectifyService.ofy()
       .load()
@@ -28,8 +36,8 @@
 <% for(int i = 0; i < keys.size(); ++i){ %>
 <%    if(keys.get(i).type.compareToIgnoreCase("Browser") == 0) browkey = keys.get(i).value; %>
 <% } %>
-<% String originpt = rides.get(0).origin; %>
-<% String destpt = rides.get(0).destination; %>
+<% String originpt = rides.get(rides.size() - 1).origin; %>
+<% String destpt = rides.get(rides.size() - 1).destination; %>
 <% originpt = originpt.substring(1, originpt.length() - 2); %>
 <% destpt = destpt.substring(1, destpt.length() - 2); %>
 <% String testUrl = "https://www.google.com/maps/embed/v1/directions?key=" + browkey + "&origin="+ originpt + "&destination=" + destpt; %>
