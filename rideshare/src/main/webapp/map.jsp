@@ -36,8 +36,8 @@
 <% for(int i = 0; i < keys.size(); ++i){ %>
 <%    if(keys.get(i).type.compareToIgnoreCase("Browser") == 0) browkey = keys.get(i).value; %>
 <% } %>
-<% String originpt = rides.get(rides.size() - 1).origin; %>
-<% String destpt = rides.get(rides.size() - 1).destination; %>
+<% String originpt = finalrides.get(finalrides.size() - 1).origin; %>
+<% String destpt = finalrides.get(finalrides.size() - 1).destination; %>
 <% originpt = originpt.substring(1, originpt.length() - 2); %>
 <% destpt = destpt.substring(1, destpt.length() - 2); %>
 <% String testUrl = "https://www.google.com/maps/embed/v1/directions?key=" + browkey + "&origin="+ originpt + "&destination=" + destpt; %>
