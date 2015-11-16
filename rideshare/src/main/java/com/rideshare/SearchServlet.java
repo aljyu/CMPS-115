@@ -108,8 +108,12 @@ public class SearchServlet extends HttpServlet {
 		}
 		//sixth, if user entered number of seats, filter by seats avaliable
 		if(seats.length() > 0){
-			List<Ride> filter2 = allrides.filterBySeats(filtered, seats);
-			filtered=filter2;
+      if (drive) {
+        List<Ride> filter2 = allrides.filterBySeatsMore(filtered, seats);
+        filtered=filter2;}
+      else {
+			     List<Ride> filter2 = allrides.filterBySeatsLess(filtered, seats);
+          filtered=filter2;}
 		}
     //seventh, if user entered a origin radius
     if ((origin.length() > 0) && (originrad.length()>0)) {

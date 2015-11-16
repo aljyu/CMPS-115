@@ -351,8 +351,7 @@ public class Ridelist{
     	}
     	return rl;
     }
-	
-	public List<Ride> filterBySeats(List<Ride> l, String inputseats){
+    public List<Ride> filterBySeatsMore(List<Ride> l, String inputseats){
 		List <Ride> rl = new ArrayList<Ride>();
 		int seats = Integer.parseInt(inputseats);
 		for (int i = 0; i < l.size(); i++) {
@@ -362,4 +361,16 @@ public class Ridelist{
     	}
     	return rl;
 	}
+
+	public List<Ride> filterBySeatsLess(List<Ride> l, String inputseats){
+		List <Ride> rl = new ArrayList<Ride>();
+		int seats = Integer.parseInt(inputseats);
+		for (int i = 0; i < l.size(); i++) {
+    		if (l.get(i).seats <= seats) {
+    			rl.add(l.get(i));
+    		}
+    	}
+    	return rl;
+	}
+
 }
