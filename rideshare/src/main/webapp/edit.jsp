@@ -9,6 +9,8 @@
 <%@ page import="com.googlecode.objectify.ObjectifyService" %>
 
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script type="text/javascript" src="conversion.js"></script>
 <html>
@@ -17,18 +19,25 @@
 </head>
 
 <body>
-  <% 
-     List<Ride> rides = ObjectifyService.ofy()
+<% 
+   List<Ride> rides = ObjectifyService.ofy()
       .load()
       .type(Ride.class)
-      .order("-email")
+      .order("-id")
       .list();
-   %>
-   <% for (int i = 0; i < rides.size(); ++i){
-         // if users don't match remove ride 
-      } %>
+%>
+<%   Ride chosen = null; %>
    <!-- replace with rides.get(i) where i is from the url -->
-<%   Ride chosen = rides.get(0); %>
+<% String idfromurl = request.getParameter("key"); %>
+<% long id = Long.parseLong(idfromurl); %> 
+<% 
+   for(int i = 0; i < rides.size(); ++i){
+      if(rides.get(i).id == id){
+         chosen = rides.get(i);
+         break;
+      }
+   }
+%>
 <% 
    pageContext.setAttribute("key_content", chosen.id);
    pageContext.setAttribute("name_content", chosen.name);
@@ -37,6 +46,8 @@
    pageContext.setAttribute("destination_content", chosen.destination);
    pageContext.setAttribute("depart_content", chosen.depart);
    pageContext.setAttribute("arrive_content", chosen.arrive);
+   pageContext.setAttribute("seat_content", Integer.toString(chosen.seats));
+   
 %>
    <form action="/edit" method="post"> 
       <p> Please submit your ride here: </p>
@@ -54,13 +65,21 @@
       <label for "arrive"> Arrival Time: </label>
       <input id = "arrive" type ="text" value = "${fn:escapeXml(arrive_content)}"name = "arrive"><br>
       <label for = "seats"> Seats Avaliable: </label>
-      <input id = "seats" type = "text" name = "seats"><br>
+      <input id = "seats" type = "text" name = "seats" value="${fn:escapeXml(seat_content)}"><br>
       <label for "drive"> Are you driving or riding? </label><br>
       <label for "drive"> Driving </label>
-      <input type="radio" name="drive" value="true" checked>
+      <input type="radio" name="drive" value="true">
       <label for "drive"> Riding </label>
       <input type="radio" name="drive" value="false"> <br>
       <br>
+      <p> Offering or looking for a weekly ride? Check the day(s) that apply: </p>
+      <p><input type="checkbox" name="weekday" value="su"/>Sunday</p>
+      <p><input type="checkbox" name="weekday" value="mo"/>Monday</p>
+      <p><input type="checkbox" name="weekday" value="tu"/>Tuesday</p>
+      <p><input type="checkbox" name="weekday" value="we"/>Wednesday</p>
+      <p><input type="checkbox" name="weekday" value="th"/>Thursday</p>
+      <p><input type="checkbox" name="weekday" value="fr"/>Friday</p>
+      <p><input type="checkbox" name="weekday" value="sa"/>Saturday</p>
       <input type="submit" name="Submit" value=Submit>
    </form>
 

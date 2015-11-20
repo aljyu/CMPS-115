@@ -84,7 +84,6 @@ public class EditerServlet extends HttpServlet {
    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
       Ride ride;
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService(); 
-      // TODO: cast this to a long
       String key = req.getParameter("Key");
       long keynum = Long.parseLong(key);
       String name = req.getParameter("name");
@@ -94,6 +93,46 @@ public class EditerServlet extends HttpServlet {
       String depart = req.getParameter("depart");
       String arrive = req.getParameter("arrive");
       String driving = req.getParameter("drive");
+
+      String seatstr = req.getParameter("seats");
+      int seats = Integer.parseInt(seatstr);     
+ 
+      String weekdays[]= req.getParameterValues("weekday");
+      boolean su = false;
+      boolean mo = false;
+      boolean tu = false;
+      boolean we = false;
+      boolean th = false;
+      boolean fr = false;
+      boolean sa = false;      
+      if ((weekdays != null) && (weekdays.length > 0)) {
+        for (int i = 0; i < weekdays.length; i++) {
+          if (weekdays[i].equals("su")) {
+             su = true;
+          }
+          if (weekdays[i].equals("mo")) {
+             mo = true;
+          }
+          if (weekdays[i].equals("tu")) {
+             tu = true;
+          }
+          if (weekdays[i].equals("we")) {
+             we = true;
+          }
+          if (weekdays[i].equals("th")) {
+             th = true;
+          }
+          if (weekdays[i].equals("fr")) {
+             fr = true;
+          }
+          if (weekdays[i].equals("sa")) {
+             sa = true;
+          }
+        }
+      }
+      if(driving == null) driving = "true"; 
+      if((!(driving.equals("true"))) && (!(driving.equals("false")))) driving = "true";
+      
       List<Ride> rides = ObjectifyService.ofy()
          .load()
          .type(Ride.class)
@@ -104,6 +143,7 @@ public class EditerServlet extends HttpServlet {
             break;
          }
       }
+      boolean dr = driving.equals("true");
       // Transaction code on the ride goes here
       Transaction txn = datastore.beginTransaction();
       try {
@@ -113,16 +153,28 @@ public class EditerServlet extends HttpServlet {
          tom.setProperty("email", email);
          tom.setProperty("depart", depart); 
          tom.setProperty("arrive", arrive);
-         tom.setProperty("drive", driving);
+         tom.setProperty("drive", dr);
+         tom.setProperty("seats", seats);
+
          GeoPt st = geocode(origin);
          origin = loc;
 
          GeoPt end = geocode(dest);
          dest = loc;
+
          tom.setProperty("origin", origin);
          tom.setProperty("destination", dest);
          tom.setProperty("start", st);
          tom.setProperty("end", end);
+
+         tom.setProperty("su", su);
+         tom.setProperty("mo", mo);
+         tom.setProperty("tu", tu);
+         tom.setProperty("we", we);
+         tom.setProperty("th", th);
+         tom.setProperty("fr", fr);
+         tom.setProperty("sa", sa);
+ 
          datastore.put(tom);
          txn.commit();
       }
