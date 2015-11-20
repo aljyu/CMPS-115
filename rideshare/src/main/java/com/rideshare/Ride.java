@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Random;
 
 @Entity
-public class Ride {
+public class Ride implements java.io.Serializable{
    @Id public Long id;
    @Index public String name;
    @Index public String email;
@@ -61,5 +61,13 @@ public class Ride {
 	fr = fri;
 	sa = sat;
 	seats = seat;
-   }	
+   }
+
+	public String getName(){
+		return name;
+	}
+	
+	public void setName(String nName){
+		name = nName;
+	}
 }

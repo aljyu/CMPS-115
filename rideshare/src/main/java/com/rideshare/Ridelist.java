@@ -28,14 +28,25 @@ import javax.servlet.http.HttpServletResponse;
 import com.googlecode.objectify.ObjectifyService;
 
 @Entity
-public class Ridelist{
+public class Ridelist implements java.io.Serializable{
 	//class variables
 	List<Ride> inputlist;
 
 	
-	//constructor 
+	//constructor
+	public Ridelist(){
+	}
+	
 	public Ridelist(List<Ride> list){
 		inputlist = list;
+	}
+	
+	public List<Ride> getInputlist(){
+		return inputlist;
+	}
+	
+	public void setInputlist(List<Ride> ilist){
+		inputlist = ilist;
 	}
 	
 	public float testFindDist(){

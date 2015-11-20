@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.util.Date;
 import java.io.PrintWriter;
 import java.util.*;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 
 import javax.servlet.ServletException;
 //import javax.servlet.annotation.WebServlet;
@@ -156,8 +158,35 @@ public class SearchServlet extends HttpServlet {
         List<Ride> filter2 = allrides.sort(irlist);
         filtered =filter2;
     }
-
-		PrintWriter writer = resp.getWriter();
+		Ridelist rlist = new Ridelist(filtered);
+		
+		System.out.println("First");
+		req.setAttribute("departs", depart);
+		req.setAttribute("resultRides", rlist);
+		System.out.println("Fourth");
+		String url = "/searchreturn.jsp";
+		//ServletContext sc = this.getServletContext();
+		System.out.println("Second");
+		RequestDispatcher rd = req.getRequestDispatcher(url);
+		System.out.println("Third");
+		
+		
+		try{
+			rd.forward(req, resp);
+		}catch(ServletException e){
+			//...
+			System.out.println("First error");
+			System.exit(127);
+		}catch(IOException e){
+			//...
+			System.out.println("Second error");
+			System.exit(127);
+		}
+		System.out.println("Fifth");
+		//resp.sendRedirect("/searchreturn.jsp");
+		System.out.println("Sixth");
+		
+		/*PrintWriter writer = resp.getWriter();
 	  
 		String htmlResp = "<html><b>Start</b>";
 		for(Ride ride : filtered){
@@ -177,7 +206,7 @@ public class SearchServlet extends HttpServlet {
 		htmlResp += "</html>";
 	  
 		writer.println(htmlResp);
-
+		*/
       //resp.sendRedirect("/searchreturn.jsp");
    }
 }

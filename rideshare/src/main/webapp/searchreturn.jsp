@@ -12,46 +12,112 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html>
-<!--head>
+<head>
     <link type="text/css" rel="stylesheet" href="/stylesheets/main.css"/>
-</head-->
+</head>
 
 <body>
-  <!--%
-   List<Ride> rides = ObjectifyService.ofy()
+  <%
+  List<Ride> rides = ObjectifyService.ofy()
       .load()
       .type(Ride.class)
+      .order("-depart")
       .list();
-%>
-     <!--% Ridelist ridelist = new Ridelist(rides); %>
+  %>
 
-    <!--%  String email = request.getParameter("email"); %>
-    <!--%  String origin = request.getParameter("origin"); %>
-    <!--%  String dest = request.getParameter("dest"); %-->
-    <%  String depart = req.getParameter("depart"); %>
-     <!--% String arrive = request.getParameter("arrive"); %-->
-	 
+	<% Ridelist rl = new Ridelist(rides); %>
+	<!--% pageContext.setAttribute("geo", rl.testFindDist().toString()); %-->
+	<!--b>${fn:escapeXml(geo)}</b-->
+	<!--script>
+	(function (global) {
+		document.getElementById("depart").value = global.localStorage.getItem("Depart");
+	}(window));
+	</script-->
+	
+  <form action="/search" method="post"> 
+	<script>
+		/*jslint sub: true, maxerr: 50, indent: 4, browser: true */
+		(function (global) {
+			document.getElementById("depart").value = global.localStorage.getItem("Depart");
+		}(window));
+	</script>
+      <label for="email"> Email: </label>
+      <input id = "email" type="text" name="email"><br>
+
+      <label for="origin"> Origin: </label> 
+      <input id ="origin" type="text" name = "origin"><br>
+      <label for="originrad"> Origin Radius: </label>
+      <input id ="originrad" type="text" name = "originrad"><br>
+
+      <label for="dest"> Destination: </label>
+      <input id= "dest" type ="text" name = "dest"><br>
+      <label for="destrad"> Destination Radius: </label>
+      <input id= "destrad" type="text" name = "destrad"><br>
+
+      <label for="depart"> Departure Time: </label>
+      <input id="depart" type = "text" name = "depart"> <br>
       
-     <!--% List<Ride> returnlist = ridelist.sortDepart(5.0, depart); %>
-    
-
-   <!--% if (!returnlist.isEmpty()) { %>
+      <label for="arrive"> Arrival Time: </label>
+      <input id="arrive" type = "text" name = "arrive"> <br>
+	  
+	  <label for="seats"> Number of Seats Avaliable: </label>
+	  <input id="seats" type = "text" name = "seats"> <br><br>
+	  
+	  Are you looking for a driver or a rider? <br>
+      <label for "drive"> Driver </label>
+      <input type="radio" name="drive" value="true" checked>
+      <label for "drive"> Rider </label>
+      <input type="radio" name="drive" value="false"> <br>
+      <br>
+      <br>
+	  
+	Searching for a weekly ride? Check the day(s) that apply: <br>
+	    <input type="checkbox" name="weekday" value="su"/>Sunday<br>
+      <input type="checkbox" name="weekday" value="mo"/>Monday<br>
+      <input type="checkbox" name="weekday" value="tu"/>Tuesday<br>
+      <input type="checkbox" name="weekday" value="we"/>Wednesday<br>
+      <input type="checkbox" name="weekday" value="th"/>Thursday<br>
+      <input type="checkbox" name="weekday" value="fr"/>Friday<br>
+      <input type="checkbox" name="weekday" value="sa"/>Saturday<br>
+	  
+	Prioritize: <br>
+      <input type="radio" name="prio" value="both" checked/>Origin and Destination<br>
+      <input type="radio" name="prio" value="origin"/>Origin<br>
+      <input type="radio" name="prio" value="dest"/>Destination<br>
+      <input type="submit" name="Submit" value=Submit>
+   </form>
+   <!--% String departs = (String)pageContext.getAttribute("depart");%-->
+   <!--% System.out.println(departs + " HELLO");%-->
+   
+   
+   <% Object tRides = request.getAttribute("resultRides");%>
+   <!--% System.out.println("Start");%-->
+   <!--% System.out.println(ridessss);%-->
+   <% Ridelist lRides = (Ridelist)tRides;%>
+   <% List<Ride> listRide = lRides.getInputlist();%>
+   <!--jsp:useBean id="resultRides" class="com.rideshare.Ridelist" scope="request" typeSpec/-->
+	<!--c:forEach var="ride" items="${names}">
+		<c:out value=${ride}/><p>
+	</c:forEach-->
+   
+   <!--% rides = rl.sortDepart(5,pageContext.getAttribute("depart"));%-->
+   <% if (!listRide.isEmpty()) { %>
 	  <p> The Current Rides </p>
-      <!--% for (Ride ride : returnlist) { %>
-         <!--% pageContext.setAttribute("ride_email", ride.email); %>
-         <!--% pageContext.setAttribute("ride_origin", ride.origin); %>
-         <!--% pageContext.setAttribute("ride_dest", ride.destination); %-->
-         <% pageContext.setAttribute("ride_depart", depart); %>
-         <!--b>${fn:escapeXml(ride_email)}</b>
+      <% for (Ride ride : listRide) { %>
+         <% pageContext.setAttribute("ride_email", ride.email); %>
+         <% pageContext.setAttribute("ride_origin", ride.origin); %>
+         <% pageContext.setAttribute("ride_dest", ride.destination); %>
+         <% pageContext.setAttribute("ride_depart", ride.depart); %>
+         <p>
+		 <b>${fn:escapeXml(ride_email)}</b>
          <b>${fn:escapeXml(ride_origin)}</b>
-         <b>${fn:escapeXml(ride_dest)}</b-->
+         <b>${fn:escapeXml(ride_dest)}</b>
          <b>${fn:escapeXml(ride_depart)}</b>
-		 <b>HELLO</b>
-		 
-      <!--% } %>
-  <!--% } else { %>
+		 </p>
+      <% } %>
+  <% } else { %>
       <p> There are no current rides. </p>
-   <!--% } %-->
+   <% } %>
    
 </body>
 </html>

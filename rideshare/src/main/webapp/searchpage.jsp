@@ -40,7 +40,7 @@
       <label for="dest"> Destination: </label>
       <input id= "dest" type ="text" name = "dest"><br>
       <label for="destrad"> Destination Radius: </label>
-      <input if= "destrad" type="text" name = "destrad"><br>
+      <input id= "destrad" type="text" name = "destrad"><br>
 
       <label for="depart"> Departure Time: </label>
       <input id="depart" type = "text" name = "depart"> <br>
@@ -72,10 +72,30 @@
       <input type="radio" name="prio" value="both" checked/>Origin and Destination<br>
       <input type="radio" name="prio" value="origin"/>Origin<br>
       <input type="radio" name="prio" value="dest"/>Destination<br>
-      <input type="submit" name="Submit" value=Submit>
+      <input type="submit" id = "Submit" name="Submit" value=Submit>
+	  <script>
+		/*jslint sub: true, maxerr: 50, indent: 4, browser: true */
+		(function (global) {
+			document.getElementById("Submit").addEventListener("click", function () {
+				global.localStorage.setItem("Depart", document.getElementById("depart").value);
+			}, false);
+		}(window));
+	</script>
    </form>
-   <!--% String departs = pageContext.getAttribute("depart");%-->
+   
+   <!--script>
+   (function (global) {
+		document.getElementById("save").addEventListener("Submit", function () {
+			global.localStorage.setItem("Depart", document.getElementById("depart").value);
+		}, false);
+	}(window));
+	</script-->
+   
+   <!--% String departs = (String)pageContext.getAttribute("depart");%-->
    <!--% System.out.println(departs);%-->
+   
+   <!--jsp:useBean id="resultRides" class="" scope="request"/-->
+   
    <!--% rides = rl.sortDepart(5,pageContext.getAttribute("depart"));%-->
    <!--% if (!rides.isEmpty()) { %>
 	  <p> The Current Rides </p>
