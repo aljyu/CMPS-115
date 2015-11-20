@@ -17,10 +17,8 @@
 
 <body>
       <p> Something went wrong when you tried to submit your ride. Please press the back button and try again. </p>
-      <p> Make sure that none of the following are blank: Full Name, Email, Origin, Destination, Departure Time, Arrival Time, Seats Available. </p>
-      <p> Your Origin and Destination should be as specific addresses as possible. </p>
-      <p> In addition, make sure that your times are entered in 24-hour time: Enter 11:00 for 11:00 AM, and 15:00 for 3:00 PM. </p> 
+      <p> Your address was invalid. </p>
+      
 
 </body>
 </html>
-

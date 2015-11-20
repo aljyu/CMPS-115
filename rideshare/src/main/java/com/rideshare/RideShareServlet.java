@@ -33,6 +33,7 @@ import java.util.Iterator;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.regex.Pattern;
 
 import com.googlecode.objectify.ObjectifyService;
 
@@ -57,17 +58,70 @@ public class RideShareServlet extends HttpServlet {
          drive = false;
       }
 	  String seatstring = req.getParameter("seats");
+
+    //Error checking for blank spots
     if ((name.length() == 0) || (email.length() == 0) || 
           (origin.length() == 0) || (dest.length() == 0) ||  
           (depart.length() == 0) || (arrive.length() == 0)
           || (seatstring.length() == 0)){
-        resp.sendRedirect("/submissionerror.jsp");
+        resp.sendRedirect("/blanksubmissionerror.jsp");
       }
+  else { 
+    //error checking for time formats
+    String time = depart;
+    int hour = 0;
+    int minutes = 0;
+    boolean b = true;
+    
+    if(time.matches(".*[a-zA-Z]+.*") == true) {
+      b = false;
+      System.out.println("Invalid Characters");
+    }
+    time = arrive;
+    if(time.matches(".*[a-zA-Z]+.*") == true) {
+      b = false;
+      System.out.println("Invalid Characters");
+    }
+    if (!b){
+      resp.sendRedirect("/timesubmissionerror.jsp");
+    }
 
-    else { 
-      
+    else {
+      int index = time.indexOf(':');
+      if(index != -1) {
+              hour = Integer.parseInt(time.substring(0, index));
+              if(index != time.length() - 3) {
+                b = false;
+                System.out.println("There is a colon at the wrong spot for arrive");}
+                else { minutes = Integer.parseInt(time.substring(index+1));}
+        }
+        else {hour = Integer.parseInt(time);}
+        if ((hour>23) || (minutes>59)) {
+          b= false;
+          System.out.println("Time out of range");
+        }
+        time = depart;
+        index = time.indexOf(':');
+        if(index != -1) {
+              hour = Integer.parseInt(time.substring(0, index));
+              if(index != time.length() - 3) {
+                b = false;
+                System.out.println("There is a colon at the wrong spot for arrive");}
+                else { minutes = Integer.parseInt(time.substring(index+1));}
+        }
+        else {hour = Integer.parseInt(time);}
+        if ((hour>23) || (minutes>59)) {
+          b= false;
+          System.out.println("Time out of range");
+        }
+        if (!b){
+            resp.sendRedirect("/timesubmissionerror.jsp");
+        }
+        else {
       int seats = Integer.parseInt(seatstring);
     
+      String status ="";
+
       String lat = "0", lng = "0";
       origin = origin.replaceAll(" ", "%20");
       List<Keys> listkey = ObjectifyService.ofy().load().type(Keys.class).list();
@@ -88,14 +142,25 @@ public class RideShareServlet extends HttpServlet {
             }
             if(line.contains("lat")) lat = line.substring(colon + 2, line.lastIndexOf(",") - 1);
             if(line.contains("lng")) lng = line.substring(colon + 2);
+            if(line.contains("status")){
+               status = line.substring(colon + 2);
+            }
          }   
+        
       } catch (MalformedURLException e) {
-        System.exit(127);
-      // ...
+        b=false;
       } catch (IOException e) {
-        System.exit(127);
-      // ...
+        b=false;
       } 
+      finally {
+        if (status.contains("OK") == false) {
+          b=false;
+          System.out.println("Status for origin is " + status);
+        }
+        if (!b) {
+        resp.sendRedirect("/addresssubmissionerror.jsp");
+      }
+      else {
       float lt = Float.parseFloat(lat);
       float ln = Float.parseFloat(lng);
       GeoPt start = new GeoPt(lt, ln); 
@@ -116,18 +181,27 @@ public class RideShareServlet extends HttpServlet {
             }
             if(line.contains("lat")) sla = line.substring(colon + 2, line.lastIndexOf(",") - 1);
             if(line.contains("lng")) slg = line.substring(colon + 2);
-         }         
+            if(line.contains("status")){
+               status = line.substring(colon + 2);
+            }
+         }             
       } catch (MalformedURLException e) {
-      // ...
-         System.exit(125);
+        b=false;
       } catch (IOException e) {
-      // ...
-         System.exit(125);
+        b=false;
       }
-      float slt = Float.parseFloat(sla);
+      finally {
+      if (status.contains("OK") == false) {
+        b=false;
+        System.out.println("Status for dest is " + status);
+      }
+      if (!b) {
+        resp.sendRedirect("/addresssubmissionerror.jsp");
+      }
+      else {
+        float slt = Float.parseFloat(sla);
       float sln = Float.parseFloat(slg);
       GeoPt end = new GeoPt(slt, sln);
-
       String weekdays[]= req.getParameterValues("weekday");
       boolean su = false;
       boolean mo = false;
@@ -187,4 +261,10 @@ public class RideShareServlet extends HttpServlet {
     writer.println(htmlResp);
   }
    }
+ }
+}
+}
+}
+}
+}
 }
