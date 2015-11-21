@@ -26,14 +26,13 @@ import java.util.Date;
 import com.google.appengine.api.datastore.GeoPt;
 import java.io.PrintWriter;
 import java.util.*;
-<<<<<<< Updated upstream
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
-=======
+import javax.servlet.ServletException;
 import java.util.Properties;
 import java.lang.Iterable;
 import java.util.Iterator;
->>>>>>> Stashed changes
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -262,101 +261,74 @@ public class SearchServlet extends HttpServlet {
     }
     else {
 
-    //seventh, if user entered a origin radius
-    if ((origin.length() > 0) && (originrad.length()>0)) {
-      List<Ride> filter2 = allrides.originRadius(filtered, origin, originrad);
-      filtered=filter2;
-    }
+		//seventh, if user entered a origin radius
+		if ((origin.length() > 0) && (originrad.length()>0)) {
+			List<Ride> filter2 = allrides.originRadius(filtered, origin, originrad);
+			filtered=filter2;
+		}
 
-    //eigthth, if user entered a destination radius
-    if ((dest.length() > 0) && (destrad.length()>0)) {
-      List<Ride> filter2 = allrides.destRadius(filtered, dest, destrad);
-      filtered=filter2;
-    }
+		//eigthth, if user entered a destination radius
+		if ((dest.length() > 0) && (destrad.length()>0)) {
+			List<Ride> filter2 = allrides.destRadius(filtered, dest, destrad);
+			filtered=filter2;
+		}
 
-    //Now, sort according to user priority
-    if (((origin.length() > 0) && (prio.equals("origin"))) || ((!(dest.length()>0)) && (prio.equals("both")))) {
-      List<Ride> so = allrides.sortOrigin(filtered, origin);
-      filtered=so;
-    }
+		//Now, sort according to user priority
+		if (((origin.length() > 0) && (prio.equals("origin"))) || ((!(dest.length()>0)) && (prio.equals("both")))) {
+			List<Ride> so = allrides.sortOrigin(filtered, origin);
+			filtered=so;
+		}
 
-    else if (((dest.length() > 0) &&(prio.equals("destination"))) || ((!(origin.length()>0)) && (prio.equals("both")))) {
-        List<Ride> sd = allrides.sortDest(filtered, dest);
-        filtered=sd;
-      }
+		else if (((dest.length() > 0) &&(prio.equals("destination"))) || ((!(origin.length()>0)) && (prio.equals("both")))) {
+			List<Ride> sd = allrides.sortDest(filtered, dest);
+			filtered=sd;
+		}
 
-    //optimize for both
-    else if ((dest.length()>0) && (origin.length()>0)){
-        //go thru so and sd, adding up respective indices from filtered
-        List<floatRide> irlist = new ArrayList<floatRide>();
-        List<Ride> so = allrides.sortOrigin(filtered, origin);
-        List<Ride> sd = allrides.sortDest(filtered, dest);
-        //first, go through the list and compute values
-        for (int i=0; i< filtered.size(); i++) {
-            int loc1 = so.indexOf(filtered.get(i));
-            int loc2 = sd.indexOf(filtered.get(i));
-            float val = loc1+loc2;
-            floatRide ir = new floatRide(val, filtered.get(i));
-            irlist.add(ir);
-        }
-        //then, sort the list and return it
-        List<Ride> filter2 = allrides.sort(irlist);
-        filtered =filter2;
-    }
-<<<<<<< Updated upstream
+		//optimize for both
+		else if ((dest.length()>0) && (origin.length()>0)){
+			//go thru so and sd, adding up respective indices from filtered
+			List<floatRide> irlist = new ArrayList<floatRide>();
+			List<Ride> so = allrides.sortOrigin(filtered, origin);
+			List<Ride> sd = allrides.sortDest(filtered, dest);
+			//first, go through the list and compute values
+			for (int i=0; i< filtered.size(); i++) {
+				int loc1 = so.indexOf(filtered.get(i));
+				int loc2 = sd.indexOf(filtered.get(i));
+				float val = loc1+loc2;
+				floatRide ir = new floatRide(val, filtered.get(i));
+				irlist.add(ir);
+			}
+			//then, sort the list and return it
+			List<Ride> filter2 = allrides.sort(irlist);
+			filtered =filter2;
+		}
 		Ridelist rlist = new Ridelist(filtered);
 		
-		System.out.println("First");
+		//System.out.println("First");
 		req.setAttribute("departs", depart);
 		req.setAttribute("resultRides", rlist);
-		System.out.println("Fourth");
+		//System.out.println("Fourth");
 		String url = "/searchreturn.jsp";
 		//ServletContext sc = this.getServletContext();
-		System.out.println("Second");
+		//System.out.println("Second");
 		RequestDispatcher rd = req.getRequestDispatcher(url);
-		System.out.println("Third");
+		//System.out.println("Third");
 		
 		
 		try{
 			rd.forward(req, resp);
 		}catch(ServletException e){
 			//...
-			System.out.println("First error");
+			//System.out.println("First error");
 			System.exit(127);
 		}catch(IOException e){
 			//...
-			System.out.println("Second error");
+			//System.out.println("Second error");
 			System.exit(127);
 		}
-		System.out.println("Fifth");
+		//System.out.println("Fifth");
 		//resp.sendRedirect("/searchreturn.jsp");
-		System.out.println("Sixth");
-		
-		/*PrintWriter writer = resp.getWriter();
-=======
-		PrintWriter writer = resp.getWriter();
->>>>>>> Stashed changes
-	  
-		String htmlResp = "<html><b>Start</b>";
-		for(Ride ride : filtered){
-			htmlResp += "<p>";
-			//htmlResp += "<b>";
-			htmlResp += "Contact Email: " + ride.email + ", ";
-			htmlResp += "Origin: " + ride.origin.replaceAll("%20", " ") + ", ";
-			htmlResp += "Destination: " + ride.destination.replaceAll("%20", " ") + ", ";
-			htmlResp += "Departure Time: " + ride.depart + ", ";
-			htmlResp += "Arrival Time: " + ride.arrive + ", ";
-			//htmlResp += "Days of the week offered: " + ride.su + ", " + ride.mo + ", " + ride.tu + ", " + ride.we + ", " + ride.th + ", " + ride.fr + ", " + ride.sa;
-			htmlResp += "Seats Avaliable: " + ride.seats;
-			htmlResp += "Driver? " + ride.drive;
-			//htmlResp += "</b>";"
-			htmlResp += "</p>";
-		}
-		htmlResp += "</html>";
-	  
-		writer.println(htmlResp);
-		*/
-      //resp.sendRedirect("/searchreturn.jsp");
-  }
+		//System.out.println("Sixth");
+	}
    }
 }
