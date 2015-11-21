@@ -17,17 +17,23 @@
 <%@ page import="java.util.List" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<html style = "background-color:lightblue">
+<html>
 	<head><center>
+		<link rel="icon" type="image/png" href= "LittleCaricon.jpeg">
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
 		<link type = "text/css" rel = "stylesheet" href = "LoginPage.css"/>
 		<title>Log-In Page</title>
 		
-		<h1>Sign-In Here!</h1>
-		<!--<meta name="google-signin-scope" content="profile email">
-		<meta name="google-signin-client_id" content="504928432041-6ivaiei584ib5vueh5hjult3o2v9o49v.apps.googleusercontent.com">
-		<script src="https://apis.google.com/js/platform.js" async defer></script>-->
+		<h1><b><font color = "white">WELCOME TO RIDESHARE</font></b></h1>
+		<p><b><font color = "white">Better than HitchHiking</font></b></p>
+		<br></br>
+		<h2><font color = "white">Sign-In Here!</font></h2>
 	</center></head>
-	<body><center>
+	<body background = "LoginPageBackground.jpg"><center>
 		<%
 		   	String login_email = request.getParameter("login_email");
 		    if (login_email == null) {
@@ -36,42 +42,30 @@
 		    pageContext.setAttribute("login_email", login_email);
 		    UserService userService = UserServiceFactory.getUserService();
 		    User user = userService.getCurrentUser();
-		    /*String user_email = userService.getCurrentUser().getEmail();
-		    if (user_email != null) {
-		        pageContext.setAttribute("user_email", user_email);*/
 		    if (user != null) {
 		        pageContext.setAttribute("user", user);
 		%>
-		<p>Hello, ${fn:escapeXml(user.nickname)}! (You can
-		<a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>.)</p>
-		<li class = "temp"><a href="rideshare.jsp">Click here to continue after signing in</a></li>
+		<p><b>Hello, ${fn:escapeXml(user.nickname)}!  <br> You can either</b> </p>
+		<div class = "btn-group btn-justified" role = "group">
+		<div class = "btn-group" role = "group">
+		<a href="rideshare.jsp" class = "btn btn-success">Continue</a></button>
+		</div>
+		<div class = "btn-group" role = "group">
+		<a href="<%= userService.createLogoutURL(request.getRequestURI()) %>" class = "btn btn-danger">Sign out</a></button>
+		</div>
+		</div>
 		<% 
 		   } else {
 		%>
-		<p> Hello!
-			<a href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign in</p>
+		<div class = "btn-group">
+			<a href="<%= userService.createLoginURL(request.getRequestURI()) %>" class = "btn btn-success">Sign in</a></button>
+			</div>	
 		<% }%>
 
 
-		<!-- Google Sign-In Button -->
-		<!--<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-		<script>
-			var login_success = Boolean(false);
-			var profile;
-			function onSignIn(googleUser) {
-				var profile = googleUser.getBasicProfile();
-				login_success = Boolean(true);
-			};
-		</script>
-		</br></br>
-		
-		<script>
-			function Redirect() {
-				if (login_success) {
-					window.location.assign("GetEmail.jsp");
-				}
-			};
-		</script>
-		<button type = "button" onclick = "Redirect()">Click here to continue after signing in</button>-->
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+
 	</center></body>
 </html>
