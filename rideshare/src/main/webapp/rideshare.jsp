@@ -12,13 +12,15 @@
 
 <html>
 	<head>
+    <link rel="icon" type="image/png" href= "LittleCaricon.jpeg">
+    
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 
 		<!-- Optional theme -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
 	</head>
-	<body><center>
+	<body background = "LoginPageBackground.jpg"><center>
 		<p>
 			<%
 				String email_login = request.getParameter("login_email");
@@ -35,7 +37,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <a class="navbar-brand" href="LoginPage.jsp">Home</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -44,21 +46,23 @@
         <li class="active"><a href="ProfilePage.jsp">Profile <span class="sr-only">(current)</span></a></li>
         <li><a href="searchpage.jsp">Searching a Ride</a></li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar">
         <li><a href="submissionpage.jsp">Adding a Ride</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-			<h1><a href = "ProfilePage.jsp">My Profile Page</a><form action = "ProfilePage.jsp"></form></h1>
-			</br></br></br>
-			<form method = "link" action = "submissionpage.jsp" >
-				<input type = "submit" value = "Add a Ride?">
-			</form>
-			<form method = "link" action = "searchpage.jsp">
-				<input type = "submit" value = "Or Search for a Ride?">
-			</form>
-		</p>
+<div class = "col-sm-4 col-xs-12"></div>
+      <div class = "panel-info">
+        <div class = "panel-heading">Summary</div>
+        <div class = "panel-body">
+          <p>
+          
+          </p>
+        </div>
+      </div>
+
+		
 	</center></body>
 
 	<!-- Latest compiled and minified JavaScript -->
