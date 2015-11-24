@@ -33,16 +33,15 @@
 		<p>
 			<% UserService userService = UserServiceFactory.getUserService(); %>
 			<% User user = userService.getCurrentUser(); %>
-		    <% String user_email = userService.getCurrentUser().getEmail(); %>
+		        <% String user_email = userService.getCurrentUser().getEmail(); %>
 			<% int top = rides.size(); %>
 			<% List <Ride> finalrides = new ArrayList<Ride>(); %>
 			<% for (int i = 0; i < top; ++i){ %>
-			<%    String rideemail = rides.get(i).email; %>
-			<%    if(rideemail.equals(user_email)) %>
-			<%      finalrides.add(rides.get(i)); %>
+			<%    if(rides.get(i).email.equals(user_email)){ %>
+			<%       finalrides.add(rides.get(i)); %>
+                        <%    } %>
 			<% } %>
-<!--
-			<% List<Keys> keys = ObjectifyService.ofy()
+		    <% List<Keys> keys = ObjectifyService.ofy()
 		      .load()
 		      .type(Keys.class)
 		      .list();
@@ -52,38 +51,41 @@
 			<% for(int i = 0; i < keys.size(); ++i){ %>
 			<%    if(keys.get(i).type.compareToIgnoreCase("Browser") == 0) browkey = keys.get(i).value; %>
 			<% } %>
-			<% String originpt = finalrides.get(finalrides.size() - 1).origin; %>
-			<% String destpt = finalrides.get(finalrides.size() - 1).destination; %>
-			<% originpt = originpt.substring(1, originpt.length() - 2); %>
-			<% destpt = destpt.substring(1, destpt.length() - 2); %>
-			<% String testUrl = "https://www.google.com/maps/embed/v1/directions?key=" + browkey + "&origin="+ originpt + "&destination=" + destpt; %>
-
-			<iframe
-			  id = "map"
-			  width="600"
-			  height="450"
-			  frameborder="0" style="border:0"
-			  src="<%=testUrl%>" allowfullscreen>
-			</iframe>
-		</br>
-	-->
-		</p>
-		</br></br>
 		<h1>My Rides</h1>
 			<!-- Output rides -->
-		<% if (!rides.isEmpty()) { %>
-		<%		for(Ride ride : rides) { %>
-		<%			pageContext.setAttribute("ride_email", ride.email); %>
-		<% 			pageContext.setAttribute("ride_origin", ride.origin); %>
-		<%			pageContext.setAttribute("ride_dest", ride.destination); %>
-		<%			pageContext.setAttribute("ride_depart", ride.depart); %>
-					<b>${fn:escapeXml(ride_email)}</b>
-					<b>${fn:escapeXml(ride_origin)}</b>
-					<b>${fn:escapeXml(ride_dest)}</b>
-					<b>${fn:escapeXml(ride_depart)}</b>	
-		<% } %>			
+		<% if (!finalrides.isEmpty()) { %>
+                        <% String originpt = finalrides.get(finalrides.size() - 1).origin; %>
+                        <% String destpt = finalrides.get(finalrides.size() - 1).destination; %>
+                        <% originpt = originpt.substring(1, originpt.length() - 2); %>
+                        <% destpt = destpt.substring(1, destpt.length() - 2); %>
+                        <% String testUrl = "https://www.google.com/maps/embed/v1/directions?key=" + browkey + "&origin="+ originpt + "&destination=" + destpt; %>
+                        <iframe
+                          id = "map"
+                          width="600"
+                          height="450"
+                          frameborder="0" style="border:0"
+                          src="<%=testUrl%>" allowfullscreen>
+                        </iframe>
+		<%	for(Ride ride : finalrides) { %>
+		<%		pageContext.setAttribute("ride_email", ride.email); %>
+		<% 		pageContext.setAttribute("ride_origin", ride.origin); %>
+		<%		pageContext.setAttribute("ride_dest", ride.destination); %>
+		<%		pageContext.setAttribute("ride_depart", ride.depart); %>
+				<b>${fn:escapeXml(ride_email)}</b>
+				<b>${fn:escapeXml(ride_origin)}</b>
+				<b>${fn:escapeXml(ride_dest)}</b>
+				<b>${fn:escapeXml(ride_depart)}</b>         
+                                <form class="button" action="/edit.jsp" method="post">
+                                <input type="hidden" value = "<%=ride.id %>" name="key"><br>
+        	     		<input type="submit" value="Edit!">
+      				</form>
+      			        <form class="button" action="/delete.jsp" method="post">
+         			<input type="hidden" value= <%=ride.id %> name="key"><br>
+           			<input type="submit" value = "Delete!">
+      				</form>	
+	        	<% } %>			
 		<% } else { %> 
 			<p>There are no current rides</p>
-		<% } %> 		
+		<% } %> 
 	</center></body>
 </html>
