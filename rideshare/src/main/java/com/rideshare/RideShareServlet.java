@@ -93,13 +93,14 @@ public class RideShareServlet extends HttpServlet {
               if(index != time.length() - 3) {
                 b = false;
                 System.out.println("There is a colon at the wrong spot for arrive");}
-                else { minutes = Integer.parseInt(time.substring(index+1));}
+                else { minutes = Integer.parseInt(time.substring(index+1));
         }
         else {hour = Integer.parseInt(time);}
         if ((hour>23) || (minutes>59)) {
           b= false;
           System.out.println("Time out of range");
         }
+        float arriveTime = hour + (float) minutes/60;
         time = depart;
         index = time.indexOf(':');
         if(index != -1) {
@@ -107,12 +108,17 @@ public class RideShareServlet extends HttpServlet {
               if(index != time.length() - 3) {
                 b = false;
                 System.out.println("There is a colon at the wrong spot for arrive");}
-                else { minutes = Integer.parseInt(time.substring(index+1));}
+                else { minutes = Integer.parseInt(time.substring(index+1));
         }
         else {hour = Integer.parseInt(time);}
         if ((hour>23) || (minutes>59)) {
           b= false;
           System.out.println("Time out of range");
+        }
+        float departTime = hour + (float) minutes /60;
+        if (arriveTime <= departTime) {
+          b = false;
+          System.out.println("Departure is before arrival.");
         }
         if (!b){
             resp.sendRedirect("/timesubmissionerror.jsp");

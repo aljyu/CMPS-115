@@ -17,7 +17,7 @@
 
 <body>
       <p> Something went wrong when you tried to submit your ride. Please press the back button and try again. </p>
-      <p> Your Departure and Arrival times must be in 24-hour time (1PM = 13:00), with format 14 or 14:00, and no AM or PM. </p>
+      <p> Your Departure and Arrival times must be in 24-hour time (1PM = 13:00), with format 14 or 14:00, and no AM or PM. Your Arrival time must be after your Departure time.</p>
       
 
 </body>
