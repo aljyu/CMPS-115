@@ -47,7 +47,7 @@
 		      .list();
 		    %>
 		      
-			<% String browkey = ""; %>
+			<% String browkey = "null"; %>
 			<% for(int i = 0; i < keys.size(); ++i){ %>
 			<%    if(keys.get(i).type.compareToIgnoreCase("Browser") == 0) browkey = keys.get(i).value; %>
 			<% } %>
