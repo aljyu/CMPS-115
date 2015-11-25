@@ -54,7 +54,7 @@
 </nav>
 <div class = "col-sm-4 col-xs-12"></div>
       <div class = "panel-info">
-        <div class = "panel-heading">Summary</div>
+        <div class = "panel-heading">Welcome to the Rideshare App! You can add a ride, search for rides, and check out your profile for your rides and other information.</div>
         <div class = "panel-body">
           <p>
           
