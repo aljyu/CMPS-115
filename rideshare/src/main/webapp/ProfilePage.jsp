@@ -59,14 +59,6 @@
                         <% originpt = originpt.substring(1, originpt.length() - 2); %>
                         <% destpt = destpt.substring(1, destpt.length() - 2); %>
                         <% String testUrl = "https://www.google.com/maps/embed/v1/directions?key=" + browkey + "&origin="+ originpt + "&destination=" + destpt; %>
-                        <iframe
-                          id = "map"
-                          width="600"
-                          height="450"
-                          frameborder="0" style="border:0"
-                          src="<%=testUrl%>" allowfullscreen>
-                        </iframe>
-                        <br><br>
 		<%	for(Ride ride : finalrides) { %>
 		<%		pageContext.setAttribute("ride_email", ride.email); %>
 		<% 		pageContext.setAttribute("ride_origin", ride.origin); %>
@@ -84,7 +76,16 @@
          			<input type="hidden" value= <%=ride.id %> name="key"><br>
            			<input type="submit" value = "Delete!">
       				</form>	
-	        	<% } %>			
+	        	<% } %>		
+			<iframe
+                          id = "map"
+                          width="600"
+                          height="450"
+                          frameborder="0" style="border:0"
+                          src="<%=testUrl%>" allowfullscreen>
+                        </iframe>
+                        <br><br>
+	
 		<% } else { %> 
 			<p>There are no current rides</p>
 		<% } %> 
