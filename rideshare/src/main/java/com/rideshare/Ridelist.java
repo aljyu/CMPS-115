@@ -133,7 +133,7 @@ public class Ridelist implements java.io.Serializable{
 
 	public GeoPt convertString(String location) {
 	       String finalLoc;
-	       String lat = null, lng = null;
+	       String lat = "0", lng = "0";
 	       location = location.replaceAll(" ", "%20");
 	       List<Keys> listkey = ObjectifyService.ofy().load().type(Keys.class).list();
                String geokey = null;
