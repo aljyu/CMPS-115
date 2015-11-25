@@ -91,12 +91,13 @@ public class RideShareServlet extends HttpServlet {
       if(index != -1) {
               hour = Integer.parseInt(time.substring(0, index));
               if(index != time.length() - 3) {
-                b = false;
-                System.out.println("There is a colon at the wrong spot for arrive");}
-                else { minutes = Integer.parseInt(time.substring(index+1));
-        }
-        else {hour = Integer.parseInt(time);}
-        if ((hour>23) || (minutes>59)) {
+                 b = false;
+                 System.out.println("There is a colon at the wrong spot for arrive");
+              }else { 
+                 minutes = Integer.parseInt(time.substring(index+1));
+              }
+      }else {hour = Integer.parseInt(time);}
+      if ((hour>23) || (minutes>59)) {
           b= false;
           System.out.println("Time out of range");
         }
@@ -106,14 +107,17 @@ public class RideShareServlet extends HttpServlet {
         if(index != -1) {
               hour = Integer.parseInt(time.substring(0, index));
               if(index != time.length() - 3) {
-                b = false;
-                System.out.println("There is a colon at the wrong spot for arrive");}
-                else { minutes = Integer.parseInt(time.substring(index+1));
+                 b = false;
+                 System.out.println("There is a colon at the wrong spot for arrive");
+              }else { 
+                 minutes = Integer.parseInt(time.substring(index+1));
+              }
+        } else {
+           hour = Integer.parseInt(time);
         }
-        else {hour = Integer.parseInt(time);}
         if ((hour>23) || (minutes>59)) {
-          b= false;
-          System.out.println("Time out of range");
+           b= false;
+           System.out.println("Time out of range");
         }
         float departTime = hour + (float) minutes /60;
         if (arriveTime <= departTime) {
@@ -266,7 +270,7 @@ public class RideShareServlet extends HttpServlet {
     
     writer.println(htmlResp);
   }
-   }
+  }
  }
 }
 }
