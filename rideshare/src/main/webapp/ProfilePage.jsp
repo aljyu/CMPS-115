@@ -47,7 +47,7 @@
 		      .list();
 		    %>
 		      
-			<% String browkey = null; %>
+			<% String browkey = ""; %>
 			<% for(int i = 0; i < keys.size(); ++i){ %>
 			<%    if(keys.get(i).type.compareToIgnoreCase("Browser") == 0) browkey = keys.get(i).value; %>
 			<% } %>
@@ -66,6 +66,7 @@
                           frameborder="0" style="border:0"
                           src="<%=testUrl%>" allowfullscreen>
                         </iframe>
+                        <br><br>
 		<%	for(Ride ride : finalrides) { %>
 		<%		pageContext.setAttribute("ride_email", ride.email); %>
 		<% 		pageContext.setAttribute("ride_origin", ride.origin); %>
