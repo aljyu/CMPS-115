@@ -89,8 +89,9 @@
       <br><br><br>
       
       <div class = "Section1">
-      <p><b> Offering or looking for a weekly ride? Check the day(s) that apply: </b></p>
-      </div>
+      <div class = "panel-primary">
+      <div class = "panel-heading"><p><b> Offering or looking for a weekly ride? Check the day(s) that apply: </b></p>
+     
       
 
       <p><input type="checkbox" name="weekday" value="su"/><b>Sunday</b></p>
@@ -102,7 +103,9 @@
       <p><input type="checkbox" name="weekday" value="sa"/><b>Saturday</b></p>
       <button type="submit" class = "btn btn-info" name="Submit" value=Submit>Submit</button>
    </form>
-
+      </div>
+      </div>
+      </div>
    <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 
