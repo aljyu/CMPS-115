@@ -13,10 +13,53 @@
 
 <html>
 <head>
-    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css"/>
+      <link rel="icon" type="image/png" href= "LittleCaricon.jpeg">
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+
+      <!-- Optional theme -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+      <link type="text/css" rel="stylesheet" href="/stylesheets/main.css"/>
+
+      <style>
+        div.Buffer {
+          padding-top: 50px;
+        }
+
+        div.Section2 {
+          padding-top: 10px;
+        }
+      </style>
 </head>
 
-<body>
+<body background = "LoginPageBackground1.jpg">
+  <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="LoginPage.jsp">Home</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="ProfilePage.jsp">Profile <span class="sr-only">(current)</span></a></li>
+        <li><a href="searchpage.jsp">Searching a Ride</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar">
+        <li><a href="submissionpage.jsp">Adding a Ride</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<h2><center>Searching for A Ride?</center></h2>
   <%
   List<Ride> rides = ObjectifyService.ofy()
       .load()
@@ -51,28 +94,39 @@
 	  <label for="seats"> Number of Seats Avaliable: </label>
 	  <input id="seats" type = "text" name = "seats"> <br><br>
 	  
-	  Are you looking for a driver or a rider? <br>
+  <div class = "Buffer">
+	  <p>Are you looking for a driver or a rider?</p><br>
+  </div>    
       <label for "drive"> Driver </label>
       <input type="radio" name="drive" value="true" checked>
       <label for "drive"> Rider </label>
       <input type="radio" name="drive" value="false"> <br>
-      <br>
-      <br>
-	  
-	Searching for a weekly ride? Check the day(s) that apply: <br>
-	    <input type="checkbox" name="weekday" value="su"/>Sunday<br>
-      <input type="checkbox" name="weekday" value="mo"/>Monday<br>
-      <input type="checkbox" name="weekday" value="tu"/>Tuesday<br>
-      <input type="checkbox" name="weekday" value="we"/>Wednesday<br>
-      <input type="checkbox" name="weekday" value="th"/>Thursday<br>
-      <input type="checkbox" name="weekday" value="fr"/>Friday<br>
-      <input type="checkbox" name="weekday" value="sa"/>Saturday<br>
-	  
-	Prioritize: <br>
-      <input type="radio" name="prio" value="both" checked/>Origin and Destination<br>
-      <input type="radio" name="prio" value="origin"/>Origin<br>
-      <input type="radio" name="prio" value="dest"/>Destination<br>
-      <input type="submit" id = "Submit" name="Submit" value=Submit>
+    
+      <br><br>
+   <div class = "Section2"> 
+    <div class = "panel-info">   
+      <div class = "panel-heading"><p>Searching for a weekly ride? Check the day(s) that apply:</p>
+       <input type="checkbox" name="weekday" value="su"/><b>Sunday</b><br>
+       <input type="checkbox" name="weekday" value="mo"/><b>Monday</b><br>
+       <input type="checkbox" name="weekday" value="tu"/><b>Tuesday</b><br>
+       <input type="checkbox" name="weekday" value="we"/><b>Wednesday</b><br>
+       <input type="checkbox" name="weekday" value="th"/><b>Thursday</b><br>
+       <input type="checkbox" name="weekday" value="fr"/><b>Friday</b><br>
+       <input type="checkbox" name="weekday" value="sa"/><b>Saturday</b><br>
+       </div>
+   </div>
+  </div> 
+
+	<div class = "Section3"> 
+    <div class = "panel-warning">
+	    <div class = "panel-heading"><p><b>Prioritize:</b></p> <br>
+      <input type="radio" name="prio" value="both" checked/><b>Origin and Destination</b><br>
+      <input type="radio" name="prio" value="origin"/><b>Origin</b><br>
+      <input type="radio" name="prio" value="dest"/><b>Destination</b><br>
+      <button type="submit" class = "btn-info" id = "Submit" name="Submit" value=Submit>Submit</button>
+    </div>
+  </div>
+  </div>    
 	  <script>
 		/*jslint sub: true, maxerr: 50, indent: 4, browser: true */
 		(function (global) {
@@ -82,6 +136,9 @@
 		}(window));
 	</script>
    </form>
+
+   <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
    
    <!--script>
    (function (global) {
@@ -113,7 +170,6 @@
       <!--% } %>
   <!--% } else { %>
       <p> There are no current rides. </p>
-   <!--% } %-->
-   
+   <!--% } %-->  
 </body>
 </html>
