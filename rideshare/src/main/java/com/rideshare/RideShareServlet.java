@@ -47,6 +47,16 @@ public class RideShareServlet extends HttpServlet {
       String email = req.getParameter("email"); 
       String origin = req.getParameter("origin");
       String dest = req.getParameter("dest");
+      String date = req.getParameter("date");
+      System.out.println(date);
+      // A date is mm/dd/yyyy
+      Date ridedate = new Date(date);
+      /* if(month < 1 || month > 12 ||
+           day < 1 || day > 31 || 
+        ((month == 9 || month == 4 || month == 6 || month == 11) && day > 30) ||
+        ((month == 2 && ((day > 29 && year % 4 == 0) || day > 28)))){
+         resp.sendRedirect("/dateError.jsp");
+      } */
       String depart = req.getParameter("depart");
       String arrive = req.getParameter("arrive");
       String driving = req.getParameter("drive");
@@ -248,7 +258,8 @@ public class RideShareServlet extends HttpServlet {
       }
 
     
-    ride = new Ride(name, email, origin, dest, depart, arrive, start, end, drive, su, mo, tu, we, th, fr, sa, seats);
+    ride = new Ride(name, email, origin, dest, depart, arrive, ridedate,
+                    start, end, drive, su, mo, tu, we, th, fr, sa, seats);
     ObjectifyService.ofy().save().entity(ride).now();
     resp.sendRedirect("/rideshare.jsp");
       

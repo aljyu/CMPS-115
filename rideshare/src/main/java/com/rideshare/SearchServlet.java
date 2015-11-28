@@ -45,11 +45,11 @@ public class SearchServlet extends HttpServlet {
    @Override
    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
       
-	  List<Ride> rides = ObjectifyService.ofy()
-      .load()
-      .type(Ride.class)
-      .order("-depart")
-      .list();
+      List<Ride> rides = ObjectifyService.ofy()
+         .load()
+         .type(Ride.class)
+         .order("-depart")
+         .list();
 
       String email = req.getParameter("email"); 
       String origin = req.getParameter("origin");
@@ -58,6 +58,20 @@ public class SearchServlet extends HttpServlet {
       String destrad = req.getParameter("destrad");
       String depart = req.getParameter("depart");
       String arrive = req.getParameter("arrive");
+      String datestr = req.getParameter("date");
+      Date date = new Date(datestr);
+      if(datestr == null && (depart != null || arrive != null)) resp.sendRedirect("/searcherror.jsp"); 
+      
+      List<Ride> finalrides = new ArrayList<Ride>(); 
+      if(datestr != null){ 
+         for(Ride ride: rides){
+            if(date.equals(ride.ridedate)){
+               System.out.println("I'm here for date" + datestr);
+               finalrides.add(ride);
+            }
+         } 
+      }
+      rides = finalrides;
       String driving = req.getParameter("drive");
       boolean drive = false;
       if (driving.equals("true")) {

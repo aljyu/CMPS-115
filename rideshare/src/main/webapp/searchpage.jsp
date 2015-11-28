@@ -90,7 +90,8 @@
       
       <label for="arrive"> Arrival Time: </label>
       <input id="arrive" type = "text" name = "arrive"> <br>
-	  
+      <label for "date"> Date (mm/dd/yyyy): </label>
+      <input id = "date" type = "text" name = "date"><br>	  
 	  <label for="seats"> Number of Seats Avaliable: </label>
 	  <input id="seats" type = "text" name = "seats"> <br><br>
 	  

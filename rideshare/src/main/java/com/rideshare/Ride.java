@@ -20,10 +20,9 @@ public class Ride implements java.io.Serializable{
    @Index public String destination;
    @Index public String depart;
    @Index public String arrive;
+   @Index public Date ridedate;
    @Index public GeoPt start;
    @Index public GeoPt end;
-//   @Index public int depart;
-//   @Index public int arrive;
    @Index public boolean drive;
    @Index public boolean mo;
    @Index public boolean tu;
@@ -39,9 +38,13 @@ public class Ride implements java.io.Serializable{
    public Ride(){
    }
    public Ride(String fullname, String riderEmail, 
-               String orig, String dest, String departure, String arrival, 
+               String orig, String dest, 
+               String departure, String arrival, Date date,
                GeoPt st, GeoPt en, boolean driver, 
-               boolean sun, boolean mon, boolean tue, boolean wed, boolean thu, boolean fri, boolean sat, int seat){
+               boolean sun, boolean mon, 
+               boolean tue, boolean wed, 
+               boolean thu, boolean fri, 
+               boolean sat, int seat){
         Random r = new Random();
         id = r.nextLong();
 	name = fullname;
@@ -50,6 +53,7 @@ public class Ride implements java.io.Serializable{
 	destination = dest;
 	depart = departure;
 	arrive = arrival;
+        ridedate = date;
         start = st;
         end = en;
 	drive = driver;
