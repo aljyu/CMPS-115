@@ -92,6 +92,19 @@ public class EditerServlet extends HttpServlet {
       String dest = req.getParameter("dest");
       String depart = req.getParameter("depart");
       String arrive = req.getParameter("arrive");
+      String datestr = req.getParameter("date");      
+      Date date = null;
+      boolean n = false;
+      if(datestr != null || !(datestr.isEmpty())){
+         System.out.println(datestr);
+         try {
+            date = new Date(datestr);
+            n = true;
+         }catch(IllegalArgumentException e){
+            System.err.println("Error " + e + "Caused in editer servlet");
+            n = false;
+         }
+      } 
       String driving = req.getParameter("drive");
 
       String seatstr = req.getParameter("seats");
@@ -153,6 +166,7 @@ public class EditerServlet extends HttpServlet {
          tom.setProperty("email", email);
          tom.setProperty("depart", depart); 
          tom.setProperty("arrive", arrive);
+         if(n) tom.setProperty("ridedate", date);
          tom.setProperty("drive", dr);
          tom.setProperty("seats", seats);
 

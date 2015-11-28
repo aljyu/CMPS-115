@@ -9,6 +9,7 @@
 <%@ page import="com.googlecode.objectify.ObjectifyService" %>
 
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Date" %>
 <%@ page import="java.util.ArrayList" %>
 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -47,7 +48,6 @@
    pageContext.setAttribute("depart_content", chosen.depart);
    pageContext.setAttribute("arrive_content", chosen.arrive);
    pageContext.setAttribute("seat_content", Integer.toString(chosen.seats));
-   
 %>
    <form action="/edit" method="post"> 
       <p> Please submit your ride here: </p>
@@ -64,6 +64,8 @@
       <input id="depart" type ="text" value = "${fn:escapeXml(depart_content)}"name= "depart"><br>
       <label for "arrive"> Arrival Time: </label>
       <input id = "arrive" type ="text" value = "${fn:escapeXml(arrive_content)}"name = "arrive"><br>
+      <label for "date"> Date: (mm/dd/yyyy) </label>
+      <input id = "date" type="text" name="date"><br>
       <label for = "seats"> Seats Avaliable: </label>
       <input id = "seats" type = "text" name = "seats" value="${fn:escapeXml(seat_content)}"><br>
       <label for "drive"> Are you driving or riding? </label><br>
