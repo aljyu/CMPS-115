@@ -60,7 +60,6 @@ public class SearchServlet extends HttpServlet {
       String arrive = req.getParameter("arrive");
       String datestr = req.getParameter("date");
       Date date = new Date(datestr);
-      if(datestr == null && (depart != null || arrive != null)) resp.sendRedirect("/searcherror.jsp"); 
       
       List<Ride> finalrides = new ArrayList<Ride>(); 
       if(datestr != null){ 

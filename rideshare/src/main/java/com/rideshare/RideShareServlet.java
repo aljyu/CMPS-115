@@ -50,13 +50,11 @@ public class RideShareServlet extends HttpServlet {
       String date = req.getParameter("date");
       System.out.println(date);
       // A date is mm/dd/yyyy
-      Date ridedate = new Date(date);
-      /* if(month < 1 || month > 12 ||
-           day < 1 || day > 31 || 
-        ((month == 9 || month == 4 || month == 6 || month == 11) && day > 30) ||
-        ((month == 2 && ((day > 29 && year % 4 == 0) || day > 28)))){
+      try{  
+         Date ridedate = new Date(date);
+      }catch(IllegalArgumentException e){
          resp.sendRedirect("/dateError.jsp");
-      } */
+      }
       String depart = req.getParameter("depart");
       String arrive = req.getParameter("arrive");
       String driving = req.getParameter("drive");
