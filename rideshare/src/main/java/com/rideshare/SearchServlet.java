@@ -59,18 +59,21 @@ public class SearchServlet extends HttpServlet {
       String depart = req.getParameter("depart");
       String arrive = req.getParameter("arrive");
       String datestr = req.getParameter("date");
-      Date date = new Date(datestr);
       
+      try{ 
+         Date date = new Date(datestr);
+      }catch(IllegalArgumentException e){
+         // don't need to do anything its not an error
+      }
       List<Ride> finalrides = new ArrayList<Ride>(); 
-      if(datestr != null){ 
+      if(datestr != null || !(datestr.isEmpty())){ 
          for(Ride ride: rides){
             if(date.equals(ride.ridedate)){
-               System.out.println("I'm here for date" + datestr);
                finalrides.add(ride);
             }
          } 
+         rides = finalrides;
       }
-      rides = finalrides;
       String driving = req.getParameter("drive");
       boolean drive = false;
       if (driving.equals("true")) {
