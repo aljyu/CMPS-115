@@ -59,20 +59,11 @@ public class SearchServlet extends HttpServlet {
       String depart = req.getParameter("depart");
       String arrive = req.getParameter("arrive");
       String datestr = req.getParameter("date");
-      
+      Date date = null;      
       try{ 
-         Date date = new Date(datestr);
+         date = new Date(datestr);
       }catch(IllegalArgumentException e){
          // don't need to do anything its not an error
-      }
-      List<Ride> finalrides = new ArrayList<Ride>(); 
-      if(datestr != null || !(datestr.isEmpty())){ 
-         for(Ride ride: rides){
-            if(date.equals(ride.ridedate)){
-               finalrides.add(ride);
-            }
-         } 
-         rides = finalrides;
       }
       String driving = req.getParameter("drive");
       boolean drive = false;
@@ -115,6 +106,40 @@ public class SearchServlet extends HttpServlet {
             sa = true;
           }
         }
+      }
+      List<Ride> finalrides = new ArrayList<Ride>();
+      if(datestr != null || !(datestr.isEmpty())){
+         int d = date.getDay();
+         for(Ride ride: rides){
+            boolean match = false;
+            switch(d) {
+               case 0:
+                  if(ride.su) match = true;
+                  break; 
+               case 1:
+                  if(ride.mo) match = true;
+                  break;
+               case 2: 
+                  if(ride.tu) match = true;
+                  break;
+               case 3: 
+                  if(ride.we) match = true;
+                  break;
+               case 4:
+                  if(ride.th) match = true;
+                  break;
+               case 5: 
+                  if(ride.fr) match = true;
+                  break;
+               case 6:
+                  if(ride.sa) match = true;
+                  break;
+            }
+            if(date.equals(ride.ridedate) || match){
+               finalrides.add(ride);
+            }
+         }
+         rides = finalrides;
       }
 
 	  

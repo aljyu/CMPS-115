@@ -50,8 +50,9 @@ public class RideShareServlet extends HttpServlet {
       String date = req.getParameter("date");
       System.out.println(date);
       // A date is mm/dd/yyyy
+      Date ridedate = null;
       try{  
-         Date ridedate = new Date(date);
+         ridedate = new Date(date);
       }catch(IllegalArgumentException e){
          resp.sendRedirect("/dateError.jsp");
       }
