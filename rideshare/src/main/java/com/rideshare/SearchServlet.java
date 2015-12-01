@@ -59,10 +59,12 @@ public class SearchServlet extends HttpServlet {
       String depart = req.getParameter("depart");
       String arrive = req.getParameter("arrive");
       String datestr = req.getParameter("date");
-      Date date = null;      
+      Date date = new Date("1/1/1111");      
+      boolean l = false;
       try{ 
          date = new Date(datestr);
       }catch(IllegalArgumentException e){
+         l = true;
          // don't need to do anything its not an error
       }
       String driving = req.getParameter("drive");
@@ -108,7 +110,7 @@ public class SearchServlet extends HttpServlet {
         }
       }
       List<Ride> finalrides = new ArrayList<Ride>();
-      if(datestr != null || !(datestr.isEmpty())){
+      if(datestr != null || !(datestr.isEmpty()) || l){
          int d = date.getDay();
          for(Ride ride: rides){
             boolean match = false;
