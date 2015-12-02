@@ -19,7 +19,7 @@
 
       <!-- Optional theme -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
-    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/searchreturn.css"/>
 
      <style>
         div.Buffer {
@@ -170,7 +170,7 @@
    
    <% if (!listRide.isEmpty()) { %>
 	  <p> The Current Rides </p>
-	  <table border"1" style="width:100%">
+	  <table border="1" style="width:100%">
 		<tr>
 			<th>Email</th>
 			<th>Origin</th>
@@ -178,6 +178,7 @@
 			<th>Depart Time</th>
 			<th>Arrival Time</th>
 			<th>Driver/Rider</th>
+			<th>Date</th>
 			<th>Days of Week</th>
 			<th>Seats</th>
 		</tr>
@@ -189,6 +190,7 @@
          <% pageContext.setAttribute("ride_dest", ride.destination); %>
          <% pageContext.setAttribute("ride_depart", ride.depart); %>
 		 <% pageContext.setAttribute("ride_arrive",ride.arrive);%>
+		 <%	pageContext.setAttribute("ride_date", ride.ridedate.toString().substring(0, 11) + ride.ridedate.toString().substring(24)); %>
 		 <% pageContext.setAttribute("ride_seats",ride.seats);%>
          <p>
 		 <!--b>${fn:escapeXml(ride_)}</b-->
@@ -202,6 +204,7 @@
 		 <% } else { %>
 			<td> rider </td>
 		 <% } %>
+		 <td>${fn:escapeXml(ride_date)}</td>
 		 <td>
 		 <ul id="dots">
 		 <% if(ride.su){ %>
