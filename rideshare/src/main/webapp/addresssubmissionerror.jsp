@@ -17,6 +17,7 @@
 
 <body>
       <p> Something went wrong when you tried to submit your ride. Please press the back button and try again. </p>
+      <br></br>
       <p> Your address was invalid. </p>
       
 
