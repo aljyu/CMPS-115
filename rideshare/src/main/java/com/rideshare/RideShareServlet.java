@@ -160,7 +160,7 @@ public class RideShareServlet extends HttpServlet {
          if(listkey.get(i).type.compareToIgnoreCase("Server") == 0)geokey = listkey.get(i).value;
       }
       try {
-         String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + origin + "key="+geokey; 
+         String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + origin + "key=" + geokey; 
          URL geocodeOri = new URL(url);
          BufferedReader reader = new BufferedReader(new InputStreamReader(geocodeOri.openStream()));
          String line;
@@ -183,13 +183,14 @@ public class RideShareServlet extends HttpServlet {
         b=false;
       } 
       finally {
+        b = true;
         if (status.contains("OK") == false) {
           b=false;
           System.out.println("Status for origin is " + status);
         }
         if (!b) {
-        resp.sendRedirect("/addresssubmissionerror.jsp");
-      }
+          resp.sendRedirect("/addresssubmissionerror.jsp");
+        }
       else {
       float lt = Float.parseFloat(lat);
       float ln = Float.parseFloat(lng);
