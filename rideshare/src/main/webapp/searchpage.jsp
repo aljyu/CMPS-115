@@ -23,7 +23,7 @@
 
       <style>
         div.Buffer {
-          padding-top: 50px;
+          padding-top: 52px;
         }
 
         div.Section2 {
@@ -105,7 +105,7 @@
     
       <br><br>
    <div class = "Section2"> 
-    <div class = "panel-info">   
+    <div class = "panel-success">   
       <div class = "panel-heading"><p>Searching for a weekly ride? Check the day(s) that apply:</p>
        <input type="checkbox" name="weekday" value="su"/><b>Sunday</b><br>
        <input type="checkbox" name="weekday" value="mo"/><b>Monday</b><br>
@@ -119,7 +119,7 @@
   </div> 
 
 	<div class = "Section3"> 
-    <div class = "panel-warning">
+    <div class = "panel-success">
 	    <div class = "panel-heading"><p><b>Prioritize:</b></p> <br>
       <input type="radio" name="prio" value="both" checked/><b>Origin and Destination</b><br>
       <input type="radio" name="prio" value="origin"/><b>Origin</b><br>

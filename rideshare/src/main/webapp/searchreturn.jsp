@@ -116,7 +116,7 @@
       <br>
 	  
 	<div class = "Section2"> 
-    <div class = "panel-info">   
+    <div class = "panel-success">   
       <div class = "panel-heading"><p>Searching for a weekly ride? Check the day(s) that apply:</p>
 	    <input type="checkbox" name="weekday" value="su"/>Sunday<br>
       <input type="checkbox" name="weekday" value="mo"/>Monday<br>
