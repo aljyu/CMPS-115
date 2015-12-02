@@ -99,8 +99,9 @@
       <label for "drive"> Riding </label>
       <input type="radio" name="drive" value="false"><br><br> <br>
       </div>
+      <br>
       <div class = "Section1">
-      <div class = "panel-primary">
+      <div class = "panel-success">
       <div class = "panel-heading"><p><b> Offering or looking for a weekly ride? Check the day(s) that apply: </b></p>
       <label><input type="checkbox" name="weekday" value="su"/><b>Sunday</label><br>
       <label><input type="checkbox" name="weekday" value="mo"/><b>Monday</label><br>
