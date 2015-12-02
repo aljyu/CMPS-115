@@ -152,9 +152,9 @@
    </form>
    <!--% String departs = (String)pageContext.getAttribute("depart");%-->
    <!--% System.out.println(departs + " HELLO");%-->
-   <p id = "demo">Yes</p>
+   <!--p id = "demo">Yes</p>
    <p id = "demo1">No</p>
-   <p id = "demo2">Maybe so</p>
+   <p id = "demo2">Maybe so</p-->
    
    <% Object tRides = request.getAttribute("resultRides");%>
    <!--% System.out.println("Start");%-->
