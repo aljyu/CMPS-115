@@ -69,10 +69,11 @@ public class RideShareServlet extends HttpServlet {
 	  String seatstring = req.getParameter("seats");
 
     //Error checking for blank spots
-    if ((name.length() == 0) || (email.length() == 0) || 
-          (origin.length() == 0) || (dest.length() == 0) ||  
-          (depart.length() == 0) || (arrive.length() == 0)
-          || (seatstring.length() == 0)){
+    if ((name.length() == 0)     || (email.length() == 0) || 
+          (origin.length() == 0) || (dest.length() == 0)  ||  
+          (depart.length() == 0) || (arrive.length() == 0)||
+          (seatstring.length() == 0)                      || 
+             (ridedate == null)  || (date.length() == 0)){
         resp.sendRedirect("/blanksubmissionerror.jsp");
       }
   else { 
@@ -137,8 +138,18 @@ public class RideShareServlet extends HttpServlet {
             resp.sendRedirect("/timesubmissionerror.jsp");
         }
         else {
-      int seats = Integer.parseInt(seatstring);
-    
+      int seats = -1; 
+      try {
+         seats = Integer.parseInt(seatstring);
+      }catch(NumberFormatException e){
+         System.err.println("Thats not a number for seats");
+         resp.sendRedirect("/seatserror.jsp");
+         return;
+      }
+      if(seats == -1){ 
+         resp.sendRedirect("/seatserror.jsp");
+         return;
+      } 
       String status ="";
 
       String lat = "0", lng = "0";
