@@ -72,7 +72,8 @@ public class Ridelist implements java.io.Serializable{
 	}
 	
 	private float findDist(GeoPt orig, GeoPt dest){
-		float dist;
+		if(orig == null || orig == new GeoPt(0, 0) || dest == null || dest == new GeoPt(0, 0))return 0;
+                float dist;
 		int R = 6371; //Radius of the earth in meters
 		float latO = (float) Math.toRadians(orig.getLatitude());
 		float latD = (float) Math.toRadians(dest.getLatitude());
@@ -165,13 +166,12 @@ public class Ridelist implements java.io.Serializable{
 	      return loc;
 	}
 
-	public List<Ride> sortOrigin(List<Ride> ilist, String location) {
-	      GeoPt loc = convertString(location); 
-	      List<floatRide> irlist = new ArrayList<floatRide>();
+	public List<Ride> sortOrigin(List<Ride> ilist, GeoPt location) {
+	List<floatRide> irlist = new ArrayList<floatRide>();
         //first, go through the list and compute values
         for (int i=0; i< ilist.size(); i++) {
             GeoPt istart = ilist.get(i).start;
-            float val = this.findDist(istart, loc);
+            float val = this.findDist(istart, location);
             floatRide ir = new floatRide(val, ilist.get(i));
             irlist.add(ir);
         }
@@ -179,25 +179,23 @@ public class Ridelist implements java.io.Serializable{
         return sort(irlist);
 	}
 
-	public List<Ride> originRadius(List<Ride> l, String origin, String radius){
+	public List<Ride> originRadius(List<Ride> l, GeoPt origin, String radius){
 		int b = Integer.parseInt(radius);
-		GeoPt loc = convertString(origin); 
 		List<Ride> rl = new ArrayList<Ride>();
     	for (int i = 0; i < l.size(); i++) {
-    		if (this.findDist(l.get(i).start, loc) < b) {
-    			rl.add(l.get(i));
+    		if (this.findDist(l.get(i).start, origin) < b) {
+    		   rl.add(l.get(i));
     		}
     	}
     	return rl;
 	}
 
-	public List<Ride> sortDest(List<Ride> ilist, String location) {
-	      GeoPt loc = convertString(location); 
-	      List<floatRide> irlist = new ArrayList<floatRide>();
+	public List<Ride> sortDest(List<Ride> ilist, GeoPt location) {
+	List<floatRide> irlist = new ArrayList<floatRide>();
         //first, go through the list and compute values
         for (int i=0; i< ilist.size(); i++) {
             GeoPt istart = ilist.get(i).end;
-            float val = this.findDist(istart, loc);
+            float val = this.findDist(istart, location);
             floatRide ir = new floatRide(val, ilist.get(i));
             irlist.add(ir);
         }
@@ -205,12 +203,11 @@ public class Ridelist implements java.io.Serializable{
         return sort(irlist);
 	}
 
-	public List<Ride> destRadius(List<Ride> l, String dest, String radius){
+	public List<Ride> destRadius(List<Ride> l, GeoPt dest, String radius){
 		int b = Integer.parseInt(radius);
-		GeoPt loc = convertString(dest); 
 		List<Ride> rl = new ArrayList<Ride>();
     	for (int i = 0; i < l.size(); i++) {
-    		if (this.findDist(l.get(i).end, loc) < b) {
+    		if (this.findDist(l.get(i).end, dest) < b) {
     			rl.add(l.get(i));
     		}
     	}

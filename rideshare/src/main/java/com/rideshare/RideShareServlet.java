@@ -47,6 +47,15 @@ public class RideShareServlet extends HttpServlet {
       String email = req.getParameter("email"); 
       String origin = req.getParameter("origin");
       String dest = req.getParameter("dest");
+      String date = req.getParameter("date");
+      System.out.println(date);
+      // A date is mm/dd/yyyy
+      Date ridedate = null;
+      try{  
+         ridedate = new Date(date);
+      }catch(IllegalArgumentException e){
+         resp.sendRedirect("/dateError.jsp");
+      }
       String depart = req.getParameter("depart");
       String arrive = req.getParameter("arrive");
       String driving = req.getParameter("drive");
@@ -60,10 +69,11 @@ public class RideShareServlet extends HttpServlet {
 	  String seatstring = req.getParameter("seats");
 
     //Error checking for blank spots
-    if ((name.length() == 0) || (email.length() == 0) || 
-          (origin.length() == 0) || (dest.length() == 0) ||  
-          (depart.length() == 0) || (arrive.length() == 0)
-          || (seatstring.length() == 0)){
+    if ((name.length() == 0)     || (email.length() == 0) || 
+          (origin.length() == 0) || (dest.length() == 0)  ||  
+          (depart.length() == 0) || (arrive.length() == 0)||
+          (seatstring.length() == 0)                      || 
+             (ridedate == null)  || (date.length() == 0)){
         resp.sendRedirect("/blanksubmissionerror.jsp");
       }
   else { 
@@ -91,35 +101,55 @@ public class RideShareServlet extends HttpServlet {
       if(index != -1) {
               hour = Integer.parseInt(time.substring(0, index));
               if(index != time.length() - 3) {
-                b = false;
-                System.out.println("There is a colon at the wrong spot for arrive");}
-                else { minutes = Integer.parseInt(time.substring(index+1));}
-        }
-        else {hour = Integer.parseInt(time);}
-        if ((hour>23) || (minutes>59)) {
+                 b = false;
+                 System.out.println("There is a colon at the wrong spot for arrive");
+              }else { 
+                 minutes = Integer.parseInt(time.substring(index+1));
+              }
+      }else {hour = Integer.parseInt(time);}
+      if ((hour>23) || (minutes>59)) {
           b= false;
           System.out.println("Time out of range");
         }
+        float arriveTime = hour + (float) minutes/60;
         time = depart;
         index = time.indexOf(':');
         if(index != -1) {
               hour = Integer.parseInt(time.substring(0, index));
               if(index != time.length() - 3) {
-                b = false;
-                System.out.println("There is a colon at the wrong spot for arrive");}
-                else { minutes = Integer.parseInt(time.substring(index+1));}
+                 b = false;
+                 System.out.println("There is a colon at the wrong spot for arrive");
+              }else { 
+                 minutes = Integer.parseInt(time.substring(index+1));
+              }
+        } else {
+           hour = Integer.parseInt(time);
         }
-        else {hour = Integer.parseInt(time);}
         if ((hour>23) || (minutes>59)) {
-          b= false;
-          System.out.println("Time out of range");
+           b= false;
+           System.out.println("Time out of range");
+        }
+        float departTime = hour + (float) minutes /60;
+        if (arriveTime <= departTime) {
+          b = false;
+          System.out.println("Departure is before arrival.");
         }
         if (!b){
             resp.sendRedirect("/timesubmissionerror.jsp");
         }
         else {
-      int seats = Integer.parseInt(seatstring);
-    
+      int seats = -1; 
+      try {
+         seats = Integer.parseInt(seatstring);
+      }catch(NumberFormatException e){
+         System.err.println("Thats not a number for seats");
+         resp.sendRedirect("/seatserror.jsp");
+         return;
+      }
+      if(seats == -1){ 
+         resp.sendRedirect("/seatserror.jsp");
+         return;
+      } 
       String status ="";
 
       String lat = "0", lng = "0";
@@ -238,7 +268,8 @@ public class RideShareServlet extends HttpServlet {
       }
 
     
-    ride = new Ride(name, email, origin, dest, depart, arrive, start, end, drive, su, mo, tu, we, th, fr, sa, seats);
+    ride = new Ride(name, email, origin, dest, depart, arrive, ridedate,
+                    start, end, drive, su, mo, tu, we, th, fr, sa, seats);
     ObjectifyService.ofy().save().entity(ride).now();
     resp.sendRedirect("/rideshare.jsp");
       
@@ -260,7 +291,7 @@ public class RideShareServlet extends HttpServlet {
     
     writer.println(htmlResp);
   }
-   }
+  }
  }
 }
 }
