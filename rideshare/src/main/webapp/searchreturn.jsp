@@ -15,8 +15,21 @@
 <head>
     <link type="text/css" rel="stylesheet" href="/stylesheets/main.css"/>
 </head>
-
-<body>
+<!--script>
+		/*jslint sub: true, maxerr: 50, indent: 4, browser: true */
+		(function load(global) {
+			document.getElementById("demo").value = global.localStorage.getItem("Email1");
+			document.getElementById("demo1").innerHTML = global.localStorage.getItem("Email1");
+			document.getElementById("demo2").innerHTML = "Working?";
+		}(window));
+	</script-->
+	<script>
+	(function load(global) {
+		document.getElementById("email").value = global.localStorage.getItem("Email1");
+	}(window));
+	
+	</script>
+<body onload="load();">
   <%
   List<Ride> rides = ObjectifyService.ofy()
       .load()
@@ -28,19 +41,17 @@
 	<% Ridelist rl = new Ridelist(rides); %>
 	<!--% pageContext.setAttribute("geo", rl.testFindDist().toString()); %-->
 	<!--b>${fn:escapeXml(geo)}</b-->
-	<!--script>
-	(function (global) {
-		document.getElementById("depart").value = global.localStorage.getItem("Depart");
-	}(window));
-	</script-->
+	<script>
+		System.out.println("1");
+		//System.out.println(global.localStorage.getItem("Email1");
+		//document.getElementById("demo1").innerHTML = global.localStorage.getItem("Email1");
+		System.out.println("2");
+		document.getElementById("demo2").innerHTML = "Working?";
+		window.alert("Working???");
+	</script>
 	
   <form action="/search" method="post"> 
-	<script>
-		/*jslint sub: true, maxerr: 50, indent: 4, browser: true */
-		(function (global) {
-			document.getElementById("depart").value = global.localStorage.getItem("Depart");
-		}(window));
-	</script>
+	
       <label for="email"> Email: </label>
       <input id = "email" type="text" name="email"><br>
 
@@ -88,7 +99,9 @@
    </form>
    <!--% String departs = (String)pageContext.getAttribute("depart");%-->
    <!--% System.out.println(departs + " HELLO");%-->
-   
+   <p id = "demo">Yes</p>
+   <p id = "demo1">No</p>
+   <p id = "demo2">Maybe so</p>
    
    <% Object tRides = request.getAttribute("resultRides");%>
    <!--% System.out.println("Start");%-->
@@ -104,15 +117,47 @@
    <% if (!listRide.isEmpty()) { %>
 	  <p> The Current Rides </p>
       <% for (Ride ride : listRide) { %>
+		 <!--% pageContext.setAttribute("ride_",ride.);%-->
          <% pageContext.setAttribute("ride_email", ride.email); %>
          <% pageContext.setAttribute("ride_origin", ride.origin); %>
          <% pageContext.setAttribute("ride_dest", ride.destination); %>
          <% pageContext.setAttribute("ride_depart", ride.depart); %>
+		 <% pageContext.setAttribute("ride_arrive",ride.arrive);%>
+		 <% pageContext.setAttribute("ride_seats",ride.seats);%>
          <p>
+		 <!--b>${fn:escapeXml(ride_)}</b-->
 		 <b>${fn:escapeXml(ride_email)}</b>
          <b>${fn:escapeXml(ride_origin)}</b>
          <b>${fn:escapeXml(ride_dest)}</b>
          <b>${fn:escapeXml(ride_depart)}</b>
+		 <b>${fn:escapeXml(ride_arrive)}</b>
+		 <% if(ride.drive){ %>
+			<b> driver </b>
+		 <% } else { %>
+			<b> rider </b>
+		 <% } %>
+		 <% if(ride.su){ %>
+			<b> sunday </b>
+		 <% } %>
+		 <% if(ride.mo){ %>
+			<b> monday </b>
+		 <% } %>
+		 <% if(ride.tu){ %>
+			<b> tuesday </b>
+		 <% } %>
+		 <% if(ride.we){ %>
+			<b> wednesday </b>
+		 <% } %>
+		 <% if(ride.th){ %>
+			<b> thursday </b>
+		 <% } %>
+		 <% if(ride.fr){ %>
+			<b> friday </b>
+		 <% } %>
+		 <% if(ride.sa){ %>
+			<b> saturday </b>
+		 <% } %>
+		 <b> seats: ${fn:escapeXml(ride_seats)}</b>
 		 </p>
       <% } %>
   <% } else { %>

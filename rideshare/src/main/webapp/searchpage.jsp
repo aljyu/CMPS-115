@@ -15,7 +15,13 @@
 <head>
     <link type="text/css" rel="stylesheet" href="/stylesheets/main.css"/>
 </head>
-
+<script>
+	(function load(global) {
+		document.getElementById("email").value = global.sessionStorage.getItem("Email1");
+		document.getElementById("demo").value = global.sessionStorage.getItem("Email1");
+	}(window));
+	
+	</script>
 <body>
   <%
   List<Ride> rides = ObjectifyService.ofy()
@@ -73,15 +79,20 @@
       <input type="radio" name="prio" value="origin"/>Origin<br>
       <input type="radio" name="prio" value="dest"/>Destination<br>
       <input type="submit" id = "Submit" name="Submit" value=Submit>
-	  <script>
+	  
+   </form>
+   <script>
 		/*jslint sub: true, maxerr: 50, indent: 4, browser: true */
 		(function (global) {
 			document.getElementById("Submit").addEventListener("click", function () {
-				global.localStorage.setItem("Depart", document.getElementById("depart").value);
+				global.sessionStorage.setItem("Email1", document.getElementById("email").value);
+				document.getElementById("demo1").innerHTML = global.sessionStorage.getItem("Email1");
+				document.getElementById("demo").innerHTML = "Hello World!";
 			}, false);
 		}(window));
 	</script>
-   </form>
+   <p id = "demo1">Hello</p>
+   <p id = "demo">Goodbye</p>
    
    <!--script>
    (function (global) {
