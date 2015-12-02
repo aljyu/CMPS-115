@@ -167,9 +167,22 @@
 	</c:forEach-->
    
    <!--% rides = rl.sortDepart(5,pageContext.getAttribute("depart"));%-->
+   
    <% if (!listRide.isEmpty()) { %>
 	  <p> The Current Rides </p>
+	  <table border"1" style="width:100%">
+		<tr>
+			<th>Email</th>
+			<th>Origin</th>
+			<th>Destination</th>
+			<th>Depart Time</th>
+			<th>Arrival Time</th>
+			<th>Driver/Rider</th>
+			<th>Days of Week</th>
+			<th>Seats</th>
+		</tr>
       <% for (Ride ride : listRide) { %>
+		<tr>
 		 <!--% pageContext.setAttribute("ride_",ride.);%-->
          <% pageContext.setAttribute("ride_email", ride.email); %>
          <% pageContext.setAttribute("ride_origin", ride.origin); %>
@@ -179,39 +192,44 @@
 		 <% pageContext.setAttribute("ride_seats",ride.seats);%>
          <p>
 		 <!--b>${fn:escapeXml(ride_)}</b-->
-		 <b>${fn:escapeXml(ride_email)}</b>
-         <b>${fn:escapeXml(ride_origin)}</b>
-         <b>${fn:escapeXml(ride_dest)}</b>
-         <b>${fn:escapeXml(ride_depart)}</b>
-		 <b>${fn:escapeXml(ride_arrive)}</b>
+		 <td>${fn:escapeXml(ride_email)}</td>
+         <td>${fn:escapeXml(ride_origin)}</td>
+         <td>${fn:escapeXml(ride_dest)}</td>
+         <td>${fn:escapeXml(ride_depart)}</td>
+		 <td>${fn:escapeXml(ride_arrive)}</td>
 		 <% if(ride.drive){ %>
-			<b> driver </b>
+			<td> driver </td>
 		 <% } else { %>
-			<b> rider </b>
+			<td> rider </td>
 		 <% } %>
+		 <td>
+		 <ul id="dots">
 		 <% if(ride.su){ %>
-			<b> sunday </b>
+			<li> sunday </li>
 		 <% } %>
 		 <% if(ride.mo){ %>
-			<b> monday </b>
+			<li> monday </li>
 		 <% } %>
 		 <% if(ride.tu){ %>
-			<b> tuesday </b>
+			<li> tuesday </li>
 		 <% } %>
 		 <% if(ride.we){ %>
-			<b> wednesday </b>
+			<li> wednesday </li>
 		 <% } %>
 		 <% if(ride.th){ %>
-			<b> thursday </b>
+			<li> thursday </li>
 		 <% } %>
 		 <% if(ride.fr){ %>
-			<b> friday </b>
+			<li> friday </li>
 		 <% } %>
 		 <% if(ride.sa){ %>
-			<b> saturday </b>
+			<li> saturday </li>
 		 <% } %>
-		 <b> seats: ${fn:escapeXml(ride_seats)}</b>
+		 </ul>
+		 </td>
+		 <td> seats: ${fn:escapeXml(ride_seats)}</td>
 		 </p>
+		 </tr>
       <% } %>
   <% } else { %>
       <p> There are no current rides. </p>
