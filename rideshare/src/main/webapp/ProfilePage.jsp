@@ -94,6 +94,7 @@
 		<%		pageContext.setAttribute("ride_email", ride.email); %>
 		<% 		pageContext.setAttribute("ride_origin", ride.origin); %>
 		<%		pageContext.setAttribute("ride_dest", ride.destination); %>
+                <%		pageContext.setAttribute("ride_date", ride.ridedate.toString().substring(0, 11) + ride.ridedate.toString().substring(24)); %>
 		<%		pageContext.setAttribute("ride_depart", ride.depart); %>
 			<div class = "container" ng-controller = "AppCtrl">
 			  <table class = "table">
@@ -102,8 +103,9 @@
 			  			<th> Email </th>
 			  			<th> Origin </th>
 			  			<th> Destination </th>
-			  			<th> Departure </th>
-			  			<th> Action </th>
+                                                <th> Date </th>
+	                                        <th> Departure </th>
+						<th> Action </th>
 			  		</tr>	
 			  	</thead>
 			  	<tbody>	
@@ -111,7 +113,8 @@
 					<td><b>${fn:escapeXml(ride_email)}</b></td>
 					<td><b>${fn:escapeXml(ride_origin)}</b></td>
 					<td><b>${fn:escapeXml(ride_dest)}</b></td>
-					<td><b>${fn:escapeXml(ride_depart)}</b> </td>        
+					<td><b>${fn:escapeXml(ride_date)}</b></td>
+   					<td><b>${fn:escapeXml(ride_depart)}</b> </td>        
                     <td><form class="button" action="/edit.jsp" method="post">
                        <input type="hidden" value = "<%=ride.id %>" name="key">
         	     	   <button type="submit" class = "btn btn-warning" value="Edit!">Edit </button>
