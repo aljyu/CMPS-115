@@ -66,7 +66,7 @@ public class RideShareServlet extends HttpServlet {
       else {
          drive = false;
       }
-	  String seatstring = req.getParameter("seats");
+      String seatstring = req.getParameter("seats");
 
     //Error checking for blank spots
     if ((name.length() == 0)     || (email.length() == 0) || 

@@ -218,11 +218,20 @@ public class SearchServlet extends HttpServlet {
          }
      }
 		//sixth, if user entered number of seats, filter by seats avaliable
-      if(seats.length() > 0){
+      int seatc = -1;
+      try {
+         seatc = Integer.parseInt(seats);
+      }catch(NumberFormatException e){
+         System.err.println("Thats not a number for seats");
+         resp.sendRedirect("/seatserror.jsp");
+         return;
+      }
+ 
+     if(seats.length() > 0){
       	if (drive) {
         	List<Ride> filter2 = allrides.filterBySeatsMore(filtered, seats);
-        	filtered=filter2;}
-      	else {
+        	filtered=filter2;
+        }else {
 		List<Ride> filter2 = allrides.filterBySeatsLess(filtered, seats);
           	filtered=filter2;
         }
