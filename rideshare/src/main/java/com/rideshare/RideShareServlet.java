@@ -273,24 +273,6 @@ public class RideShareServlet extends HttpServlet {
                     start, end, drive, su, mo, tu, we, th, fr, sa, seats);
     ObjectifyService.ofy().save().entity(ride).now();
     resp.sendRedirect("/rideshare.jsp");
-      
-    PrintWriter writer = resp.getWriter();
-    
-    String htmlResp = "<html><b>Start</b>";
-    
-      htmlResp += "<p>";
-      //htmlResp += "<b>";
-      htmlResp += "Contact Email: " + ride.email + ", ";
-      htmlResp += "Departure Time: " + ride.depart + ", ";
-      htmlResp += "Arrival Time: " + ride.arrive + ", ";
-      //htmlResp += "Days of the week offered: " + ride.su + ", " + ride.mo + ", " + ride.tu + ", " + ride.we + ", " + ride.th + ", " + ride.fr + ", " + ride.sa;
-      htmlResp += "Driver? " + ride.drive;
-      //htmlResp += "</b>";"
-      htmlResp += "</p>";
-    
-    htmlResp += "</html>";
-    
-    writer.println(htmlResp);
   }
   }
  }
