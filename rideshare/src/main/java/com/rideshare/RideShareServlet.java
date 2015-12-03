@@ -173,7 +173,7 @@ public class RideShareServlet extends HttpServlet {
             if(line.contains("lat")) lat = line.substring(colon + 2, line.lastIndexOf(",") - 1);
             if(line.contains("lng")) lng = line.substring(colon + 2);
             if(line.contains("status")){
-               status = line.substring(colon + 2);
+               status = line.substring(colon + 3, line.length() - 2);
             }
          }   
         
@@ -208,7 +208,7 @@ public class RideShareServlet extends HttpServlet {
             int colon = 0;
             colon = line.indexOf(":");
             if(line.contains("formatted_address")){
-               dest = line.substring(colon + 2);
+               dest = line.substring(colon + 3, line.length() - 2);
             }
             if(line.contains("lat")) sla = line.substring(colon + 2, line.lastIndexOf(",") - 1);
             if(line.contains("lng")) slg = line.substring(colon + 2);

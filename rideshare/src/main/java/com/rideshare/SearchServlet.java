@@ -146,20 +146,19 @@ public class SearchServlet extends HttpServlet {
          rides = finalrides;
       }
 
-	  
-	Ridelist allrides = new Ridelist(rides);
-	//first, always filter by driver or rider
-	List<Ride> filtered = allrides.filterByDrive(rides, drive);
-	//second, if user entered an email, filter by email
-	if (email.length() > 0) {
-		List<Ride> filter2 = allrides.filterByEmail(filtered, email);
-		filtered=filter2;
-	}
-	//third, if user checked any recurring boxes, filter by days
-	if ((weekdays != null) && (weekdays.length > 0)) {
-		List<Ride> filter2 = allrides.filterByDays(filtered, su, mo, tu, we, th, fr, sa);
-		filtered = filter2;
-	}
+      Ridelist allrides = new Ridelist(rides);
+      //first, always filter by driver or rider
+      List<Ride> filtered = allrides.filterByDrive(rides, drive);
+      //second, if user entered an email, filter by email
+      if (email.length() > 0) {
+         List<Ride> filter2 = allrides.filterByEmail(filtered, email);
+	 filtered = filter2;
+      }
+      //third, if user checked any recurring boxes, filter by days
+      if ((weekdays != null) && (weekdays.length > 0)) {
+         List<Ride> filter2 = allrides.filterByDays(filtered, su, mo, tu, we, th, fr, sa);
+	 filtered = filter2;
+      }
 	//fourth, if user entered a departure time, filter by depart
  	if (depart.length() > 0) {
            String time = depart;
@@ -201,13 +200,17 @@ public class SearchServlet extends HttpServlet {
          }
          int index = time.indexOf(':');
          if(index != -1) {
-              hour = Integer.parseInt(time.substring(0, index));
-              if(index != time.length() - 3) {
-                b = false;
-                System.out.println("There is a colon at the wrong spot for arrive");}
-                else { minutes = Integer.parseInt(time.substring(index+1));}
+            hour = Integer.parseInt(time.substring(0, index));
+            if(index != time.length() - 3) {
+               b = false;
+               System.out.println("There is a colon at the wrong spot for arrive");}
+               else { 
+                  minutes = Integer.parseInt(time.substring(index+1));
+               }
          }
-         else {hour = Integer.parseInt(time);}
+         else {
+            hour = Integer.parseInt(time);
+         }
          if ((hour>23) || (minutes>59)) {
             b= false;
             System.out.println("Time out of range");
@@ -217,78 +220,78 @@ public class SearchServlet extends HttpServlet {
             filtered=filter2;
          }
      }
-      //sixth, if user entered number of seats, filter by seats avaliable
-      int seatc = -1;
-      try {
-         seatc = Integer.parseInt(seats);
-      }catch(NumberFormatException e){
-         if(seats == ""){
-         }else if(!(seats.length() > 0) || seats.isEmpty() || seats == null || seats == ""){
-            System.err.println("Thats not a number for seats");
-            resp.sendRedirect("/seatserror.jsp");
-            return;
-         }
+     //sixth, if user entered number of seats, filter by seats avaliable
+     int seatc = -1;
+     try {
+        seatc = Integer.parseInt(seats);
+     }catch(NumberFormatException e){
+        if(seats == ""){
+        }else if(!(seats.length() > 0) || seats.isEmpty() || seats == null || seats == ""){
+           System.err.println("Thats not a number for seats");
+           resp.sendRedirect("/seatserror.jsp");
+           return;
+        }
      }
  
      if(seats.length() > 0){
-      	if (drive) {
-        	List<Ride> filter2 = allrides.filterBySeatsMore(filtered, seats);
-        	filtered=filter2;
+        if (drive) {
+           List<Ride> filter2 = allrides.filterBySeatsMore(filtered, seats);
+           filtered=filter2;
         }else {
-		List<Ride> filter2 = allrides.filterBySeatsLess(filtered, seats);
-          	filtered=filter2;
+	   List<Ride> filter2 = allrides.filterBySeatsLess(filtered, seats);
+           filtered=filter2;
         }
     }
     //check origin and destination are valid
     GeoPt origPt = null; 
     if(origin.length() > 0 && origin != null) {
-      String status ="";
-      String lat = "0", lng = "0";
-      String origins = origin.replaceAll(" ", "%20");
-      String geokey = null;
-      List<Keys> listkey = ObjectifyService.ofy().load().type(Keys.class).list();
-      for(int i = 0; i < listkey.size(); ++i){
-         if(listkey.get(i).type.compareToIgnoreCase("Server") == 0)geokey = listkey.get(i).value;
-      }
-      try {
-         String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + origins + "key="+geokey; 
-         URL geocodeOri = new URL(url);
-         BufferedReader reader = new BufferedReader(new InputStreamReader(geocodeOri.openStream()));
-         String line;
-         while ((line = reader.readLine()) != null){
-            int colon = 0;
-            colon = line.indexOf(":");
-            if(line.contains("status")){
-               status = line.substring(colon + 2);
-            }
-	    if(line.contains("lat")) lat = line.substring(colon + 2, line.lastIndexOf(",") - 1);
-            if(line.contains("lng")) lng = line.substring(colon + 2);
-         }
-         float lt = Float.parseFloat(lat);
-         float ln = Float.parseFloat(lng); 
-         origPt = new GeoPt(lt, ln);
-      } catch (MalformedURLException e) {
-        b=false;
-      } catch (IOException e) {
-        b=false;
-      } 
-      finally {
-        if (status.contains("OK") == false) {
+       String status ="";
+       String lat = "0", lng = "0";
+       String origins = origin.replaceAll(" ", "%20");
+       String geokey = null;
+       List<Keys> listkey = ObjectifyService.ofy().load().type(Keys.class).list();
+       for(int i = 0; i < listkey.size(); ++i){
+          if(listkey.get(i).type.compareToIgnoreCase("Server") == 0)geokey = listkey.get(i).value;
+       }
+       try {
+          String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + origins + "key="+geokey; 
+          URL geocodeOri = new URL(url);
+          BufferedReader reader = new BufferedReader(new InputStreamReader(geocodeOri.openStream()));
+          String line;
+          while ((line = reader.readLine()) != null){
+             int colon = 0;
+             colon = line.indexOf(":");
+             if(line.contains("status")){
+                status = line.substring(colon + 2);
+             }
+	     if(line.contains("lat")) lat = line.substring(colon + 2, line.lastIndexOf(",") - 1);
+             if(line.contains("lng")) lng = line.substring(colon + 2);
+          } 
+          float lt = Float.parseFloat(lat);
+          float ln = Float.parseFloat(lng); 
+          origPt = new GeoPt(lt, ln);
+       } catch (MalformedURLException e) {
           b=false;
-          System.out.println("Status for origin is " + status);
-        }
-      }
+       } catch (IOException e) {
+          b=false;
+       }  
+       finally {
+          if (status.contains("OK") == false) {
+             b=false;
+             System.out.println("Status for origin is " + status);
+          }
+       }
     } 
     GeoPt destpt = null;
     if(dest.length() > 0 || dest == null) {
-      String status = "";
-      String dests = dest.replaceAll(" ", "%20");
-      String dlat = "0", dlng = "0";
-      List<Keys> listkey = ObjectifyService.ofy().load().type(Keys.class).list();
-      String geokey = null;
-      for(int i = 0; i < listkey.size(); ++i){
-         if(listkey.get(i).type.compareToIgnoreCase("Server") == 0)geokey = listkey.get(i).value;
-      }
+       String status = "";
+       String dests = dest.replaceAll(" ", "%20");
+       String dlat = "0", dlng = "0";
+       List<Keys> listkey = ObjectifyService.ofy().load().type(Keys.class).list();
+       String geokey = null;
+       for(int i = 0; i < listkey.size(); ++i){
+          if(listkey.get(i).type.compareToIgnoreCase("Server") == 0)geokey = listkey.get(i).value;
+       }
       try {
          String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + dests + "key="+geokey; 
          URL geocodeOri = new URL(url);
@@ -332,73 +335,72 @@ public class SearchServlet extends HttpServlet {
       }
     }
     if (!b) {
-      resp.sendRedirect("/searcherror.jsp");
+       resp.sendRedirect("/searcherror.jsp");
     }
     else {
-	//seventh, if user entered a origin radius and a origin
-	if ((origin.length() > 0) && (originrad.length() > 0)) {
-		List<Ride> filter2 = allrides.originRadius(filtered, origPt, originrad);
-		filtered=filter2;
-	} 
-	//eigthth, if user entered a destination radius
-	if ((dest.length() > 0) && (destrad.length()>0)) {
-		List<Ride> filter2 = allrides.destRadius(filtered, destpt, destrad);
-		filtered=filter2;
-	}
+       //seventh, if user entered a origin radius and a origin
+       if ((origin.length() > 0) && (originrad.length() > 0)) {
+          List<Ride> filter2 = allrides.originRadius(filtered, origPt, originrad);
+          filtered=filter2;
+       } 
+       //eigthth, if user entered a destination radius
+       if ((dest.length() > 0) && (destrad.length()>0)) {
+          List<Ride> filter2 = allrides.destRadius(filtered, destpt, destrad);
+	  filtered=filter2;
+       }
 
-	//Now, sort according to user priority
-	if (((origin.length() > 0) && (prio.equals("origin"))) || ((!(dest.length()>0)) && (prio.equals("both")))) {
-		List<Ride> so = allrides.sortOrigin(filtered, origPt);
-		filtered=so;
-	}
+       //Now, sort according to user priority
+       if (((origin.length() > 0) && (prio.equals("origin"))) || ((!(dest.length()>0)) && (prio.equals("both")))) {
+          List<Ride> so = allrides.sortOrigin(filtered, origPt);
+	  filtered=so;
+       }
 
-	else if (((dest.length() > 0) &&(prio.equals("destination"))) || ((!(origin.length()>0)) && (prio.equals("both")))) {
-		List<Ride> sd = allrides.sortDest(filtered, destpt);
-		filtered=sd;
-	}
-
-	//optimize for both
-	else if ((dest.length()>0) && (origin.length()>0)){
-		//go thru so and sd, adding up respective indices from filtered
-		List<floatRide> irlist = new ArrayList<floatRide>();
-		List<Ride> so = allrides.sortOrigin(filtered, origPt);
-		List<Ride> sd = allrides.sortDest(filtered, destpt);
-		//first, go through the list and compute values
-		for (int i=0; i< filtered.size(); i++) {
-			int loc1 = so.indexOf(filtered.get(i));
-			int loc2 = sd.indexOf(filtered.get(i));
-			float val = loc1+loc2;
-			floatRide ir = new floatRide(val, filtered.get(i));
-			irlist.add(ir);
-		}
-		//then, sort the list and return it
-		List<Ride> filter2 = allrides.sort(irlist);
-		filtered =filter2;
-	}
-	Ridelist rlist = new Ridelist(filtered);
-	//System.out.println("First");
-	req.setAttribute("departs", depart);
-	req.setAttribute("resultRides", rlist);
-	//System.out.println("Fourth");
-	String url = "/searchreturn.jsp";
-	//ServletContext sc = this.getServletContext();
-	//System.out.println("Second");
-	RequestDispatcher rd = req.getRequestDispatcher(url);
-	//System.out.println("Third");
-	try{
-		rd.forward(req, resp);
-	}catch(ServletException e){
-		//...
-		//System.out.println("First error");
-		System.exit(127);
-	}catch(IOException e){
-		//...
-		//System.out.println("Second error");
-		System.exit(127);
-	}
-	//System.out.println("Fifth");
-	//resp.sendRedirect("/searchreturn.jsp");
-	//System.out.println("Sixth");
+       else if (((dest.length() > 0) &&(prio.equals("destination"))) || ((!(origin.length()>0)) && (prio.equals("both")))) {
+          List<Ride> sd = allrides.sortDest(filtered, destpt);
+	  filtered=sd;
+       }
+       //optimize for both
+       else if ((dest.length()>0) && (origin.length()>0)){
+          //go thru so and sd, adding up respective indices from filtered
+	  List<floatRide> irlist = new ArrayList<floatRide>();
+	  List<Ride> so = allrides.sortOrigin(filtered, origPt);
+	  List<Ride> sd = allrides.sortDest(filtered, destpt);
+	  //first, go through the list and compute values
+	  for (int i=0; i< filtered.size(); i++) {
+             int loc1 = so.indexOf(filtered.get(i));
+             int loc2 = sd.indexOf(filtered.get(i));
+	     float val = loc1+loc2;
+             floatRide ir = new floatRide(val, filtered.get(i));
+             irlist.add(ir);
+	  }
+          //then, sort the list and return it
+	  List<Ride> filter2 = allrides.sort(irlist);
+	  filtered =filter2;
+      }
+      Ridelist rlist = new Ridelist(filtered);
+      //System.out.println("First");
+      req.setAttribute("departs", depart);
+      req.setAttribute("resultRides", rlist);
+      //System.out.println("Fourth");
+      String url = "/searchreturn.jsp";
+      //ServletContext sc = this.getServletContext();
+      //System.out.println("Second");
+      RequestDispatcher rd = req.getRequestDispatcher(url);
+      //System.out.println("Third");
+      try{
+         rd.forward(req, resp);
+      }catch(ServletException e){
+      //...
+      //System.out.println("First error");
+         System.exit(127);
+      }catch(IOException e){
+         //...
+         //System.out.println("Second error");
+         System.exit(127);
+      }
+      //System.out.println("Fifth");
+      //resp.sendRedirect("/searchreturn.jsp");
+      //System.out.println("Sixth");
    }
 }
 }

@@ -19,7 +19,6 @@
 </head>
 
 TIME TO CLEANUP
-<form action="/delete" method="post">
-  
+<form action="/clean" method="post">  
   <input type="submit" name="submit" value = CLEANUP>
 </form>
