@@ -19,7 +19,7 @@
 
       <!-- Optional theme -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
-    <link type="text/css" rel="stylesheet" href="/stylesheets/searchreturn.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css"/>
 
      <style>
         div.Buffer {

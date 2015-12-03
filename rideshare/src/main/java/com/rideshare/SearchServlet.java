@@ -217,15 +217,18 @@ public class SearchServlet extends HttpServlet {
             filtered=filter2;
          }
      }
-		//sixth, if user entered number of seats, filter by seats avaliable
+      //sixth, if user entered number of seats, filter by seats avaliable
       int seatc = -1;
       try {
          seatc = Integer.parseInt(seats);
       }catch(NumberFormatException e){
-         System.err.println("Thats not a number for seats");
-         resp.sendRedirect("/seatserror.jsp");
-         return;
-      }
+         if(seats == ""){
+         }else if(!(seats.length() > 0) || seats.isEmpty() || seats == null || seats == ""){
+            System.err.println("Thats not a number for seats");
+            resp.sendRedirect("/seatserror.jsp");
+            return;
+         }
+     }
  
      if(seats.length() > 0){
       	if (drive) {
