@@ -173,7 +173,7 @@ public class RideShareServlet extends HttpServlet {
             if(line.contains("lat")) lat = line.substring(colon + 2, line.lastIndexOf(",") - 1);
             if(line.contains("lng")) lng = line.substring(colon + 2);
             if(line.contains("status")){
-               status = line.substring(colon + 3, line.length() - 2);
+               status = line.substring(colon + 2);
             }
          }   
         
@@ -183,7 +183,6 @@ public class RideShareServlet extends HttpServlet {
         b=false;
       } 
       finally {
-        b = true;
         if (status.contains("OK") == false) {
           b=false;
           System.out.println("Status for origin is " + status);
