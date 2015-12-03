@@ -110,35 +110,37 @@ public class SearchServlet extends HttpServlet {
         }
       }
       List<Ride> finalrides = new ArrayList<Ride>();
-      if(datestr != null || !(datestr.isEmpty()) || l){
-         int d = date.getDay();
-         for(Ride ride: rides){
-            boolean match = false;
-            switch(d) {
-               case 0:
-                  if(ride.su) match = true;
-                  break; 
-               case 1:
-                  if(ride.mo) match = true;
-                  break;
-               case 2: 
-                  if(ride.tu) match = true;
-                  break;
-               case 3: 
-                  if(ride.we) match = true;
-                  break;
-               case 4:
-                  if(ride.th) match = true;
-                  break;
-               case 5: 
-                  if(ride.fr) match = true;
-                  break;
-               case 6:
-                  if(ride.sa) match = true;
-                  break;
-            }
-            if(date.equals(ride.ridedate) || match){
-               finalrides.add(ride);
+      if(!l){
+         if(datestr != null || !(datestr.isEmpty())){
+            int d = date.getDay();
+            for(Ride ride: rides){
+               boolean match = false;
+               switch(d) {
+                  case 0:
+                     if(ride.su) match = true;
+                     break; 
+                  case 1:
+                     if(ride.mo) match = true;
+                     break;
+                  case 2: 
+                     if(ride.tu) match = true;
+                     break;
+                  case 3: 
+                     if(ride.we) match = true;
+                     break;
+                  case 4:
+                     if(ride.th) match = true;
+                     break;
+                  case 5: 
+                     if(ride.fr) match = true;
+                     break;
+                  case 6:
+                     if(ride.sa) match = true;
+                     break;
+               }
+               if(date.equals(ride.ridedate) || match){
+                  finalrides.add(ride);
+               }
             }
          }
          rides = finalrides;
@@ -216,11 +218,20 @@ public class SearchServlet extends HttpServlet {
          }
      }
 		//sixth, if user entered number of seats, filter by seats avaliable
-      if(seats.length() > 0){
+      int seatc = -1;
+      try {
+         seatc = Integer.parseInt(seats);
+      }catch(NumberFormatException e){
+         System.err.println("Thats not a number for seats");
+         resp.sendRedirect("/seatserror.jsp");
+         return;
+      }
+ 
+     if(seats.length() > 0){
       	if (drive) {
         	List<Ride> filter2 = allrides.filterBySeatsMore(filtered, seats);
-        	filtered=filter2;}
-      	else {
+        	filtered=filter2;
+        }else {
 		List<Ride> filter2 = allrides.filterBySeatsLess(filtered, seats);
           	filtered=filter2;
         }

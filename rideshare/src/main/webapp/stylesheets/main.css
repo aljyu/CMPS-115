@@ -8,3 +8,7 @@ label {
 input, label {
     float:left;
 }
+
+#dots li{
+	list-style-type:none;
+}

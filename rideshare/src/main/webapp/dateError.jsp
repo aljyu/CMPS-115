@@ -19,4 +19,4 @@
 
    <p> Something went wrong when you tried to submit your ride. Please press the back button and try again. </p>
 
-   <p> Your Address is incorrect please make sure it is in the form (mm/dd/yyyy)   </p>
+   <p> Your Date is incorrect please make sure it is in the form (mm/dd/yyyy)   </p>

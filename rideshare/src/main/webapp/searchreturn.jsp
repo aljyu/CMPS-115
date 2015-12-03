@@ -19,7 +19,7 @@
 
       <!-- Optional theme -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
-    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/searchreturn.css"/>
 
      <style>
         div.Buffer {
@@ -31,6 +31,21 @@
         }
       </style>
 </head>
+<!--script>
+		/*jslint sub: true, maxerr: 50, indent: 4, browser: true */
+		(function load(global) {
+			document.getElementById("demo").value = global.localStorage.getItem("Email1");
+			document.getElementById("demo1").innerHTML = global.localStorage.getItem("Email1");
+			document.getElementById("demo2").innerHTML = "Working?";
+		}(window));
+	</script-->
+	<script>
+	(function load(global) {
+		document.getElementById("email").value = global.localStorage.getItem("Email1");
+	}(window));
+	
+	</script>
+<!--body onload="load();"-->
 
 <body style = "background-color:lightblue">
    <nav class="navbar navbar-default">
@@ -58,7 +73,6 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-
   <%
   List<Ride> rides = ObjectifyService.ofy()
       .load()
@@ -70,19 +84,17 @@
 	<% Ridelist rl = new Ridelist(rides); %>
 	<!--% pageContext.setAttribute("geo", rl.testFindDist().toString()); %-->
 	<!--b>${fn:escapeXml(geo)}</b-->
-	<!--script>
-	(function (global) {
-		document.getElementById("depart").value = global.localStorage.getItem("Depart");
-	}(window));
-	</script-->
+	<script>
+		System.out.println("1");
+		//System.out.println(global.localStorage.getItem("Email1");
+		//document.getElementById("demo1").innerHTML = global.localStorage.getItem("Email1");
+		System.out.println("2");
+		document.getElementById("demo2").innerHTML = "Working?";
+		window.alert("Working???");
+	</script>
 	
   <form action="/search" method="post"> 
-	<script>
-		/*jslint sub: true, maxerr: 50, indent: 4, browser: true */
-		(function (global) {
-			document.getElementById("depart").value = global.localStorage.getItem("Depart");
-		}(window));
-	</script>
+	
       <label for="email"> Email: </label>
       <input id = "email" type="text" name="email"><br>
 
@@ -101,9 +113,12 @@
       
       <label for="arrive"> Arrival Time: </label>
       <input id="arrive" type = "text" name = "arrive"> <br>
-	  
-	  <label for="seats"> Number of Seats Avaliable: </label>
-	  <input id="seats" type = "text" name = "seats"> <br><br>
+ 
+      <label for "date"> Date (mm/dd/yyyy): </label>
+      <input id = "date" type = "text" name = "date"><br>
+  	  
+      <label for="seats"> Number of Seats Avaliable: </label>
+      <input id="seats" type = "text" name = "seats"> <br><br>
 	  
 	  <div class = "Buffer">
      <p>Are you looking for a driver or a rider?</p><br>
@@ -135,7 +150,9 @@
    </form>
    <!--% String departs = (String)pageContext.getAttribute("depart");%-->
    <!--% System.out.println(departs + " HELLO");%-->
-   
+   <!--p id = "demo">Yes</p>
+   <p id = "demo1">No</p>
+   <p id = "demo2">Maybe so</p-->
    
    <% Object tRides = request.getAttribute("resultRides");%>
    <!--% System.out.println("Start");%-->
@@ -148,19 +165,72 @@
 	</c:forEach-->
    
    <!--% rides = rl.sortDepart(5,pageContext.getAttribute("depart"));%-->
+   
    <% if (!listRide.isEmpty()) { %>
 	  <p> The Current Rides </p>
+	  <table border="1" style="width:100%">
+		<tr>
+			<th>Email</th>
+			<th>Origin</th>
+			<th>Destination</th>
+			<th>Depart Time</th>
+			<th>Arrival Time</th>
+			<th>Driver/Rider</th>
+			<th>Date</th>
+			<th>Days of Week</th>
+			<th>Seats</th>
+		</tr>
       <% for (Ride ride : listRide) { %>
+		<tr>
+		 <!--% pageContext.setAttribute("ride_",ride.);%-->
          <% pageContext.setAttribute("ride_email", ride.email); %>
          <% pageContext.setAttribute("ride_origin", ride.origin); %>
          <% pageContext.setAttribute("ride_dest", ride.destination); %>
          <% pageContext.setAttribute("ride_depart", ride.depart); %>
+		 <% pageContext.setAttribute("ride_arrive",ride.arrive);%>
+		 <%	pageContext.setAttribute("ride_date", ride.ridedate.toString().substring(0, 11) + ride.ridedate.toString().substring(24)); %>
+		 <% pageContext.setAttribute("ride_seats",ride.seats);%>
          <p>
-		 <b>${fn:escapeXml(ride_email)}</b>
-         <b>${fn:escapeXml(ride_origin)}</b>
-         <b>${fn:escapeXml(ride_dest)}</b>
-         <b>${fn:escapeXml(ride_depart)}</b>
+		 <!--b>${fn:escapeXml(ride_)}</b-->
+		 <td>${fn:escapeXml(ride_email)}</td>
+         <td>${fn:escapeXml(ride_origin)}</td>
+         <td>${fn:escapeXml(ride_dest)}</td>
+         <td>${fn:escapeXml(ride_depart)}</td>
+		 <td>${fn:escapeXml(ride_arrive)}</td>
+		 <% if(ride.drive){ %>
+			<td> driver </td>
+		 <% } else { %>
+			<td> rider </td>
+		 <% } %>
+		 <td>${fn:escapeXml(ride_date)}</td>
+		 <td>
+		 <ul id="dots">
+		 <% if(ride.su){ %>
+			<li> sunday </li>
+		 <% } %>
+		 <% if(ride.mo){ %>
+			<li> monday </li>
+		 <% } %>
+		 <% if(ride.tu){ %>
+			<li> tuesday </li>
+		 <% } %>
+		 <% if(ride.we){ %>
+			<li> wednesday </li>
+		 <% } %>
+		 <% if(ride.th){ %>
+			<li> thursday </li>
+		 <% } %>
+		 <% if(ride.fr){ %>
+			<li> friday </li>
+		 <% } %>
+		 <% if(ride.sa){ %>
+			<li> saturday </li>
+		 <% } %>
+		 </ul>
+		 </td>
+		 <td> seats: ${fn:escapeXml(ride_seats)}</td>
 		 </p>
+		 </tr>
       <% } %>
   <% } else { %>
       <p> There are no current rides. </p>

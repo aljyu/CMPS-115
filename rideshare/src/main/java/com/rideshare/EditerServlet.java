@@ -79,7 +79,57 @@ public class EditerServlet extends HttpServlet {
       float ln = Float.parseFloat(lng);
       return(new GeoPt(lt, ln)); 
    }
-
+   public boolean TimeErr(String time, HttpServletResponse resp) throws IOException{
+      int hour = 0;
+      int minutes = 0;
+      boolean b = true;
+     
+      if(time.matches(".*[a-zA-Z]+.*") == true) {
+         b = false;
+         System.out.println("Invalid Characters");
+      }
+      if (!b){
+         resp.sendRedirect("/timesubmissionerror.jsp");
+         return true;
+      }else {
+         int index = time.indexOf(':');
+         if(index != -1) {
+            hour = Integer.parseInt(time.substring(0, index));
+            if(index != time.length() - 3) {
+               b = false;
+               System.out.println("There is a colon at the wrong spot for arrive");
+            }else { 
+               minutes = Integer.parseInt(time.substring(index+1));
+            }
+         }else { hour = Integer.parseInt(time); }
+         if ((hour>23) || (minutes>59)) {
+            b= false;
+            System.out.println("Time out of range");
+         }
+         float arriveTime = hour + (float) minutes/60;
+         index = time.indexOf(':');
+         if(index != -1) {
+            hour = Integer.parseInt(time.substring(0, index));
+            if(index != time.length() - 3) {
+               b = false;
+               System.out.println("There is a colon at the wrong spot for arrive");
+            }else { 
+               minutes = Integer.parseInt(time.substring(index+1));
+            }
+         } else {
+            hour = Integer.parseInt(time);
+         }
+         if ((hour>23) || (minutes>59)) {
+            b= false;
+            System.out.println("Time out of range");
+         }
+         if (!b){
+            resp.sendRedirect("/timesubmissionerror.jsp");
+            return true;
+         }
+     }
+     return false;
+   }
    @Override
    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
       Ride ride;
@@ -92,6 +142,13 @@ public class EditerServlet extends HttpServlet {
       String dest = req.getParameter("dest");
       String depart = req.getParameter("depart");
       String arrive = req.getParameter("arrive");
+     
+      boolean dep = TimeErr(depart, resp);
+      boolean arr = TimeErr(arrive, resp);
+      if(dep || arr){
+         resp.sendRedirect("/timesubmissionerror.jsp");
+         return;
+      }
       String datestr = req.getParameter("date");      
       Date date = null;
       boolean n = false;

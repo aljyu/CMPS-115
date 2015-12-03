@@ -1,4 +1,3 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
 <%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
@@ -16,12 +15,10 @@
 </head>
 
 <body>
-      <p>  Something went wrong when you tried to search for a ride. Please press the back button and try again. </p>
-      <br></br>
-      <p>  Your address(es) need to be valid and your Departure and Arrival times must be in 24-hour time (1PM = 13:00), with format 14 or 14:00, and no AM or PM. </p>
-      <br></br>
-      <p>  If you enter Origin or Destination Radius(i), they should only have numbers. All distances are in kilometers. </p>
-      
+
+   <p> Something went wrong when you tried to submit your ride. Please press the back button and try again. </p>
+   <p> You failed to input a valid integer value for the number of seats in your car please go back and input an integer (1, 2, 3, ...)</p>
 
 </body>
-</html>
+
+

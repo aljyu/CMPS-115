@@ -1,5 +1,0 @@
-Learn PHP
-2. learn how to grab stuff from a form
-3. learn sessions
-4. learn gmaps
-5. update html pages with php

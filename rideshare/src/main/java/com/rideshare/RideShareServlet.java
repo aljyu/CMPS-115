@@ -66,13 +66,14 @@ public class RideShareServlet extends HttpServlet {
       else {
          drive = false;
       }
-	  String seatstring = req.getParameter("seats");
+      String seatstring = req.getParameter("seats");
 
     //Error checking for blank spots
-    if ((name.length() == 0) || (email.length() == 0) || 
-          (origin.length() == 0) || (dest.length() == 0) ||  
-          (depart.length() == 0) || (arrive.length() == 0)
-          || (seatstring.length() == 0)){
+    if ((name.length() == 0)     || (email.length() == 0) || 
+          (origin.length() == 0) || (dest.length() == 0)  ||  
+          (depart.length() == 0) || (arrive.length() == 0)||
+          (seatstring.length() == 0)                      || 
+             (ridedate == null)  || (date.length() == 0)){
         resp.sendRedirect("/blanksubmissionerror.jsp");
       }
   else { 
@@ -137,8 +138,18 @@ public class RideShareServlet extends HttpServlet {
             resp.sendRedirect("/timesubmissionerror.jsp");
         }
         else {
-      int seats = Integer.parseInt(seatstring);
-    
+      int seats = -1; 
+      try {
+         seats = Integer.parseInt(seatstring);
+      }catch(NumberFormatException e){
+         System.err.println("Thats not a number for seats");
+         resp.sendRedirect("/seatserror.jsp");
+         return;
+      }
+      if(seats == -1){ 
+         resp.sendRedirect("/seatserror.jsp");
+         return;
+      } 
       String status ="";
 
       String lat = "0", lng = "0";
@@ -149,7 +160,7 @@ public class RideShareServlet extends HttpServlet {
          if(listkey.get(i).type.compareToIgnoreCase("Server") == 0)geokey = listkey.get(i).value;
       }
       try {
-         String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + origin + "key="+geokey; 
+         String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + origin + "key=" + geokey; 
          URL geocodeOri = new URL(url);
          BufferedReader reader = new BufferedReader(new InputStreamReader(geocodeOri.openStream()));
          String line;
@@ -172,13 +183,14 @@ public class RideShareServlet extends HttpServlet {
         b=false;
       } 
       finally {
+        b = true;
         if (status.contains("OK") == false) {
           b=false;
           System.out.println("Status for origin is " + status);
         }
         if (!b) {
-        resp.sendRedirect("/addresssubmissionerror.jsp");
-      }
+          resp.sendRedirect("/addresssubmissionerror.jsp");
+        }
       else {
       float lt = Float.parseFloat(lat);
       float ln = Float.parseFloat(lng);

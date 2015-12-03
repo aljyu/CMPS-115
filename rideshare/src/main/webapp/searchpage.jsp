@@ -31,6 +31,13 @@
         }
       </style>
 </head>
+<script>
+	(function load(global) {
+		document.getElementById("email").value = global.sessionStorage.getItem("Email1");
+		document.getElementById("demo").value = global.sessionStorage.getItem("Email1");
+	}(window));
+	
+	</script>
 
 <body background = "LoginPageBackground1.jpg">
   <nav class="navbar navbar-default">
@@ -90,10 +97,12 @@
       
       <label for="arrive"> Arrival Time: </label>
       <input id="arrive" type = "text" name = "arrive"> <br>
+
       <label for "date"> Date (mm/dd/yyyy): </label>
       <input id = "date" type = "text" name = "date"><br>	  
-	  <label for="seats"> Number of Seats Avaliable: </label>
-	  <input id="seats" type = "text" name = "seats"> <br><br>
+
+      <label for="seats"> Number of Seats Avaliable: </label>
+      <input id="seats" type = "text" name = "seats"> <br><br>
 	  
   <div class = "Buffer">
 	  <p>Are you looking for a driver or a rider?</p><br>
@@ -101,8 +110,7 @@
       <label for "drive"> Driver </label>
       <input type="radio" name="drive" value="true" checked>
       <label for "drive"> Rider </label>
-      <input type="radio" name="drive" value="false"> <br>
-    
+      <input type="radio" name="drive" value="false"> <br>   
       <br><br>
    <div class = "Section2"> 
     <div class = "panel-success">   
@@ -132,7 +140,9 @@
 		/*jslint sub: true, maxerr: 50, indent: 4, browser: true */
 		(function (global) {
 			document.getElementById("Submit").addEventListener("click", function () {
-				global.localStorage.setItem("Depart", document.getElementById("depart").value);
+				global.sessionStorage.setItem("Email1", document.getElementById("email").value);
+				document.getElementById("demo1").innerHTML = global.sessionStorage.getItem("Email1");
+				document.getElementById("demo").innerHTML = "Hello World!";
 			}, false);
 		}(window));
 	</script>
@@ -140,6 +150,7 @@
 
    <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+
    
    <!--script>
    (function (global) {
