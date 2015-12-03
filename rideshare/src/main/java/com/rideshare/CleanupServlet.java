@@ -50,7 +50,9 @@ public class CleanupServlet extends HttpServlet {
          .load()
          .type(Ride.class)
          .list(); 
+      Date exdate = new Date(); 
       for (int i = 0; i < rides.size(); ++ i){
+         if (exdate.compareTo(rides.get(i).ridedate) < 0) continue;
          Transaction txn = datastore.beginTransaction();
          try {
             Key ridekey = KeyFactory.createKey("Ride", idnum);
