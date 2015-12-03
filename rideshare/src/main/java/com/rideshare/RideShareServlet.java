@@ -112,6 +112,7 @@ public class RideShareServlet extends HttpServlet {
           System.out.println("Time out of range");
         }
         float arriveTime = hour + (float) minutes/60;
+        minutes = 0;
         time = depart;
         index = time.indexOf(':');
         if(index != -1) {
@@ -168,7 +169,7 @@ public class RideShareServlet extends HttpServlet {
             int colon = 0;
             colon = line.indexOf(":");
             if(line.contains("formatted_address")){
-               origin = line.substring(colon + 2);
+               origin = line.substring(colon + 3, line.length() - 2); 
             }
             if(line.contains("lat")) lat = line.substring(colon + 2, line.lastIndexOf(",") - 1);
             if(line.contains("lng")) lng = line.substring(colon + 2);

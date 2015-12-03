@@ -180,14 +180,14 @@ public class Ridelist implements java.io.Serializable{
 	}
 
 	public List<Ride> originRadius(List<Ride> l, GeoPt origin, String radius){
-		int b = Integer.parseInt(radius);
-		List<Ride> rl = new ArrayList<Ride>();
-    	for (int i = 0; i < l.size(); i++) {
-    		if (this.findDist(l.get(i).start, origin) < b) {
-    		   rl.add(l.get(i));
-    		}
-    	}
-    	return rl;
+	   int b = Integer.parseInt(radius);
+	   List<Ride> rl = new ArrayList<Ride>();
+    	   for (int i = 0; i < l.size(); i++) {
+    	      if (this.findDist(l.get(i).start, origin) < b) {
+    	         rl.add(l.get(i));
+    	      }
+    	   }
+    	   return rl;
 	}
 
 	public List<Ride> sortDest(List<Ride> ilist, GeoPt location) {
